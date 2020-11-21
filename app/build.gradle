@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -23,6 +25,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            resValue("bool", "FIREBASE_ANALYTICS_COLLECTION_ENABLED", "true")
+            resValue("bool", "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED", "true")
+        }
+
+        debug {
+            resValue("bool", "FIREBASE_ANALYTICS_COLLECTION_ENABLED", "false")
+            resValue("bool", "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED", "false")
         }
     }
     compileOptions {
@@ -73,7 +83,12 @@ dependencies {
     kapt "androidx.room:room-compiler:2.2.5"
 
     // DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
 
     // Test
     testImplementation 'junit:junit:4.13.1'

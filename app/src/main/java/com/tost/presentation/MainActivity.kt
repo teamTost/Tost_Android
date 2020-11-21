@@ -1,7 +1,8 @@
-package com.tost
+package com.tost.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tost.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
