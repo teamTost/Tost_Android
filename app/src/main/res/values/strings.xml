@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Tost</string>
+    <string name="my_note">My Note</string>
+    <string name="part_n">Part.%d</string>
+    <string name="problem_solved">풀이 완료</string>
+    <string name="problem_remain">남은 문제</string>
+    <string name="problem_whole">전체 문제</string>
+    <string name="n_n">(%d/%d)</string>
+    <string name="achieve">달성했어요!</string>
+    <string name="weekly_goal">Weekly Goal</string>
+    <string name="d">%d%</string>
+    <string name="problem">문제</string>
+    <string name="learn_know_how">학습 노하우</string>
+    <string name="core_point">평가 요소</string>
+    <string name="how_to_solve">풀이 방법</string>
+    <string name="start">시작하기</string>
 </resources>

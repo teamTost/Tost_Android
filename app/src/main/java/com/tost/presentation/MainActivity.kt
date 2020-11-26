@@ -9,7 +9,7 @@ import com.tost.presentation.utils.printLog
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.layout_part_my_note)
 
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener { printLog("fcm token : ${it.result}") }

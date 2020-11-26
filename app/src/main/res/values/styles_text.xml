@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EmphasisStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/blue_grey_22</item>
+        <item name="android:textSize">16dp</item>
+        <item name="fontFamily">@font/gmarketsansmedium</item>
+    </style>
+
+    <style name="EmphasisStyle.Big1">
+        <item name="fontFamily">@font/gmarketsansbold</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="EmphasisStyle.Big2">
+        <item name="fontFamily">@font/gmarketsansbold</item>
+        <item name="android:textSize">24dp</item>
+    </style>
+
+    <style name="EmphasisStyle.Title1">
+        <item name="fontFamily">@font/gmarketsansbold</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="EmphasisStyle.Title2">
+        <item name="fontFamily">@font/gmarketsansmedium</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="EmphasisStyle.SubTitle1">
+        <item name="fontFamily">@font/gmarketsansmedium</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="EmphasisStyle.SubTitle2">
+        <item name="fontFamily">@font/gmarketsansbold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="EmphasisStyle.Caption">
+        <item name="fontFamily">@font/gmarketsansmedium</item>
+        <item name="android:textSize">10dp</item>
+    </style>
+
+    <style name="EmphasisStyle.Header1">
+        <item name="fontFamily">@font/applesdgothicneolight</item>
+        <item name="android:textSize">30dp</item>
+    </style>
+
+    <style name="EmphasisStyle.Header2">
+        <item name="fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="ParagraphStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/blue_grey_22</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="fontFamily">@font/applesdgothicneoregular</item>
+    </style>
+
+    <style name="ParagraphStyle.Text1">
+        <item name="fontFamily">@font/applesdgothicneobold</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="ParagraphStyle.Text2">
+        <item name="fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="ParagraphStyle.Text3">
+        <item name="fontFamily">@font/applesdgothicneobold</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="ParagraphStyle.Text4">
+        <item name="fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="ParagraphStyle.Text5">
+        <item name="fontFamily">@font/applesdgothicneolight</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+</resources>
