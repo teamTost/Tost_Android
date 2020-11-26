@@ -7,7 +7,6 @@
     <meta-data
         android:name="firebase_crashlytics_collection_enabled"
         android:value="@bool/FIREBASE_CRASHLYTICS_COLLECTION_ENABLED" />
-
     <meta-data
         android:name="firebase_analytics_collection_enabled"
         android:value="@bool/FIREBASE_ANALYTICS_COLLECTION_ENABLED" />
@@ -19,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tost">
+        <activity android:name=".presentation.problem.ProblemEntryActivity" />
         <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

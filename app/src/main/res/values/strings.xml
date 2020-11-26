@@ -1,14 +1,39 @@
 <resources>
     <string name="app_name">Tost</string>
+
+    <string name="part1_know_how">1–2번 문항의 문제가 출제되는 파트로,\n주어진 영어 문장을 정해진 시간 내로 소리내어\n읽는 것이 문제 풀이 방법입니다.</string>
+    <string name="part1_core_point">발음, 강세, 억양</string>
+    <string name="part1_how_to_solve">답변 준비 시간 45초 / 답변 시간 45초 이내</string>
+
+    <string name="part2_know_how">3번 문항의 문제가 출제되는 파트로,\n주어진 사진을 정해진 시간 내로\n상세하게 설명하는 것이 문제 풀이 방법입니다.</string>
+    <string name="part2_core_point">발음, 강세, 억양, 문법, 어휘, 논리성</string>
+    <string name="part2_how_to_solve">답변 준비 시간 45초 / 답변 시간 45초 이내</string>
+
+    <string name="part3_know_how">4–6번 문항의 문제가 출제되는 파트로,\n특정한 주제의 설문조사나 통화 상황에서\n질문에 대답하는 것이 문제 풀이 방법입니다.</string>
+    <string name="part3_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
+    <string name="part3_how_to_solve">답변 준비 시간 : 모든 문항 3초\n답변 시간 : 4, 5번 문항 15초 / 6번 문항 30초</string>
+
+    <string name="part4_know_how">7–9번 문항의 문제가 출제되는 파트로,\n주어진 정보(표)를 해석하고, 활용하여\n질문에 대답하는 것이 문제 풀이 방법입니다.\n\n= Part.4 문제는 음성으로만 출제됩니다.</string>
+    <string name="part4_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
+    <string name="part4_how_to_solve">답변 준비 시간 : 모든 문항 3초\n답변 시간 : 7, 8번 문항 15초 / 9번 문항 30초</string>
+
+    <string name="part5_know_how">10번 문항의 문제가 출제되는 파트로,\n녹음된 메세지나 회의 내용을 듣고 질문에 따른\n문제 상황에 대한 해결책을 제시하는 것이\n문제 풀이 방법입니다.\n\n= Part.5 문제는 음성으로만 출제됩니다.</string>
+    <string name="part5_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
+    <string name="part5_how_to_solve">답변 준비 시간 45초 / 답변 시간 60초 이내</string>
+
+    <string name="part6_know_how">11번 문항의 문제가 출제되는 파트로,\n특정한 주제에 대해 자신의 의견과 근거를 더하여\n논리적으로 표현하는 것이 문제 풀이 방법입니다.</string>
+    <string name="part6_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
+    <string name="part6_how_to_solve">답변 준비 시간 30초 / 답변 시간 60초 이내</string>
+
     <string name="my_note">My Note</string>
     <string name="part_n">Part.%d</string>
     <string name="problem_solved">풀이 완료</string>
     <string name="problem_remain">남은 문제</string>
     <string name="problem_whole">전체 문제</string>
-    <string name="n_n">(%d/%d)</string>
+    <string name="n_slash_n">(%d/%d)</string>
     <string name="achieve">달성했어요!</string>
     <string name="weekly_goal">Weekly Goal</string>
-    <string name="d">%d%</string>
+    <string name="n_percent">%d%%</string>
     <string name="problem">문제</string>
     <string name="learn_know_how">학습 노하우</string>
     <string name="core_point">평가 요소</string>
