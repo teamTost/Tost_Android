@@ -18,7 +18,7 @@
         android:roundIcon="@drawable/logo_final_3"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tost">
-        <activity android:name=".presentation.problem.ProblemPrepareActivity" />
+        <activity android:name=".presentation.problem.ProblemExplainActivity" />
         <activity android:name=".presentation.problem.ProblemEntryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

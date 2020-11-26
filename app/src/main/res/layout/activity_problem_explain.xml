@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.problem.ProblemPrepareActivity">
+        tools:context=".presentation.problem.ProblemExplainActivity">
 
         <TextView
             android:id="@+id/textView"
@@ -78,20 +78,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+        <include
             android:id="@+id/button_skip"
+            layout="@layout/button_skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
-            android:background="@drawable/border_round_rectangle_grey_99dp"
-            android:fontFamily="@font/gmarketsansmedium"
-            android:includeFontPadding="false"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
-            android:text="SKIP"
-            android:textColor="@color/blue_grey_87"
             app:layout_constraintEnd_toEndOf="@+id/text_directions"
             app:layout_constraintTop_toBottomOf="@+id/text_directions" />
     </androidx.constraintlayout.widget.ConstraintLayout>

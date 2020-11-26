@@ -11,6 +11,7 @@ import com.tost.presentation.utils.printLog
 
 // TODO: 넘겨진 파트에 따라 다음 액티비티 띄우는 분기처리
 // TODO: 넘겨진 파트에 따라 목표 서버 데이터 분기처리
+// TODO: SKIP 버튼 커스텀뷰로 옮길까..
 class ProblemEntryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +39,8 @@ class ProblemEntryActivity : AppCompatActivity() {
     // TODO: 디폴트값 지우기
 
     private fun deployProblemPrepareActivity() {
-        val intent = Intent(this, ProblemPrepareActivity::class.java)
-        intent.putExtra(ProblemPrepareActivity.KEY_PART, getPart())
+        val intent = Intent(this, ProblemExplainActivity::class.java)
+        intent.putExtra(ProblemExplainActivity.KEY_PART, getPart())
         startActivity(intent)
     }
 
