@@ -9,14 +9,57 @@ enum class Part(
     @StringRes val knowHow: Int,
     @StringRes val corePoint: Int,
     @StringRes val howToSolve: Int,
+    @StringRes val topic: Int,
+    @StringRes val directions: Int,
 ) : Serializable {
-
-    ONE(1, R.string.part1_know_how, R.string.part1_core_point, R.string.part1_how_to_solve),
-    TWO(2, R.string.part2_know_how, R.string.part2_core_point, R.string.part2_how_to_solve),
-    THREE(3, R.string.part3_know_how, R.string.part3_core_point, R.string.part3_how_to_solve),
-    FOUR(4, R.string.part4_know_how, R.string.part4_core_point, R.string.part4_how_to_solve),
-    FIVE(5, R.string.part5_know_how, R.string.part5_core_point, R.string.part5_how_to_solve),
-    SIX(6, R.string.part6_know_how, R.string.part6_core_point, R.string.part6_how_to_solve);
+    ONE(
+        1,
+        R.string.part1_know_how,
+        R.string.part1_core_point,
+        R.string.part1_how_to_solve,
+        R.string.part1_topic,
+        R.string.part1_directions,
+    ),
+    TWO(
+        2,
+        R.string.part2_know_how,
+        R.string.part2_core_point,
+        R.string.part2_how_to_solve,
+        R.string.part2_topic,
+        R.string.part2_directions,
+    ),
+    THREE(
+        3,
+        R.string.part3_know_how,
+        R.string.part3_core_point,
+        R.string.part3_how_to_solve,
+        R.string.part3_topic,
+        R.string.part3_directions,
+    ),
+    FOUR(
+        4,
+        R.string.part4_know_how,
+        R.string.part4_core_point,
+        R.string.part4_how_to_solve,
+        R.string.part4_topic,
+        R.string.part4_directions,
+    ),
+    FIVE(
+        5,
+        R.string.part5_know_how,
+        R.string.part5_core_point,
+        R.string.part5_how_to_solve,
+        R.string.part5_topic,
+        R.string.part5_directions,
+    ),
+    SIX(
+        6,
+        R.string.part6_know_how,
+        R.string.part6_core_point,
+        R.string.part6_how_to_solve,
+        R.string.part6_topic,
+        R.string.part6_directions,
+    );
 
     private fun has(number: Int): Boolean = this.number == number
 

@@ -1,5 +1,6 @@
 package com.tost.presentation.problem
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.messaging.FirebaseMessaging
@@ -24,6 +25,7 @@ class ProblemEntryActivity : AppCompatActivity() {
             weeklySolvedProblemCount = 12,
             weeklyGoalCount = 20,
         )
+        binding.buttonStart.setOnClickListener { deployProblemPrepareActivity() }
         setContentView(binding.root)
 
         FirebaseMessaging.getInstance().token
@@ -31,11 +33,17 @@ class ProblemEntryActivity : AppCompatActivity() {
     }
 
     private fun getPart(): Part = intent.getSerializableExtra(KEY_PART) as? Part
-        ?: Part.SIX
+        ?: Part.FIVE
         ?: throw IllegalArgumentException("part must be send")
     // TODO: 디폴트값 지우기
 
+    private fun deployProblemPrepareActivity() {
+        val intent = Intent(this, ProblemPrepareActivity::class.java)
+        intent.putExtra(ProblemPrepareActivity.KEY_PART, getPart())
+        startActivity(intent)
+    }
+
     companion object {
-        private const val KEY_PART = "part"
+        const val KEY_PART = "part"
     }
 }
