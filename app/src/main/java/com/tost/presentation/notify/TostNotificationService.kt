@@ -26,6 +26,7 @@ class TostNotificationService : FirebaseMessagingService() {
         val notificationManager = getNotificationManager()
         val notification = createNotification(remoteMessage.data, getDeployingAppIntent())
         notificationManager.notify(0, notification)
+        printLog(remoteMessage.data.toString())
     }
 
     private fun getDeployingAppIntent(): PendingIntent {
@@ -58,17 +59,24 @@ class TostNotificationService : FirebaseMessagingService() {
         pendingIntent: PendingIntent
     ): Notification {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.logo_final)
             .setContentTitle(message[TITLE_KEY])
             .setContentText(message[CONTENT_KEY])
             .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+            .setStyle(createBigTextStyle(message))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             notification.priority = NotificationManager.IMPORTANCE_HIGH
         }
         return notification.build()
+    }
+
+    private fun createBigTextStyle(message: Map<String, String>): NotificationCompat.BigTextStyle {
+        return NotificationCompat.BigTextStyle()
+            .setBigContentTitle(message[TITLE_KEY])
+            .bigText(message[CONTENT_KEY])
     }
 
     override fun onNewToken(token: String) {
