@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".test.TestFinishActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="60dp"
+        android:layout_marginHorizontal="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_testf_title"
+            style="@style/EmphasisStyle.Title1"
+            android:text="Well done!"
+            app:layout_constraintBottom_toBottomOf="@id/text_testf_title2"
+            app:layout_constraintTop_toTopOf="@id/text_testf_title2"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/text_testf_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="수고하셨습니다"
+            android:textColor="@color/blue_grey_22"
+            android:textSize="20dp"
+            android:layout_marginTop="52dp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/applesdgothicneobold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/text_testf_title"/>
+
+
+        <TextView
+            android:id="@+id/text_testf_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/text_testf_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            style="@style/ParagraphStyle"
+            android:text="지정된 답변을 확인하고 복습해보세요"
+            android:layout_marginTop="24dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_testf_title_num"
+            android:text="@string/test_title_num"
+            android:layout_marginTop="60dp"
+            android:textColor="@color/blue_grey_22"
+            style="@style/ParagraphStyle.Text1"
+            app:layout_constraintTop_toBottomOf="@id/text_testf_content"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_test_ex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_testf_title_num"
+            app:spanCount="2"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_rv_re_test" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_rectangle_6dp_black"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="70dp"
+            android:text="홈으로 돌아가기"
+            android:layout_marginTop="60dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_test_ex"
+            android:textColor="@color/white"
+            style="@style/ParagraphStyle.Text1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

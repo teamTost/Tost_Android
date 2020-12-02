@@ -83,4 +83,40 @@
         <item name="fontFamily">@font/applesdgothicneolight</item>
         <item name="android:textSize">14dp</item>
     </style>
+
+
+    <style name="ParagraphStyle.Text6">
+        <item name="fontFamily">@font/applesdgothicneolight</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+
+    <style name="ParagraphStyle.Text7">
+        <item name="fontFamily">@font/applesdgothicneobold</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="ParagraphStyle.WarningTitle">
+        <item name="fontFamily">@font/applesdgothicneobold</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/blue_grey_22</item>
+    </style>
+
+    <style name="ParagraphStyle.WarningOrange">
+        <item name="fontFamily">@font/applesdgothicneobold</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/main_orange</item>
+    </style>
+
+    <style name="ParagraphStyle.WarningContent">
+        <item name="fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/blue_grey_22</item>
+    </style>
+
+    <style name="ParagraphStyle.WarningHint">
+        <item name="fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/blue_grey_87</item>
+    </style>
 </resources>
