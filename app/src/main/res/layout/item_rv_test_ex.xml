@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="24dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/ticket">
+
+    <TextView
+        android:id="@+id/text_ex_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/test_title"
+        style="@style/ParagraphStyle.Text6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_ex_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1회"
+        style="@style/ParagraphStyle.Text7"
+        app:layout_constraintTop_toTopOf="@id/text_ex_title"
+        app:layout_constraintBottom_toBottomOf="@id/text_ex_title"
+        app:layout_constraintLeft_toRightOf="@id/text_ex_title"
+        android:layout_marginLeft="4dp"/>
+
+
+    <ImageView
+        android:id="@+id/img_ex_lock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
