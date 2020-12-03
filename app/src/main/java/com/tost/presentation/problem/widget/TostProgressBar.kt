@@ -51,6 +51,7 @@ class TostProgressBar @JvmOverloads constructor(
         binding.textLeftSeconds.text = duration.toSecondsText()
         binding.textRightSeconds.text = INITIAL_SECONDS.toSecondsText()
         binding.seekBar.rotation = 180f
+        binding.seekBar.progress = duration
         binding.seekBar.setOnTouchListener { _, _ -> true }
     }
 
@@ -126,3 +127,5 @@ class TostProgressBar @JvmOverloads constructor(
         fun onStopTrackingTouch(currentProgress: Int)
     }
 }
+//TODO 시간끝났을 때 리스너 달아주기
+// 깜빡거리는 버그 고치기

@@ -31,6 +31,10 @@ class ProblemToolBar @JvmOverloads constructor(
         binding.textTitle.text = typedArray.getString(R.styleable.ProblemToolBar_title)
     }
 
+    fun setTitle(text: CharSequence) {
+        binding.textTitle.text = text
+    }
+
     fun setOnCloseClickListener(runBlock: ((View) -> Unit)?) {
         binding.buttonClose.setOnClickListener(runBlock)
     }
