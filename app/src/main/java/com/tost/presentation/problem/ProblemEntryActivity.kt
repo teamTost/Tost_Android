@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.messaging.FirebaseMessaging
-import com.tost.data.entity.MyNote
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityProblemEntryBinding
 import com.tost.presentation.utils.printLog
@@ -39,8 +38,8 @@ class ProblemEntryActivity : AppCompatActivity() {
     // TODO: 디폴트값 지우기
 
     private fun deployProblemPrepareActivity() {
-        val intent = Intent(this, ProblemExplainActivity::class.java)
-        intent.putExtra(ProblemExplainActivity.KEY_PART, getPart())
+        val intent = Intent(this, ProblemGuideActivity::class.java)
+        intent.putExtra(ProblemGuideActivity.KEY_PART, getPart())
         startActivity(intent)
     }
 

@@ -1,5 +1,6 @@
 package com.tost.data.entity
 
+import androidx.annotation.RawRes
 import androidx.annotation.StringRes
 import com.tost.R
 import java.io.Serializable
@@ -11,6 +12,7 @@ enum class Part(
     @StringRes val howToSolve: Int,
     @StringRes val topic: Int,
     @StringRes val directions: Int,
+    @RawRes val guideAudio: Int,
 ) : Serializable {
     ONE(
         1,
@@ -19,6 +21,7 @@ enum class Part(
         R.string.part1_how_to_solve,
         R.string.part1_topic,
         R.string.part1_directions,
+        R.raw.guide_part1
     ),
     TWO(
         2,
@@ -27,6 +30,7 @@ enum class Part(
         R.string.part2_how_to_solve,
         R.string.part2_topic,
         R.string.part2_directions,
+        R.raw.guide_part2
     ),
     THREE(
         3,
@@ -35,6 +39,7 @@ enum class Part(
         R.string.part3_how_to_solve,
         R.string.part3_topic,
         R.string.part3_directions,
+        R.raw.guide_part3
     ),
     FOUR(
         4,
@@ -43,6 +48,7 @@ enum class Part(
         R.string.part4_how_to_solve,
         R.string.part4_topic,
         R.string.part4_directions,
+        R.raw.guide_part4
     ),
     FIVE(
         5,
@@ -51,6 +57,7 @@ enum class Part(
         R.string.part5_how_to_solve,
         R.string.part5_topic,
         R.string.part5_directions,
+        R.raw.guide_part5
     ),
     SIX(
         6,
@@ -59,6 +66,7 @@ enum class Part(
         R.string.part6_how_to_solve,
         R.string.part6_topic,
         R.string.part6_directions,
+        R.raw.guide_part6
     );
 
     private fun has(number: Int): Boolean = this.number == number
