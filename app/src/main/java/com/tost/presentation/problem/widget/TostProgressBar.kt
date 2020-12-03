@@ -1,4 +1,4 @@
-package com.tost.presentation.problem.timer
+package com.tost.presentation.problem.widget
 
 import android.content.Context
 import android.content.res.TypedArray

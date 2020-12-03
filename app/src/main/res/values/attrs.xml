@@ -4,4 +4,8 @@
         <attr name="reverse" format="boolean" />
         <attr name="duration_millis" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="ProblemToolBar">
+        <attr name="title" format="string" />
+    </declare-styleable>
 </resources>

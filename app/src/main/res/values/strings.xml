@@ -63,4 +63,5 @@
     <string name="tip">TIP</string>
     <string name="n_seconds">%02ds</string>
     <string name="mynote_login_notice">로그인하고 자동으로 목표를 관리해보세요!</string>
+    <string name="question_n">Question %d</string>
 </resources>
