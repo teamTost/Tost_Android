@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityProblemGuideBinding
+import com.tost.presentation.utils.showTostToast
 
 // TODO: 들어온 문제번호와 파트에 따라 해당 파트 액티비티 띄우기
 class ProblemGuideActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class ProblemGuideActivity : AppCompatActivity() {
         val binding = ActivityProblemGuideBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView(binding)
+        showTostToast("볼륨을 높여주세요!")
     }
 
     private fun initView(binding: ActivityProblemGuideBinding) {
