@@ -11,7 +11,7 @@ enum class Part(
     @StringRes val corePoint: Int,
     @StringRes val howToSolve: Int,
     @StringRes val topic: Int,
-    @StringRes val directions: Int,
+    @StringRes val guideText: Int,
     @RawRes val guideAudio: Int,
 ) : Serializable {
     ONE(

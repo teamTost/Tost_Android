@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:text="@{part.directions}"
+            android:text="@{part.guideText}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
@@ -86,5 +86,16 @@
             android:layout_marginTop="52dp"
             app:layout_constraintEnd_toEndOf="@+id/text_directions"
             app:layout_constraintTop_toBottomOf="@+id/text_directions" />
+
+        <ImageView
+            android:id="@+id/button_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/navbar_btn_close" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
