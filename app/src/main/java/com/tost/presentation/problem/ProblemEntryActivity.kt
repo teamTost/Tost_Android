@@ -18,14 +18,14 @@ class ProblemEntryActivity : AppCompatActivity() {
 
         val binding = ActivityProblemEntryBinding.inflate(layoutInflater)
         binding.part = getPart()
-        binding.mynote = MyNote(
-            solvedProblemCount = 12,
-            remainProblemCount = 18,
-            wholeProblemCount = 30,
-            weeklyGoalRatio = 60,
-            weeklySolvedProblemCount = 12,
-            weeklyGoalCount = 20,
-        )
+//        binding.mynote = MyNote(
+//            solvedProblemCount = 12,
+//            remainProblemCount = 18,
+//            wholeProblemCount = 30,
+//            weeklyGoalRatio = 60,
+//            weeklySolvedProblemCount = 12,
+//            weeklyGoalCount = 20,
+//        )
         binding.buttonStart.setOnClickListener { deployProblemPrepareActivity() }
         setContentView(binding.root)
 

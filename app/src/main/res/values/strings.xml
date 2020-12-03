@@ -62,4 +62,5 @@
     <string name="test_title_num">모의고사 %d회</string>
     <string name="tip">TIP</string>
     <string name="n_seconds">%02ds</string>
+    <string name="mynote_login_notice">로그인하고 자동으로 목표를 관리해보세요!</string>
 </resources>
