@@ -20,15 +20,18 @@
         android:theme="@style/Theme.Tost">
         <activity android:name=".test.TestFinishActivity"></activity>
         <activity android:name=".test.TestActivity" />
+
         <activity android:name=".presentation.problem.ProblemExplainActivity" />
         <activity android:name=".presentation.problem.ProblemEntryActivity">
+
+        </activity>
+        <activity android:name=".presentation.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.MainActivity" />
 
         <service
             android:name=".presentation.notify.TostNotificationService"
