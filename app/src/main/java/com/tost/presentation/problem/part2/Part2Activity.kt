@@ -2,16 +2,18 @@ package com.tost.presentation.problem.part2
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tost.R
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityPart2Binding
+import com.tost.presentation.problem.widget.TostProgressBar
 
 class Part2Activity : AppCompatActivity() {
 
-    private var prepareAudioPlayer: MediaPlayer? = null
-    private var readingAudioPlayer: MediaPlayer? = null
-    private var beepAudioPlayer: MediaPlayer? = null
+    private var prepareNoticePlayer: MediaPlayer? = null
+    private var readingNoticePlayer: MediaPlayer? = null
+    private var beepPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,29 +26,46 @@ class Part2Activity : AppCompatActivity() {
         startProblem(binding)
     }
 
+    private fun initAudio() {
+        prepareNoticePlayer = MediaPlayer.create(this, R.raw.begin_preparing_now)
+        readingNoticePlayer = MediaPlayer.create(this, R.raw.begin_reading_aloud_now)
+        beepPlayer = MediaPlayer.create(this, R.raw.beep)
+    }
+
     private fun initView(binding: ActivityPart2Binding) {
         binding.lifecycleOwner = this
         binding.part = Part.TWO
     }
 
-    private fun initAudio() {
-        prepareAudioPlayer = MediaPlayer.create(this, R.raw.begin_preparing_now)
-        readingAudioPlayer = MediaPlayer.create(this, R.raw.begin_reading_aloud_now)
-        beepAudioPlayer = MediaPlayer.create(this, R.raw.beep)
+    private fun startProblem(binding: ActivityPart2Binding) {
+        binding.progressBar.setOnProgressFinishListener { startReadingTime(binding) }
+        prepareNoticePlayer?.setOnCompletionListener {
+            beepPlayer?.setOnCompletionListener { binding.progressBar.start(); it.seekTo(0) }
+            beepPlayer?.start()
+        }
+        prepareNoticePlayer?.start()
     }
 
-    private fun startProblem(binding: ActivityPart2Binding) {
-        prepareAudioPlayer?.start()
-        prepareAudioPlayer?.setOnCompletionListener {
-            beepAudioPlayer?.setOnCompletionListener { binding.progressBar.start() }
-            beepAudioPlayer?.start()
+    private fun startReadingTime(binding: ActivityPart2Binding) {
+        binding.progressBar.setOnProgressFinishListener { finishProblem() }
+        readingNoticePlayer?.setOnCompletionListener {
+            beepPlayer?.setOnCompletionListener { binding.progressBar.start(); it.seekTo(0) }
+            beepPlayer?.start()
+        }
+        readingNoticePlayer?.start()
+    }
+
+    private fun finishProblem() {
+        beepPlayer?.start()
+        beepPlayer?.setOnCompletionListener {
+            Toast.makeText(this, "STOP TALKING", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        prepareAudioPlayer?.release()
-        readingAudioPlayer?.release()
-        beepAudioPlayer?.release()
+        prepareNoticePlayer?.release()
+        readingNoticePlayer?.release()
+        beepPlayer?.release()
     }
 }

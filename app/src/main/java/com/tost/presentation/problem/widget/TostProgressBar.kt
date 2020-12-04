@@ -25,13 +25,14 @@ class TostProgressBar @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr), SeekBar.OnSeekBarChangeListener {
 
     private val binding = WidgetTostProgressBarBinding.inflate(LayoutInflater.from(context), this)
+    private var onProgressChangeListener: OnProgressChangeListener? = null
+    private var onProgressFinishListener: OnProgressFinishListener? = null
 
     private var duration = 0
     private var progress = 0
     private var isDragging = false
     private var isReverse = false
     private var progressJob: Job? = null
-    private var onProgressChangeListener: OnProgressChangeListener? = null
 
     init {
         context.withStyledAttributes(attrs, R.styleable.TostTimer) { applyAttributes(this) }
@@ -72,19 +73,20 @@ class TostProgressBar @JvmOverloads constructor(
     }
 
     fun start() {
+        require(duration > 0) { "initToTimer or initToProgressBar must be called first or assign duration_mills in xml" }
         progressJob?.cancel()
         progress = if (isReverse) duration else 0
-        progressJob = startProgressJob(duration)
+        progressJob = startProgressJob()
     }
 
-    private fun startProgressJob(duration: Int) = CoroutineScope(Dispatchers.IO).launch {
+    private fun startProgressJob() = CoroutineScope(Dispatchers.IO).launch {
         val tick = if (isReverse) -duration.calculateTick() else duration.calculateTick()
         while (isProgressing(duration)) {
             delay(abs(tick).toLong())
             progress += tick
             withContext(Dispatchers.Main) { if (!isDragging) binding.seekBar.progress = progress }
         }
-        onProgressChangeListener?.onProgressFinish()
+        withContext(Dispatchers.Main) { onProgressFinishListener?.onFinish() }
     }
 
     private fun Int.calculateTick(): Int = this shr 10 + 30
@@ -112,13 +114,9 @@ class TostProgressBar @JvmOverloads constructor(
         isDragging = false
         progress = seekBar?.progress ?: return
         if (progressJob?.isActive == false) {
-            progressJob = startProgressJob(seekBar.max)
+            progressJob = startProgressJob()
         }
         onProgressChangeListener?.onStopTrackingTouch(progress)
-    }
-
-    fun setOnProgressChangeListener(l: OnProgressChangeListener?) {
-        this.onProgressChangeListener = l
     }
 
     fun stop() {
@@ -126,16 +124,26 @@ class TostProgressBar @JvmOverloads constructor(
     }
 
     fun restart() {
-        progressJob = startProgressJob(duration)
+        progressJob = startProgressJob()
+    }
+
+    fun setOnProgressChangeListener(l: OnProgressChangeListener?) {
+        this.onProgressChangeListener = l
+    }
+
+    fun setOnProgressFinishListener(l: OnProgressFinishListener?) {
+        this.onProgressFinishListener = l
     }
 
     companion object {
         private const val INITIAL_SECONDS = 0
     }
 
-    interface OnProgressChangeListener {
+    fun interface OnProgressChangeListener {
         fun onStopTrackingTouch(currentProgress: Int)
+    }
 
-        fun onProgressFinish()
+    fun interface OnProgressFinishListener {
+        fun onFinish()
     }
 }
