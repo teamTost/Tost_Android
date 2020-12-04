@@ -1,6 +1,7 @@
 package com.tost.presentation.problem.part2
 
 import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import com.tost.data.entity.Part
 import com.tost.databinding.ActivityPart2Binding
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.widget.TostProgressBar
+import com.tost.presentation.utils.printLog
 
 class Part2Activity : AudioBaseActivity() {
 
@@ -49,12 +51,44 @@ class Part2Activity : AudioBaseActivity() {
     }
 
     private fun startProblem(binding: ActivityPart2Binding) {
-        binding.progressBar.setOnProgressFinishListener { startReadingTime(binding) }
-        prepareNoticePlayer?.setOnCompletionListener {
-            beepPlayer?.setOnCompletionListener { binding.progressBar.start(); it.seekTo(0) }
-            beepPlayer?.start()
+//        binding.progressBar.setOnProgressFinishListener { startReadingTime(binding) }
+//        prepareNoticePlayer?.setOnCompletionListener {
+//            beepPlayer?.setOnCompletionListener { binding.progressBar.start(); it.seekTo(0) }
+//            beepPlayer?.start()
+//        }
+//        prepareNoticePlayer?.start()
+
+        var fileName = "${externalCacheDir?.absolutePath}/audiorecordtest.3gp"
+        val recorder = MediaRecorder()
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        recorder.setOutputFile(fileName)
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        recorder.prepare()
+        recorder.start()
+
+        var flag = 0
+        val player = MediaPlayer()
+        binding.buttonSkip.setOnClickListener {
+            when (flag++) {
+                0 -> recorder.pause()
+                1 -> recorder.resume()
+                2 -> {
+                    recorder.stop()
+                    recorder.release()
+                    printLog("fileName : $fileName")
+                }
+                3 -> {
+                    player.setDataSource(fileName)
+                    player.prepare()
+                    player.start()
+                }
+                4 -> {
+                    player.stop()
+                    player.release()
+                }
+            }
         }
-        prepareNoticePlayer?.start()
     }
 
     private fun startReadingTime(binding: ActivityPart2Binding) {
