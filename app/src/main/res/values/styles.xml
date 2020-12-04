@@ -12,4 +12,13 @@
         <item name="android:text">@string/skip</item>
         <item name="android:textColor">@color/blue_grey_87</item>
     </style>
+
+    <style name="BlackButton" parent="ParagraphStyle.Text1">
+        <item name="android:background">@drawable/round_rectangle_6dp</item>
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
