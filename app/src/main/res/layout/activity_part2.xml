@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/text_state"
                 style="@style/EmphasisStyle.SubTitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,13 +50,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
+                android:id="@+id/button_skip"
                 layout="@layout/button_skip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintBottom_toBottomOf="@+id/text_state"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView8" />
+                app:layout_constraintTop_toTopOf="@+id/text_state" />
 
             <com.tost.presentation.problem.widget.TostProgressBar
                 android:id="@+id/progress_bar"
@@ -65,13 +66,46 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="14dp"
-                android:layout_marginBottom="42dp"
                 app:duration_millis="5000"
+                app:layout_constraintBottom_toTopOf="@+id/zone_record"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_state"
+                app:layout_goneMarginBottom="42dp"
+                app:reverse="true" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/zone_record"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                app:reverse="true" />
+                tools:visibility="visible">
+
+                <com.tost.presentation.problem.widget.AudioStateButton
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/responsetime_btn_record" />
+
+                <Button
+                    android:id="@+id/button_restart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="재시작"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
