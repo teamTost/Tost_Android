@@ -27,7 +27,7 @@ class ProblemGuideActivity : AppCompatActivity() {
         val part = getPart()
         binding.part = part
         binding.buttonClose.setOnClickListener { finishActivity() }
-        binding.buttonSkip.root.setOnClickListener { deployProblemPartActivity() }
+        binding.buttonSkip.setOnClickListener { deployProblemPartActivity() }
         guideAudioPlayer = MediaPlayer.create(this, part.guideAudio)
         guideAudioPlayer?.setOnCompletionListener { deployProblemPartActivity() }
         guideAudioPlayer?.start()

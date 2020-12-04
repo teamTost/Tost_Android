@@ -78,9 +78,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <include
+        <TextView
             android:id="@+id/button_skip"
-            layout="@layout/button_skip"
+            style="@style/SkipButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
