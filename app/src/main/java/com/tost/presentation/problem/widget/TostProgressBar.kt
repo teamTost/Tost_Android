@@ -48,6 +48,7 @@ class TostProgressBar @JvmOverloads constructor(
     fun initToTimer(duration: Int) {
         isReverse = true
         this.duration = duration
+        binding.seekBar.max = duration
         binding.textLeftSeconds.text = duration.toSecondsText()
         binding.textRightSeconds.text = INITIAL_SECONDS.toSecondsText()
         binding.seekBar.rotation = 180f
@@ -58,6 +59,7 @@ class TostProgressBar @JvmOverloads constructor(
     fun initToProgressBar(duration: Int) {
         isReverse = false
         this.duration = duration
+        binding.seekBar.max = duration
         binding.textLeftSeconds.text = INITIAL_SECONDS.toSecondsText()
         binding.textRightSeconds.text = duration.toSecondsText()
         binding.seekBar.rotation = 0f
@@ -71,7 +73,6 @@ class TostProgressBar @JvmOverloads constructor(
 
     fun start() {
         progressJob?.cancel()
-        binding.seekBar.max = duration
         progress = if (isReverse) duration else 0
         progressJob = startProgressJob(duration)
     }
@@ -83,6 +84,7 @@ class TostProgressBar @JvmOverloads constructor(
             progress += tick
             withContext(Dispatchers.Main) { if (!isDragging) binding.seekBar.progress = progress }
         }
+        onProgressChangeListener?.onProgressFinish()
     }
 
     private fun Int.calculateTick(): Int = this shr 10 + 30
@@ -119,13 +121,21 @@ class TostProgressBar @JvmOverloads constructor(
         this.onProgressChangeListener = l
     }
 
+    fun stop() {
+        progressJob?.cancel()
+    }
+
+    fun restart() {
+        progressJob = startProgressJob(duration)
+    }
+
     companion object {
         private const val INITIAL_SECONDS = 0
     }
 
-    fun interface OnProgressChangeListener {
+    interface OnProgressChangeListener {
         fun onStopTrackingTouch(currentProgress: Int)
+
+        fun onProgressFinish()
     }
 }
-//TODO 시간끝났을 때 리스너 달아주기
-// 깜빡거리는 버그 고치기
