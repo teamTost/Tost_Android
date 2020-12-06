@@ -1,6 +1,8 @@
 package com.tost.config
 
 import com.tost.data.repository.RecordsRepository
+import com.tost.presentation.problem.part2.Part2ViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -12,8 +14,13 @@ val repositoryModules = module {
     single { RecordsRepository(get()) }
 }
 
+val viewModelModules = module {
+    viewModel { Part2ViewModel(get()) }
+}
+
 val diModules = listOf(
     tostDataBaseModule,
     daoModule,
     repositoryModules,
+    viewModelModules,
 )

@@ -91,7 +91,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:21.0.0'
 
     // DI - Koin
-    implementation "org.koin:koin-androidx-scope:2.0.1"
+    implementation "org.koin:koin-androidx-scope:2.1.0"
+    implementation "org.koin:koin-androidx-viewmodel:2.1.0"
+    implementation "org.koin:koin-androidx-fragment:2.1.0"
 
     // Test
     testImplementation 'junit:junit:4.13.1'
