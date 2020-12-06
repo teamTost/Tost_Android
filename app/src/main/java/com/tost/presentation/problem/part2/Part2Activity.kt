@@ -64,8 +64,8 @@ class Part2Activity : AudioBaseActivity() {
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
         recorder.setOutputFile(fileName)
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-        recorder.prepare()
-        recorder.start()
+//        recorder.prepare()
+//        recorder.start()
 
         var flag = 0
         val player = MediaPlayer()
