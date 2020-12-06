@@ -2,6 +2,7 @@ package com.tost.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.tost.data.dao.RecordsDao
 import com.tost.data.entity.Record
 
 /**
@@ -13,5 +14,5 @@ import com.tost.data.entity.Record
 @Database(entities = [Record::class], version = 1)
 abstract class TostDataBase : RoomDatabase() {
 
-
+    abstract fun recordsDao(): RecordsDao
 }

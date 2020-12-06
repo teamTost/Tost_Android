@@ -5,6 +5,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.tost.data.entity.Part
 import com.tost.data.entity.Record
+import retrofit2.http.DELETE
 
 /**
  * Created By Malibin
@@ -19,8 +20,11 @@ interface RecordsDao {
     @Query("SELECT * FROM record WHERE part = :part ORDER BY saveDate DESC")
     suspend fun getRecordsOf(part: Part): List<Record>
 
-    @Query("DELETE FROM record WHERE id = :id")
-    suspend fun deleteRecordOf(id: String)
+    @Query("DELETE FROM record WHERE filePath = :filePath")
+    suspend fun deleteRecordOf(filePath: String)
+
+    @DELETE
+    suspend fun deleteRecord(record: Record)
 
     @Query("DELETE FROM record")
     suspend fun deleteAll()
