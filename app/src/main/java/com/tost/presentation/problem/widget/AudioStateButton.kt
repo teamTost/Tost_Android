@@ -39,14 +39,22 @@ class AudioStateButton @JvmOverloads constructor(
         this.setImageResource(state.imageRes)
     }
 
+    fun setOnStateClickListener(listener: OnClickListener) {
+        this.setOnClickListener { listener.onAudioButtonClick(state) }
+    }
+
+    fun interface OnClickListener {
+        fun onAudioButtonClick(state: State)
+    }
+
     enum class State(
         val id: Int,
         @DrawableRes val imageRes: Int,
     ) {
-        RECORDING(0, R.drawable.responsetime_btn_record),
-        STOP(1, R.drawable.responsetime_btn_stop),
-        PLAYING(2, R.drawable.myrecord_btn_play),
-        PAUSE(3, R.drawable.myrecord_btn_stop);
+        RECORDING(0, R.drawable.responsetime_btn_stop),
+        STOP(1, R.drawable.responsetime_btn_record),
+        PLAYING(2, R.drawable.myrecord_btn_stop),
+        PAUSE(3, R.drawable.myrecord_btn_play);
 
         companion object {
             fun findBy(id: Int): State = values().find { it.id == id }

@@ -66,5 +66,7 @@
     <string name="question_n">Question %d</string>
     <string name="preparation_time">Preparation Time</string>
     <string name="response_time">Response Time</string>
+    <string name="my_record">My Record</string>
     <string name="audio_permission_rejected">권한을 거부하시면 서비스를 이용하실 수 없어요 ㅠㅠ</string>
+    <string name="cannot_pause_record">해당 안드로이드 버전은 녹음 일시정지가 안돼요! ㅠㅠ</string>
 </resources>

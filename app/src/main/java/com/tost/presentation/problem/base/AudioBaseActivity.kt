@@ -2,6 +2,7 @@ package com.tost.presentation.problem.base
 
 import android.content.pm.PackageManager
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.tost.R
@@ -43,6 +44,14 @@ abstract class AudioBaseActivity : AppCompatActivity() {
     protected fun previousPermissionGranted(): Boolean {
         val previousPermissionGranted = ActivityCompat.checkSelfPermission(this, AUDIO_PERMISSION)
         return previousPermissionGranted == PackageManager.PERMISSION_GRANTED
+    }
+
+    protected fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showToast(@StringRes stringResId: Int) {
+        Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

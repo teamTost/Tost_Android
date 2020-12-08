@@ -10,13 +10,12 @@ import androidx.annotation.RequiresApi
  */
 
 class TostRecorder(
-    val fileName: String,
-    private val recorder: MediaRecorder,
+    private val recorder: MediaRecorder = MediaRecorder(),
 ) {
-    init {
+    fun prepare(fileName: String) {
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-        recorder.setOutputFile(fileName)
+        recorder.setOutputFile("$fileName$FILE_EXTENSION")
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
         recorder.prepare()
     }
@@ -35,4 +34,8 @@ class TostRecorder(
     }
 
     fun release() = recorder.release()
+
+    companion object {
+        private const val FILE_EXTENSION = ".3gp"
+    }
 }
