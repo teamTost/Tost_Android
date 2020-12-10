@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="SkipButton">
+    <style name="TextButton">
         <item name="android:background">@drawable/border_round_rectangle_grey_99dp</item>
-        <item name="android:fontFamily">@font/gmarketsansmedium</item>
-        <item name="android:includeFontPadding">false</item>
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingEnd">12dp</item>
         <item name="android:paddingBottom">8dp</item>
-        <item name="android:text">@string/skip</item>
         <item name="android:textColor">@color/blue_grey_87</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="SkipButton" parent="TextButton">
+        <item name="android:fontFamily">@font/gmarketsansmedium</item>
+        <item name="android:text">@string/skip</item>
+        <item name="android:drawableEnd">@drawable/ic_next_sm_light</item>
+    </style>
+
+    <style name="RestartButton" parent="TextButton">
+        <item name="android:fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:text">@string/restart</item>
+        <item name="android:drawableStart">@drawable/restart_img</item>
+        <item name="android:drawablePadding">4dp</item>
+    </style>
+
+    <style name="NextButton" parent="TextButton">
+        <item name="android:fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:text">@string/next_problem</item>
+        <item name="android:drawableEnd">@drawable/ic_next_sm_light</item>
+        <item name="android:drawablePadding">4dp</item>
     </style>
 
     <style name="BlackButton" parent="ParagraphStyle.Text1">

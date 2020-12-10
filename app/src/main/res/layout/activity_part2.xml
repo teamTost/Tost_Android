@@ -107,15 +107,26 @@
                     app:srcCompat="@drawable/responsetime_btn_record"
                     app:state="@{viewModel.audioState}" />
 
-                <Button
-                    android:id="@+id/button_restart"
+                <TextView
+                    android:id="@+id/btn_restart"
+                    style="@style/RestartButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="재시작"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_audio_controller"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/button_audio_controller" />
+
+                <TextView
+                    android:id="@+id/btn_next"
+                    style="@style/NextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_audio_controller"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/button_audio_controller" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
