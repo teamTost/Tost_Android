@@ -19,6 +19,7 @@ val viewModelModules = module {
 }
 
 val diModules = listOf(
+    retrofitModule,
     tostDataBaseModule,
     daoModule,
     repositoryModules,

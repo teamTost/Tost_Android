@@ -75,4 +75,5 @@
     <string name="lets_continue_latest_problem">최근 문제에 이어서 시작해볼까요?</string>
     <string name="next_problem">다음 문제</string>
     <string name="restart">재시작</string>
+    <string name="restart_warning">문제 풀이 중 재시작을 누르게 되면\n녹음 중이던 파일을 잃고 다시 녹음이 시작됩니다.</string>
 </resources>

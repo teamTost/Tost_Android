@@ -72,7 +72,7 @@
             android:gravity="center"
             android:paddingTop="32dp"
             android:paddingBottom="40dp"
-            android:text="문제 풀이 중 재시작을 누르게 되면\n녹음 중이던 파일을 잃고 다시 녹음이 시작됩니다."
+            android:text="@string/restart_warning"
             android:textColor="@color/blue_grey_35"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
