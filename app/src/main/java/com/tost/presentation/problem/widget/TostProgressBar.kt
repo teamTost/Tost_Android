@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
+import androidx.databinding.BindingAdapter
 import com.tost.R
 import com.tost.databinding.WidgetTostProgressBarBinding
 import java.util.concurrent.TimeUnit

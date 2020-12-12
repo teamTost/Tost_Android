@@ -57,30 +57,33 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding.lifecycleOwner = this
         binding.part = Part.TWO
         binding.imageUrl = ""
+        binding.viewModel = part2ViewModel
         binding.buttonAudioController.setOnStateClickListener(this)
         part2ViewModel.toastMessage.observe(this) { showToast(it) }
     }
 
     override fun onAudioButtonClick(state: AudioStateButton.State) = when (state) {
         AudioStateButton.State.RECORDING -> part2ViewModel.startRecord()
-        AudioStateButton.State.STOP -> part2ViewModel.pauseRecord()
+        AudioStateButton.State.STOP -> part2ViewModel.cancelRecord()
         AudioStateButton.State.PLAYING -> part2ViewModel.playRecord()
         AudioStateButton.State.PAUSE -> part2ViewModel.pausePlayRecord()
     }
 
     private fun startProblem(binding: ActivityPart2Binding) {
-        binding.progressBar.setOnProgressFinishListener { startReadingTime(binding) }
-        prepareNoticePlayer?.setOnCompletionListener {
-            beepPlayer?.setOnCompletionListener { binding.progressBar.start(); it.seekTo(0) }
-            beepPlayer?.start()
-        }
-        prepareNoticePlayer?.start()
+        binding.progressBar.maxProgress = 4500
+        part2ViewModel.startPreparation(4500)
+//        binding.progressBar.setOnProgressFinishListener { startReadingTime(binding) }
+//        prepareNoticePlayer?.setOnCompletionListener {
+//            beepPlayer?.setOnCompletionListener { it.seekTo(0) }
+//            beepPlayer?.start()
+//        }
+//        prepareNoticePlayer?.start()
     }
 
     private fun startReadingTime(binding: ActivityPart2Binding) {
         binding.progressBar.setOnProgressFinishListener { finishProblem() }
         readingNoticePlayer?.setOnCompletionListener {
-            beepPlayer?.setOnCompletionListener { binding.progressBar.start(); it.seekTo(0) }
+            beepPlayer?.setOnCompletionListener { it.seekTo(0) }
             beepPlayer?.start()
         }
         readingNoticePlayer?.start()

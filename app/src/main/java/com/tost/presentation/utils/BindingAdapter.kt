@@ -4,6 +4,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.tost.R
+import com.tost.presentation.problem.widget.TostProgressBar
 
 /**
  * Created By Malibin
@@ -17,4 +18,9 @@ fun bindingImageUrl(imageView: ImageView, imageUrl: String?) {
         .load(imageUrl)
         .placeholder(R.drawable.image)
         .into(imageView)
+}
+
+@BindingAdapter("progress")
+fun bindingProgress(tostProgressBar: TostProgressBar, progress: Int?) {
+    tostProgressBar.progress = progress ?: return
 }

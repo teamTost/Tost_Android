@@ -22,7 +22,7 @@ abstract class AudioViewModel(
 
     abstract val part: String
 
-    private val _progress = MutableLiveData(0)
+    protected val _progress = MutableLiveData(0)
     val progress: LiveData<Int>
         get() = _progress
 
@@ -49,13 +49,13 @@ abstract class AudioViewModel(
         _audioState.value = AudioStateButton.State.RECORDING
     }
 
-    private fun finishRecord() {
+    fun finishRecord() {
         tostRecorder.stop()
         tostRecorder.release()
         recordPlayer.setDataSource(tostRecorder.fileName)
     }
 
-    private fun cancelRecord() {
+    fun cancelRecord() {
         tostRecorder.stop()
         tostRecorder.release()
         _progress.value = 0
@@ -64,21 +64,23 @@ abstract class AudioViewModel(
     }
 
     @JvmOverloads
-    fun playRecord(duration: Int = getCurrentProgress()) = viewModelScope.launch {
-        recordPlayer.seekTo(duration)
-        recordPlayer.start()
-        _audioState.value = AudioStateButton.State.PLAYING
-        val tick = recordPlayer.duration.calculateTick()
-        while (recordPlayer.isPlaying) {
-            delay(tick)
-            _progress.postValue(recordPlayer.currentPosition)
+    fun playRecord(duration: Int = getCurrentProgress()) {
+        viewModelScope.launch {
+            recordPlayer.seekTo(duration)
+            recordPlayer.start()
+            _audioState.value = AudioStateButton.State.PLAYING
+            val tick = recordPlayer.duration.calculateTick()
+            while (recordPlayer.isPlaying) {
+                delay(tick)
+                _progress.postValue(recordPlayer.currentPosition)
+            }
         }
     }
 
     private fun getCurrentProgress() = progress.value
         ?: throw IllegalStateException("progress value cannot be null")
 
-    private fun Int.calculateTick(): Long = 20L + this shr 10
+    fun Int.calculateTick(): Long = 20L + this shr 10
 
     fun pausePlayRecord() {
         recordPlayer.pause()
