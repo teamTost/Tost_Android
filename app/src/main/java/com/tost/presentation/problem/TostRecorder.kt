@@ -10,30 +10,34 @@ import androidx.annotation.RequiresApi
  */
 
 class TostRecorder(
-    private val recorder: MediaRecorder = MediaRecorder(),
+    private var recorder: MediaRecorder? = MediaRecorder(),
 ) {
+    var fileName: String = ""
+        private set
+
+    @Synchronized
     fun prepare(fileName: String) {
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-        recorder.setOutputFile("$fileName$FILE_EXTENSION")
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-        recorder.prepare()
+        this.fileName = "$fileName$FILE_EXTENSION"
+        this.release()
+        recorder = MediaRecorder()
+        requireRecorder().setAudioSource(MediaRecorder.AudioSource.MIC)
+        requireRecorder().setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        requireRecorder().setOutputFile(this.fileName)
+        requireRecorder().setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        requireRecorder().prepare()
     }
 
-    fun start() = recorder.start()
+    fun start() = requireRecorder().start()
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun pause() = recorder.pause()
+    fun stop() = requireRecorder().stop()
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun resume() = recorder.resume()
-
-    fun stop() {
-        recorder.stop()
-        recorder.release()
+    fun release() {
+        recorder?.release()
+        recorder = null
     }
 
-    fun release() = recorder.release()
+    private fun requireRecorder() = recorder
+        ?: throw IllegalStateException("MediaRecorder not initialized")
 
     companion object {
         private const val FILE_EXTENSION = ".3gp"

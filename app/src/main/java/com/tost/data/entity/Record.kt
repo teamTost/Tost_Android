@@ -12,10 +12,10 @@ import java.util.*
 @Entity
 data class Record(
     @PrimaryKey
-    val id: String,
+    val id: String = UUID.randomUUID().toString(),
     val filePath: String,
     val part: Part,
-    val saveDate: Date,
+    val saveDate: Date = Date(System.currentTimeMillis()),
     val subNumber: SubNumber = SubNumber.ONE
 ) {
     enum class SubNumber {

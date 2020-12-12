@@ -17,6 +17,10 @@ class RecordsRepository(
         return recordsDao.getRecordsOf(part)
     }
 
+    fun deleteRecord(fileName: String) {
+        File(fileName).delete()
+    }
+
     suspend fun deleteRecord(record: Record) {
         File(record.filePath).delete()
         recordsDao.deleteRecord(record)
