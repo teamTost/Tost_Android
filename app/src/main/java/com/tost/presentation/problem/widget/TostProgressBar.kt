@@ -9,9 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import com.tost.R
 import com.tost.databinding.WidgetTostProgressBarBinding
-import kotlinx.coroutines.*
 import java.util.concurrent.TimeUnit
-import kotlin.math.abs
 
 /**
  * Created By Malibin
@@ -28,11 +26,15 @@ class TostProgressBar @JvmOverloads constructor(
     private var onProgressChangeListener: OnProgressChangeListener? = null
     private var onProgressFinishListener: OnProgressFinishListener? = null
 
-    private var duration = 0
-    private var progress = 0
     private var isDragging = false
     private var isReverse = false
-    private var progressJob: Job? = null
+
+    var maxProgress: Int = binding.seekBar.max
+    var progress: Int
+        get() = binding.seekBar.progress
+        set(value) {
+            setProgressSeekBar(value)
+        }
 
     init {
         context.withStyledAttributes(attrs, R.styleable.TostTimer) { applyAttributes(this) }
@@ -41,28 +43,28 @@ class TostProgressBar @JvmOverloads constructor(
 
     private fun applyAttributes(typedArray: TypedArray) {
         isReverse = typedArray.getBoolean(R.styleable.TostTimer_reverse, false)
-        val duration = typedArray.getInt(R.styleable.TostTimer_duration_millis, 0)
-        if (isReverse) initToTimer(duration)
-        else initToProgressBar(duration)
+        val maxProgress = typedArray.getInt(R.styleable.TostTimer_duration_millis, 0)
+        if (isReverse) initToTimer(maxProgress)
+        else initToProgressBar(maxProgress)
     }
 
-    fun initToTimer(duration: Int) {
-        isReverse = true
-        this.duration = duration
-        binding.seekBar.max = duration
-        binding.textLeftSeconds.text = duration.toSecondsText()
+    fun initToTimer(maxProgress: Int) {
+        this.isReverse = true
+        this.maxProgress = maxProgress
+        binding.seekBar.max = maxProgress
+        binding.textLeftSeconds.text = maxProgress.toSecondsText()
         binding.textRightSeconds.text = INITIAL_SECONDS.toSecondsText()
         binding.seekBar.rotation = 180f
-        binding.seekBar.progress = duration
+        binding.seekBar.progress = maxProgress
         binding.seekBar.setOnTouchListener { _, _ -> true }
     }
 
-    fun initToProgressBar(duration: Int) {
-        isReverse = false
-        this.duration = duration
-        binding.seekBar.max = duration
+    fun initToProgressBar(maxProgress: Int) {
+        this.isReverse = false
+        this.maxProgress = maxProgress
+        binding.seekBar.max = maxProgress
         binding.textLeftSeconds.text = INITIAL_SECONDS.toSecondsText()
-        binding.textRightSeconds.text = duration.toSecondsText()
+        binding.textRightSeconds.text = maxProgress.toSecondsText()
         binding.seekBar.rotation = 0f
         binding.seekBar.setOnTouchListener(null)
     }
@@ -72,28 +74,10 @@ class TostProgressBar @JvmOverloads constructor(
         return context.resources.getString(R.string.n_seconds, seconds)
     }
 
-    fun start() {
-        require(duration > 0) { "initToTimer or initToProgressBar must be called first or assign duration_mills in xml" }
-        progressJob?.cancel()
-        progress = if (isReverse) duration else 0
-        progressJob = startProgressJob()
-    }
-
-    private fun startProgressJob() = CoroutineScope(Dispatchers.IO).launch {
-        val tick = if (isReverse) -duration.calculateTick() else duration.calculateTick()
-        while (isProgressing(duration)) {
-            delay(abs(tick).toLong())
-            progress += tick
-            withContext(Dispatchers.Main) { if (!isDragging) binding.seekBar.progress = progress }
-        }
-        withContext(Dispatchers.Main) { onProgressFinishListener?.onFinish() }
-    }
-
-    private fun Int.calculateTick(): Int = this shr 10 + 30
-
-    private fun isProgressing(duration: Int): Boolean {
-        return if (isReverse) progress > 0
-        else progress < duration
+    private fun setProgressSeekBar(input: Int) {
+        if (isDragging) return
+        val progress = if (isReverse) maxProgress - input else input
+        binding.seekBar.progress = progress
     }
 
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -112,19 +96,7 @@ class TostProgressBar @JvmOverloads constructor(
 
     override fun onStopTrackingTouch(seekBar: SeekBar?) {
         isDragging = false
-        progress = seekBar?.progress ?: return
-        if (progressJob?.isActive == false) {
-            progressJob = startProgressJob()
-        }
-        onProgressChangeListener?.onStopTrackingTouch(progress)
-    }
-
-    fun stop() {
-        progressJob?.cancel()
-    }
-
-    fun restart() {
-        progressJob = startProgressJob()
+        onProgressChangeListener?.onStopTrackingTouch(seekBar?.progress ?: return)
     }
 
     fun setOnProgressChangeListener(l: OnProgressChangeListener?) {
