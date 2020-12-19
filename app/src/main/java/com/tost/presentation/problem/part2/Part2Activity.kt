@@ -1,21 +1,16 @@
 package com.tost.presentation.problem.part2
 
 import android.media.MediaPlayer
-import android.media.MediaRecorder
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.viewbinding.ViewBinding
-import com.google.firebase.messaging.FirebaseMessaging
 import com.tost.R
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityPart2Binding
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.widget.AudioStateButton
-import com.tost.presentation.problem.widget.TostProgressBar
-import com.tost.presentation.utils.printLog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     private var prepareNoticePlayer: MediaPlayer? = null

@@ -4,13 +4,14 @@ import com.tost.data.dao.RecordsDao
 import com.tost.data.entity.Part
 import com.tost.data.entity.Record
 import java.io.File
+import javax.inject.Inject
 
 /**
  * Created By Malibin
  * on 12월 06, 2020
  */
 
-class RecordsRepository(
+class RecordsRepository @Inject constructor(
     private val recordsDao: RecordsDao,
 ) {
     suspend fun getRecordsOf(part: Part): List<Record> {

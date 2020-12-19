@@ -1,6 +1,7 @@
 package com.tost.presentation.problem.base
 
 import android.media.MediaPlayer
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
  * on 12월 12, 2020
  */
 
-abstract class AudioViewModel(
+abstract class AudioViewModel constructor(
     private val recordsRepository: RecordsRepository,
 ) : ViewModel() {
 
@@ -30,14 +31,10 @@ abstract class AudioViewModel(
     val audioState: LiveData<AudioStateButton.State>
         get() = _audioState
 
-    private var isTest = false
+    var isTest = false
 
     private val recordPlayer = MediaPlayer()
     private val tostRecorder = TostRecorder()
-
-    fun setTestMode(isTest: Boolean) {
-        this.isTest = isTest
-    }
 
     fun prepareRecorder(baseFilePath: String) {
         val fileName = "$baseFilePath$part"
@@ -77,10 +74,10 @@ abstract class AudioViewModel(
         }
     }
 
-    private fun getCurrentProgress() = progress.value
+    protected fun getCurrentProgress() = progress.value
         ?: throw IllegalStateException("progress value cannot be null")
 
-    fun Int.calculateTick(): Long = 20L + this shr 10
+    protected fun Int.calculateTick(): Long = 20L + this shr 10
 
     fun pausePlayRecord() {
         recordPlayer.pause()
