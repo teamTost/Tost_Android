@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
-import androidx.databinding.BindingAdapter
 import com.tost.R
 import com.tost.databinding.WidgetTostProgressBarBinding
+import com.tost.presentation.utils.printLog
 import java.util.concurrent.TimeUnit
 
 /**
@@ -25,16 +25,20 @@ class TostProgressBar @JvmOverloads constructor(
 
     private val binding = WidgetTostProgressBarBinding.inflate(LayoutInflater.from(context), this)
     private var onProgressChangeListener: OnProgressChangeListener? = null
-    private var onProgressFinishListener: OnProgressFinishListener? = null
 
     private var isDragging = false
     private var isReverse = false
 
-    var maxProgress: Int = binding.seekBar.max
+    var maxProgress: Int
+        get() = binding.seekBar.max
+        set(value) {
+            setSeekBarMax(value)
+        }
+
     var progress: Int
         get() = binding.seekBar.progress
         set(value) {
-            setProgressSeekBar(value)
+            setSeekBarProgress(value)
         }
 
     init {
@@ -52,9 +56,7 @@ class TostProgressBar @JvmOverloads constructor(
     fun initToTimer(maxProgress: Int) {
         this.isReverse = true
         this.maxProgress = maxProgress
-        binding.seekBar.max = maxProgress
-        binding.textLeftSeconds.text = maxProgress.toSecondsText()
-        binding.textRightSeconds.text = INITIAL_SECONDS.toSecondsText()
+//        setSeekBarMax(maxProgress)
         binding.seekBar.rotation = 180f
         binding.seekBar.progress = maxProgress
         binding.seekBar.setOnTouchListener { _, _ -> true }
@@ -63,11 +65,20 @@ class TostProgressBar @JvmOverloads constructor(
     fun initToProgressBar(maxProgress: Int) {
         this.isReverse = false
         this.maxProgress = maxProgress
-        binding.seekBar.max = maxProgress
-        binding.textLeftSeconds.text = INITIAL_SECONDS.toSecondsText()
-        binding.textRightSeconds.text = maxProgress.toSecondsText()
+//        setSeekBarMax(maxProgress)
         binding.seekBar.rotation = 0f
         binding.seekBar.setOnTouchListener(null)
+    }
+
+    private fun setSeekBarMax(maxProgress: Int) {
+        binding.seekBar.max = maxProgress
+        if (isReverse) {
+            binding.textLeftSeconds.text = maxProgress.toSecondsText()
+            binding.textRightSeconds.text = INITIAL_SECONDS.toSecondsText()
+            return
+        }
+        binding.textLeftSeconds.text = INITIAL_SECONDS.toSecondsText()
+        binding.textRightSeconds.text = maxProgress.toSecondsText()
     }
 
     private fun Int.toSecondsText(): String {
@@ -75,7 +86,7 @@ class TostProgressBar @JvmOverloads constructor(
         return context.resources.getString(R.string.n_seconds, seconds)
     }
 
-    private fun setProgressSeekBar(input: Int) {
+    private fun setSeekBarProgress(input: Int) {
         if (isDragging) return
         val progress = if (isReverse) maxProgress - input else input
         binding.seekBar.progress = progress
@@ -104,19 +115,11 @@ class TostProgressBar @JvmOverloads constructor(
         this.onProgressChangeListener = l
     }
 
-    fun setOnProgressFinishListener(l: OnProgressFinishListener?) {
-        this.onProgressFinishListener = l
-    }
-
     companion object {
         private const val INITIAL_SECONDS = 0
     }
 
     fun interface OnProgressChangeListener {
         fun onStopTrackingTouch(currentProgress: Int)
-    }
-
-    fun interface OnProgressFinishListener {
-        fun onFinish()
     }
 }

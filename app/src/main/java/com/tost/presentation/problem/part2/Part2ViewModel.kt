@@ -33,14 +33,4 @@ class Part2ViewModel @ViewModelInject constructor(
     fun changeState(state: ProblemState) {
         _problemState.value = state
     }
-
-    fun startPreparation(time: Int) = viewModelScope.launch {
-        val tick = time.calculateTick()
-        while (time > getCurrentProgress()) {
-            delay(tick)
-            val currentProgress = getCurrentProgress()
-            _progress.postValue(currentProgress + tick.toInt())
-            printLog(currentProgress.toString())
-        }
-    }
 }

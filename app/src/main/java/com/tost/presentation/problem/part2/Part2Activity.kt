@@ -28,13 +28,22 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         setContentView(binding.root)
         this.binding = binding
 
-        initAudio()
         initView(binding)
-        if (previousPermissionGranted()) startProblem(binding)
+        if (previousPermissionGranted()) onInitialPermissionGranted()
         else askAudioPermission()
     }
 
+    private fun initView(binding: ActivityPart2Binding) {
+        binding.lifecycleOwner = this
+        binding.part = Part.TWO
+        binding.imageUrl = ""
+        binding.viewModel = part2ViewModel
+        binding.buttonAudioController.setOnStateClickListener(this)
+        part2ViewModel.toastMessage.observe(this) { showToast(it) }
+    }
+
     override fun onInitialPermissionGranted() {
+        initAudio()
         startProblem(binding ?: throw IllegalStateException("root view must be inflated"))
     }
 
@@ -48,15 +57,6 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private fun getExternalDirectoryPath(): String = externalCacheDir?.absolutePath
         ?: throw IllegalStateException("Cannot get external Directory Path")
 
-    private fun initView(binding: ActivityPart2Binding) {
-        binding.lifecycleOwner = this
-        binding.part = Part.TWO
-        binding.imageUrl = ""
-        binding.viewModel = part2ViewModel
-        binding.buttonAudioController.setOnStateClickListener(this)
-        part2ViewModel.toastMessage.observe(this) { showToast(it) }
-    }
-
     override fun onAudioButtonClick(state: AudioStateButton.State) = when (state) {
         AudioStateButton.State.RECORDING -> part2ViewModel.startRecord()
         AudioStateButton.State.STOP -> part2ViewModel.cancelRecord()
@@ -65,20 +65,27 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun startProblem(binding: ActivityPart2Binding) {
-        binding.progressBar.maxProgress = 4500
-        part2ViewModel.startPreparation(4500)
-//        binding.progressBar.setOnProgressFinishListener { startReadingTime(binding) }
-//        prepareNoticePlayer?.setOnCompletionListener {
-//            beepPlayer?.setOnCompletionListener { it.seekTo(0) }
-//            beepPlayer?.start()
-//        }
-//        prepareNoticePlayer?.start()
+        binding.progressBar.maxProgress = 3000
+        part2ViewModel.setOnProgressFinishListener { startReadingTime(binding) }
+        prepareNoticePlayer?.setOnCompletionListener {
+            beepPlayer?.setOnCompletionListener {
+                it.seekTo(0)
+                part2ViewModel.startCountDown(binding.progressBar.maxProgress)
+            }
+            beepPlayer?.start()
+        }
+        prepareNoticePlayer?.start()
     }
 
     private fun startReadingTime(binding: ActivityPart2Binding) {
-        binding.progressBar.setOnProgressFinishListener { finishProblem() }
+        part2ViewModel.setOnProgressFinishListener {
+            finishProblem()
+        }
         readingNoticePlayer?.setOnCompletionListener {
-            beepPlayer?.setOnCompletionListener { it.seekTo(0) }
+            beepPlayer?.setOnCompletionListener {
+                it.seekTo(0)
+                part2ViewModel.startCountDown(4000)
+            }
             beepPlayer?.start()
         }
         readingNoticePlayer?.start()
@@ -97,6 +104,3 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding = null
     }
 }
-
-// 지금 일단 뷰모델 로직은 다 괜찮은데,
-// progressbar랑 실제 녹음 / 이런게 싱크고 뭐고 아무것도 안맞음. ㅠㅠ

@@ -1,7 +1,6 @@
 package com.tost.presentation.problem.base
 
 import android.media.MediaPlayer
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.tost.data.repository.RecordsRepository
 import com.tost.presentation.problem.TostRecorder
 import com.tost.presentation.problem.widget.AudioStateButton
+import com.tost.presentation.problem.widget.TostProgressBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -23,7 +23,7 @@ abstract class AudioViewModel constructor(
 
     abstract val part: String
 
-    protected val _progress = MutableLiveData(0)
+    private val _progress = MutableLiveData(0)
     val progress: LiveData<Int>
         get() = _progress
 
@@ -35,6 +35,22 @@ abstract class AudioViewModel constructor(
 
     private val recordPlayer = MediaPlayer()
     private val tostRecorder = TostRecorder()
+
+    private var onProgressFinishListener: OnProgressFinishListener? = null
+
+    fun setOnProgressFinishListener(l: OnProgressFinishListener?) {
+        this.onProgressFinishListener = l
+    }
+
+    fun startCountDown(time: Int) = viewModelScope.launch {
+        resetProgress()
+        val tick = time.calculateTick()
+        while (time > getCurrentProgress()) {
+            delay(tick)
+            _progress.postValue(getCurrentProgress() + tick.toInt())
+        }
+        onProgressFinishListener?.onFinish()
+    }
 
     fun prepareRecorder(baseFilePath: String) {
         val fileName = "$baseFilePath$part"
@@ -74,10 +90,12 @@ abstract class AudioViewModel constructor(
         }
     }
 
-    protected fun getCurrentProgress() = progress.value
+    private fun getCurrentProgress() = progress.value
         ?: throw IllegalStateException("progress value cannot be null")
 
-    protected fun Int.calculateTick(): Long = 20L + this shr 10
+    private fun Int.calculateTick(): Long = 20L + this shr 10
+
+    private fun resetProgress() = _progress.postValue(0)
 
     fun pausePlayRecord() {
         recordPlayer.pause()
@@ -88,5 +106,9 @@ abstract class AudioViewModel constructor(
         super.onCleared()
         recordPlayer.release()
         tostRecorder.release()
+    }
+
+    fun interface OnProgressFinishListener {
+        fun onFinish()
     }
 }
