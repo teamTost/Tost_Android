@@ -21,7 +21,7 @@ class AudioStateButton @JvmOverloads constructor(
 
     var state: State = State.RECORDING
         set(value) {
-            changeDrawable(state)
+            changeDrawable(value)
             field = value
         }
 
@@ -51,10 +51,10 @@ class AudioStateButton @JvmOverloads constructor(
         val id: Int,
         @DrawableRes val imageRes: Int,
     ) {
-        RECORDING(0, R.drawable.responsetime_btn_stop),
-        STOP(1, R.drawable.responsetime_btn_record),
-        PLAYING(2, R.drawable.myrecord_btn_stop),
-        PAUSE(3, R.drawable.myrecord_btn_play);
+        RECORDING(0, R.drawable.responsetime_btn_record),
+        STOP(1, R.drawable.responsetime_btn_stop),
+        PLAYING(2, R.drawable.myrecord_btn_play),
+        PAUSE(3, R.drawable.myrecord_btn_stop);
 
         companion object {
             fun findBy(id: Int): State = values().find { it.id == id }

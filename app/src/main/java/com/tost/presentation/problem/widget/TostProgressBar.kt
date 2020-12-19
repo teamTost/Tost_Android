@@ -2,14 +2,15 @@ package com.tost.presentation.problem.widget
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.SeekBar
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import com.tost.R
 import com.tost.databinding.WidgetTostProgressBarBinding
-import com.tost.presentation.utils.printLog
 import java.util.concurrent.TimeUnit
 
 /**
@@ -56,16 +57,15 @@ class TostProgressBar @JvmOverloads constructor(
     fun initToTimer(maxProgress: Int) {
         this.isReverse = true
         this.maxProgress = maxProgress
-//        setSeekBarMax(maxProgress)
+        this.progress = 0
         binding.seekBar.rotation = 180f
-        binding.seekBar.progress = maxProgress
         binding.seekBar.setOnTouchListener { _, _ -> true }
     }
 
     fun initToProgressBar(maxProgress: Int) {
         this.isReverse = false
         this.maxProgress = maxProgress
-//        setSeekBarMax(maxProgress)
+        this.progress = 0
         binding.seekBar.rotation = 0f
         binding.seekBar.setOnTouchListener(null)
     }

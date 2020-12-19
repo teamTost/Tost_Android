@@ -6,8 +6,10 @@ import androidx.activity.viewModels
 import com.tost.R
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityPart2Binding
+import com.tost.presentation.problem.ProblemState
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.widget.AudioStateButton
+import com.tost.presentation.utils.printLog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +33,10 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         initView(binding)
         if (previousPermissionGranted()) onInitialPermissionGranted()
         else askAudioPermission()
+
+        part2ViewModel.audioState.observe(this){
+            printLog("viewmodel : $it button : ${binding.buttonAudioController.state}")
+        }
     }
 
     private fun initView(binding: ActivityPart2Binding) {
@@ -44,7 +50,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     override fun onInitialPermissionGranted() {
         initAudio()
-        startProblem(binding ?: throw IllegalStateException("root view must be inflated"))
+        startProblem()
     }
 
     private fun initAudio() {
@@ -64,37 +70,58 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         AudioStateButton.State.PAUSE -> part2ViewModel.pausePlayRecord()
     }
 
-    private fun startProblem(binding: ActivityPart2Binding) {
-        binding.progressBar.maxProgress = 3000
-        part2ViewModel.setOnProgressFinishListener { startReadingTime(binding) }
-        prepareNoticePlayer?.setOnCompletionListener {
-            beepPlayer?.setOnCompletionListener {
-                it.seekTo(0)
-                part2ViewModel.startCountDown(binding.progressBar.maxProgress)
-            }
-            beepPlayer?.start()
+    private fun startProblem() {
+        rewindProgressBar(3000)
+        part2ViewModel.setOnProgressFinishListener { startReadingTime() }
+        playSound(prepareNoticePlayer) {
+            playSound(beepPlayer) { part2ViewModel.startCountDown(3000) }
         }
-        prepareNoticePlayer?.start()
     }
 
-    private fun startReadingTime(binding: ActivityPart2Binding) {
-        part2ViewModel.setOnProgressFinishListener {
-            finishProblem()
-        }
-        readingNoticePlayer?.setOnCompletionListener {
-            beepPlayer?.setOnCompletionListener {
-                it.seekTo(0)
+    private fun startReadingTime() {
+        part2ViewModel.changeState(ProblemState.RESPONSE)
+        rewindProgressBar(4000)
+        playSound(readingNoticePlayer) {
+            playSound(beepPlayer) {
+                startRecord(4000)
                 part2ViewModel.startCountDown(4000)
             }
-            beepPlayer?.start()
         }
-        readingNoticePlayer?.start()
+    }
+
+    private fun startRecord(duration: Int) {
+        part2ViewModel.startRecord()
+        part2ViewModel.setOnProgressFinishListener {
+            part2ViewModel.finishRecord()
+            finishProblem()
+        }
+    }
+
+    private fun rewindProgressBar(maxProgress: Int) {
+        requireBinding().progressBar.maxProgress = maxProgress
+        part2ViewModel.resetProgress()
+    }
+
+    private fun playSound(mediaPlayer: MediaPlayer?, finishCallback: () -> Unit) {
+        mediaPlayer?.setOnCompletionListener {
+            it.seekTo(0)
+            finishCallback()
+        }
+        mediaPlayer?.start()
     }
 
     private fun finishProblem() {
-        beepPlayer?.start()
-        beepPlayer?.setOnCompletionListener { showToast("STOP TALKING") }
+        part2ViewModel.changeState(ProblemState.MY_RECORD)
+        playSound(beepPlayer) {
+            showToast("STOP TALKING")
+            requireBinding().progressBar.initToProgressBar(part2ViewModel.getRecordDuration())
+            requireBinding().progressBar.setOnProgressChangeListener { part2ViewModel.playRecord(it) }
+            part2ViewModel.playRecord(0)
+        }
     }
+
+    private fun requireBinding() = binding
+        ?: throw IllegalStateException("root view must be inflated")
 
     override fun onDestroy() {
         super.onDestroy()

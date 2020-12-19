@@ -8,7 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.tost.data.repository.RecordsRepository
 import com.tost.presentation.problem.TostRecorder
 import com.tost.presentation.problem.widget.AudioStateButton
-import com.tost.presentation.problem.widget.TostProgressBar
+import com.tost.presentation.utils.printLog
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -27,7 +28,7 @@ abstract class AudioViewModel constructor(
     val progress: LiveData<Int>
         get() = _progress
 
-    private val _audioState = MutableLiveData(AudioStateButton.State.RECORDING)
+    private val _audioState = MutableLiveData(AudioStateButton.State.STOP)
     val audioState: LiveData<AudioStateButton.State>
         get() = _audioState
 
@@ -36,6 +37,7 @@ abstract class AudioViewModel constructor(
     private val recordPlayer = MediaPlayer()
     private val tostRecorder = TostRecorder()
 
+    private var progressJob: Job? = null
     private var onProgressFinishListener: OnProgressFinishListener? = null
 
     fun setOnProgressFinishListener(l: OnProgressFinishListener?) {
@@ -59,13 +61,15 @@ abstract class AudioViewModel constructor(
 
     fun startRecord() {
         tostRecorder.start()
-        _audioState.value = AudioStateButton.State.RECORDING
+//        _audioState.value = AudioStateButton.State.STOP
     }
 
     fun finishRecord() {
         tostRecorder.stop()
         tostRecorder.release()
         recordPlayer.setDataSource(tostRecorder.fileName)
+        recordPlayer.prepare()
+        println("finish record : ${recordPlayer.duration}")
     }
 
     fun cancelRecord() {
@@ -78,27 +82,33 @@ abstract class AudioViewModel constructor(
 
     @JvmOverloads
     fun playRecord(duration: Int = getCurrentProgress()) {
-        viewModelScope.launch {
+        progressJob?.cancel()
+        progressJob = viewModelScope.launch {
             recordPlayer.seekTo(duration)
             recordPlayer.start()
-            _audioState.value = AudioStateButton.State.PLAYING
+            _audioState.value = (AudioStateButton.State.PAUSE)
             val tick = recordPlayer.duration.calculateTick()
             while (recordPlayer.isPlaying) {
                 delay(tick)
                 _progress.postValue(recordPlayer.currentPosition)
+//                printLog("record playing : ${recordPlayer.currentPosition}")
             }
+            _audioState.value = (AudioStateButton.State.PLAYING)
         }
     }
 
     private fun getCurrentProgress() = progress.value
         ?: throw IllegalStateException("progress value cannot be null")
 
-    private fun Int.calculateTick(): Long = 20L + this shr 10
+    private fun Int.calculateTick(): Long = 10L + (this shr 10)
 
-    private fun resetProgress() = _progress.postValue(0)
+    fun getRecordDuration() = recordPlayer.duration
+
+    fun resetProgress() = _progress.postValue(0)
 
     fun pausePlayRecord() {
         recordPlayer.pause()
+//        progressJob?.cancel()
         _audioState.value = AudioStateButton.State.PAUSE
     }
 
