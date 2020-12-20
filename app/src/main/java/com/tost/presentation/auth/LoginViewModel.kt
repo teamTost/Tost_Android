@@ -5,11 +5,13 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.tost.R
-import com.tost.data.entity.User
-import com.tost.data.service.TostService
+import com.tost.data.repository.UserRepository
 import com.tost.presentation.auth.LoginActivity.Companion.REQUEST_CODE_GOOGLE_AUTH
+import kotlinx.coroutines.launch
 
 /**
  * Created By Malibin
@@ -17,7 +19,7 @@ import com.tost.presentation.auth.LoginActivity.Companion.REQUEST_CODE_GOOGLE_AU
  */
 
 class LoginViewModel @ViewModelInject constructor(
-    private val tostService: TostService
+    private val userRepository: UserRepository,
 ) : ViewModel() {
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean>
@@ -27,6 +29,10 @@ class LoginViewModel @ViewModelInject constructor(
     val toastMessage: LiveData<Int>
         get() = _toastMessage
 
+    private val _loginSuccess = MutableLiveData(false)
+    val loginSuccess: LiveData<Boolean>
+        get() = _loginSuccess
+
     fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         if (requestCode == REQUEST_CODE_GOOGLE_AUTH) {
             val googleAccount = GoogleSignIn.getSignedInAccountFromIntent(intent).result
@@ -34,8 +40,13 @@ class LoginViewModel @ViewModelInject constructor(
                 _toastMessage.value = R.string.google_login_fail
                 return
             }
-            val googleToken = googleAccount.idToken
-//            val user = User.from(googleAccount)
+            saveUser(googleAccount)
         }
+    }
+
+    private fun saveUser(account: GoogleSignInAccount) = viewModelScope.launch {
+        userRepository.saveUser(account)
+        _isLoading.value = false
+        _loginSuccess.value = true
     }
 }
