@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.withStyledAttributes
 import com.tost.R
+import com.tost.presentation.utils.disableTemporary
 
 /**
  * Created By Malibin
@@ -40,7 +41,10 @@ class AudioStateButton @JvmOverloads constructor(
     }
 
     fun setOnStateClickListener(listener: OnClickListener) {
-        this.setOnClickListener { listener.onAudioButtonClick(state) }
+        this.setOnClickListener {
+            it.disableTemporary(300)
+            listener.onAudioButtonClick(state)
+        }
     }
 
     fun interface OnClickListener {

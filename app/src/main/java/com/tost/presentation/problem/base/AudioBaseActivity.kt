@@ -7,6 +7,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.tost.R
+import com.tost.presentation.utils.showToast
 
 /**
  * Created By Malibin
@@ -56,14 +57,6 @@ abstract class AudioBaseActivity : AppCompatActivity() {
             finishCallback?.invoke()
         }
         mediaPlayer?.start()
-    }
-
-    protected fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    protected fun showToast(@StringRes stringResId: Int) {
-        Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show()
     }
 
     companion object {

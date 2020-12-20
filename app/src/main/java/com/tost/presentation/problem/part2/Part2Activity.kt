@@ -10,6 +10,7 @@ import com.tost.presentation.problem.ProblemState
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.problem.widget.AudioStateButton
+import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 
@@ -42,7 +43,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding.imageUrl = ""
         binding.viewModel = part2ViewModel
         binding.buttonAudioController.setOnStateClickListener(this)
-        binding.buttonRestart.setOnClickListener { part2ViewModel.cancelRecord() }
+        binding.buttonRestart.setOnClickListener { cancelRecord() }
         binding.buttonSkip.setOnClickListener { skipPreparation() }
         part2ViewModel.toastMessage.observe(this) { showToast(it) }
     }
@@ -60,7 +61,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     override fun onAudioButtonClick(state: AudioStateButton.State) = when (state) {
         AudioStateButton.State.RECORDING -> startRecord(RESPONSE_TIME)
-        AudioStateButton.State.STOP -> part2ViewModel.cancelRecord()
+        AudioStateButton.State.STOP -> cancelRecord()
         AudioStateButton.State.PLAYING -> part2ViewModel.playRecord()
         AudioStateButton.State.PAUSE -> part2ViewModel.pausePlayRecord()
     }
@@ -117,6 +118,15 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         requireBinding().progressBar.initToProgressBar(part2ViewModel.getRecordDuration())
         requireBinding().progressBar.setOnProgressChangeListener { part2ViewModel.playRecord(it) }
         part2ViewModel.playRecord(0)
+    }
+
+    private fun cancelRecord() {
+        part2ViewModel.cancelRecord()
+        readingNoticePlayer?.pause()
+        if (beepPlayer?.isPlaying == true) {
+            beepPlayer?.pause()
+            beepPlayer?.seekTo(0)
+        }
     }
 
     private fun requireBinding() = binding

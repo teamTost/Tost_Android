@@ -15,6 +15,9 @@ class TostRecorder(
     var fileName: String = ""
         private set
 
+    var isStarted: Boolean = false
+        private set
+
     @Synchronized
     fun prepare(fileName: String) {
         this.fileName = "$fileName$FILE_EXTENSION"
@@ -27,9 +30,14 @@ class TostRecorder(
         requireRecorder().prepare()
     }
 
-    fun start() = requireRecorder().start()
+    fun start() {
+        requireRecorder().start()
+        isStarted = true
+    }
 
-    fun stop() = requireRecorder().stop()
+    fun stop() {
+        if (isStarted) requireRecorder().stop()
+    }
 
     fun reset() = requireRecorder().reset()
 
