@@ -11,6 +11,8 @@
     <color name="main_orange">#FF5C3E</color>
     <color name="light_orange">#FF9A76</color>
 
+    <color name="transparent">#00000000</color>
+
     <color name="blue_grey_f8">#F8F9FA</color>
     <color name="blue_grey_e9">#E9ECEF</color>
     <color name="blue_grey_cf">#CFD4D9</color>

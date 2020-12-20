@@ -91,7 +91,6 @@ abstract class AudioViewModel constructor(
             while (recordPlayer.isPlaying) {
                 delay(tick)
                 _progress.postValue(recordPlayer.currentPosition)
-//                printLog("record playing : ${recordPlayer.currentPosition}")
             }
             _audioState.value = (AudioStateButton.State.PLAYING)
         }
@@ -108,7 +107,6 @@ abstract class AudioViewModel constructor(
 
     fun pausePlayRecord() {
         recordPlayer.pause()
-//        progressJob?.cancel()
         _audioState.value = AudioStateButton.State.PAUSE
     }
 

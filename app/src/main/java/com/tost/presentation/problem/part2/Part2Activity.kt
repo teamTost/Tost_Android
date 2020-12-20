@@ -8,6 +8,7 @@ import com.tost.data.entity.Part
 import com.tost.databinding.ActivityPart2Binding
 import com.tost.presentation.problem.ProblemState
 import com.tost.presentation.problem.base.AudioBaseActivity
+import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.problem.widget.AudioStateButton
 import com.tost.presentation.utils.printLog
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,10 +34,6 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         initView(binding)
         if (previousPermissionGranted()) onInitialPermissionGranted()
         else askAudioPermission()
-
-        part2ViewModel.audioState.observe(this){
-            printLog("viewmodel : $it button : ${binding.buttonAudioController.state}")
-        }
     }
 
     private fun initView(binding: ActivityPart2Binding) {
@@ -89,35 +86,40 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         }
     }
 
-    private fun startRecord(duration: Int) {
-        part2ViewModel.startRecord()
-        part2ViewModel.setOnProgressFinishListener {
-            part2ViewModel.finishRecord()
-            finishProblem()
-        }
-    }
-
     private fun rewindProgressBar(maxProgress: Int) {
         requireBinding().progressBar.maxProgress = maxProgress
         part2ViewModel.resetProgress()
     }
 
-    private fun playSound(mediaPlayer: MediaPlayer?, finishCallback: () -> Unit) {
+    private fun playSound(mediaPlayer: MediaPlayer?, finishCallback: (() -> Unit)? = null) {
         mediaPlayer?.setOnCompletionListener {
             it.seekTo(0)
-            finishCallback()
+            finishCallback?.invoke()
         }
         mediaPlayer?.start()
     }
 
-    private fun finishProblem() {
-        part2ViewModel.changeState(ProblemState.MY_RECORD)
-        playSound(beepPlayer) {
-            showToast("STOP TALKING")
-            requireBinding().progressBar.initToProgressBar(part2ViewModel.getRecordDuration())
-            requireBinding().progressBar.setOnProgressChangeListener { part2ViewModel.playRecord(it) }
-            part2ViewModel.playRecord(0)
+    private fun startRecord(duration: Int) {
+        part2ViewModel.startRecord()
+        part2ViewModel.setOnProgressFinishListener {
+            part2ViewModel.finishRecord()
+            playSound(beepPlayer)
+            deployStopTalkingDialog()
         }
+    }
+
+    private fun deployStopTalkingDialog() {
+        StopTalkingButtonsDialog(this).apply {
+            setOnCheckProblemClickListener { listenMyRecord() }
+            setOnNextClickListener {}
+        }.show()
+    }
+
+    private fun listenMyRecord() {
+        part2ViewModel.changeState(ProblemState.MY_RECORD)
+        requireBinding().progressBar.initToProgressBar(part2ViewModel.getRecordDuration())
+        requireBinding().progressBar.setOnProgressChangeListener { part2ViewModel.playRecord(it) }
+        part2ViewModel.playRecord(0)
     }
 
     private fun requireBinding() = binding
