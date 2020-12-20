@@ -361,6 +361,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
+                    style="@style/BlackButton"
                     android:id="@+id/button_start"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -368,15 +369,8 @@
                     android:layout_marginTop="60dp"
                     android:layout_marginEnd="56dp"
                     android:layout_marginBottom="52dp"
-                    android:background="@drawable/round_rectangle_6dp"
-                    android:backgroundTint="@color/black"
                     android:fontFamily="@font/applesdgothicneobold"
-                    android:gravity="center"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
                     android:text="@string/start"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

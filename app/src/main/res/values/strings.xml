@@ -77,4 +77,9 @@
     <string name="restart">재시작</string>
     <string name="restart_warning">문제 풀이 중 재시작을 누르게 되면\n녹음 중이던 파일을 잃고 다시 녹음이 시작됩니다.</string>
     <string name="stop_talking_auto_next">자동으로 다음 문제로 넘어갑니다.</string>
+    <string name="every_day">Every day</string>
+    <string name="toeic_speaking">Toeic Speaking</string>
+    <string name="training">Training</string>
+    <string name="login">로그인</string>
+    <string name="signup">회원가입</string>
 </resources>

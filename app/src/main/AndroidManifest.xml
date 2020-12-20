@@ -20,6 +20,7 @@
         android:roundIcon="@drawable/logo_final_3"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tost">
+        <activity android:name=".presentation.auth.LoginActivity"></activity>
         <activity android:name=".presentation.problem.part2.Part2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,10 +31,8 @@
         <activity android:name=".test.TestFinishActivity" />
         <activity android:name=".test.TestActivity" />
         <activity android:name=".presentation.problem.ProblemGuideActivity" />
-        <activity android:name=".presentation.problem.ProblemEntryActivity">
-
-        </activity>
-        <activity android:name=".presentation.MainActivity"></activity>
+        <activity android:name=".presentation.problem.ProblemEntryActivity"></activity>
+        <activity android:name=".presentation.MainActivity" />
 
         <service
             android:name=".presentation.notify.TostNotificationService"
