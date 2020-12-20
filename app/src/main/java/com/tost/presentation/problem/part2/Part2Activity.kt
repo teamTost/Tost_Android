@@ -10,8 +10,8 @@ import com.tost.presentation.problem.ProblemState
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.problem.widget.AudioStateButton
-import com.tost.presentation.utils.printLog
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
@@ -42,6 +42,8 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding.imageUrl = ""
         binding.viewModel = part2ViewModel
         binding.buttonAudioController.setOnStateClickListener(this)
+        binding.buttonRestart.setOnClickListener { part2ViewModel.cancelRecord() }
+        binding.buttonSkip.setOnClickListener { skipPreparation() }
         part2ViewModel.toastMessage.observe(this) { showToast(it) }
     }
 
@@ -54,35 +56,37 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         prepareNoticePlayer = MediaPlayer.create(this, R.raw.begin_preparing_now)
         readingNoticePlayer = MediaPlayer.create(this, R.raw.begin_reading_aloud_now)
         beepPlayer = MediaPlayer.create(this, R.raw.beep)
-        part2ViewModel.prepareRecorder(getExternalDirectoryPath())
     }
 
-    private fun getExternalDirectoryPath(): String = externalCacheDir?.absolutePath
-        ?: throw IllegalStateException("Cannot get external Directory Path")
-
     override fun onAudioButtonClick(state: AudioStateButton.State) = when (state) {
-        AudioStateButton.State.RECORDING -> part2ViewModel.startRecord()
+        AudioStateButton.State.RECORDING -> startRecord(RESPONSE_TIME)
         AudioStateButton.State.STOP -> part2ViewModel.cancelRecord()
         AudioStateButton.State.PLAYING -> part2ViewModel.playRecord()
         AudioStateButton.State.PAUSE -> part2ViewModel.pausePlayRecord()
     }
 
-    private fun startProblem() {
-        rewindProgressBar(3000)
-        part2ViewModel.setOnProgressFinishListener { startReadingTime() }
-        playSound(prepareNoticePlayer) {
-            playSound(beepPlayer) { part2ViewModel.startCountDown(3000) }
+    private fun skipPreparation() {
+        part2ViewModel.skipProgress()
+        prepareNoticePlayer?.pause()
+        if (beepPlayer?.isPlaying == true) {
+            beepPlayer?.pause()
+            beepPlayer?.seekTo(0)
         }
+    }
+
+    private fun startProblem() {
+        rewindProgressBar(PREPARATION_TIME)
+        playSound(prepareNoticePlayer) {
+            playSound(beepPlayer) { part2ViewModel.startCountDown(PREPARATION_TIME) }
+        }
+        part2ViewModel.setOnProgressFinishListener { startReadingTime() }
     }
 
     private fun startReadingTime() {
         part2ViewModel.changeState(ProblemState.RESPONSE)
-        rewindProgressBar(4000)
+        rewindProgressBar(RESPONSE_TIME)
         playSound(readingNoticePlayer) {
-            playSound(beepPlayer) {
-                startRecord(4000)
-                part2ViewModel.startCountDown(4000)
-            }
+            playSound(beepPlayer) { startRecord(RESPONSE_TIME) }
         }
     }
 
@@ -91,16 +95,9 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         part2ViewModel.resetProgress()
     }
 
-    private fun playSound(mediaPlayer: MediaPlayer?, finishCallback: (() -> Unit)? = null) {
-        mediaPlayer?.setOnCompletionListener {
-            it.seekTo(0)
-            finishCallback?.invoke()
-        }
-        mediaPlayer?.start()
-    }
-
     private fun startRecord(duration: Int) {
-        part2ViewModel.startRecord()
+        part2ViewModel.prepareRecorder(getExternalDirectoryPath())
+        part2ViewModel.startRecord(duration)
         part2ViewModel.setOnProgressFinishListener {
             part2ViewModel.finishRecord()
             playSound(beepPlayer)
@@ -132,4 +129,9 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         beepPlayer?.release()
         binding = null
     }
-}
+
+    companion object {
+        private val PREPARATION_TIME = TimeUnit.SECONDS.toMillis(3).toInt()
+        private val RESPONSE_TIME = TimeUnit.SECONDS.toMillis(4).toInt()
+    }
+}//TODO 아예 AudioViewModel 도 부모클래스에다가 집어넣어도 될거같은데

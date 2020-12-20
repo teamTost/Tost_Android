@@ -31,6 +31,8 @@ class TostRecorder(
 
     fun stop() = requireRecorder().stop()
 
+    fun reset() = requireRecorder().reset()
+
     fun release() {
         recorder?.release()
         recorder = null

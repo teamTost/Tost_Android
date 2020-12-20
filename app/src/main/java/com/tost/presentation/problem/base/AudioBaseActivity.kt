@@ -1,6 +1,7 @@
 package com.tost.presentation.problem.base
 
 import android.content.pm.PackageManager
+import android.media.MediaPlayer
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +32,7 @@ abstract class AudioBaseActivity : AppCompatActivity() {
     }
 
     private fun showPermissionRejected() {
-        Toast.makeText(this, R.string.audio_permission_rejected, Toast.LENGTH_SHORT).show()
+        showToast( R.string.audio_permission_rejected)
         finish()
     }
 
@@ -44,6 +45,17 @@ abstract class AudioBaseActivity : AppCompatActivity() {
     protected fun previousPermissionGranted(): Boolean {
         val previousPermissionGranted = ActivityCompat.checkSelfPermission(this, AUDIO_PERMISSION)
         return previousPermissionGranted == PackageManager.PERMISSION_GRANTED
+    }
+
+    protected fun getExternalDirectoryPath(): String = externalCacheDir?.absolutePath
+        ?: throw IllegalStateException("Cannot get external Directory Path")
+
+    protected fun playSound(mediaPlayer: MediaPlayer?, finishCallback: (() -> Unit)? = null) {
+        mediaPlayer?.setOnCompletionListener {
+            it.seekTo(0)
+            finishCallback?.invoke()
+        }
+        mediaPlayer?.start()
     }
 
     protected fun showToast(message: String) {

@@ -9,6 +9,8 @@
 
         <import type="com.tost.presentation.problem.ProblemState" />
 
+        <import type="com.tost.presentation.problem.widget.AudioStateButton.State" />
+
         <variable
             name="part"
             type="com.tost.data.entity.Part" />
@@ -110,17 +112,18 @@
                     app:state="@{viewModel.audioState}" />
 
                 <TextView
-                    android:id="@+id/btn_restart"
+                    android:id="@+id/button_restart"
                     style="@style/RestartButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:visibility="@{viewModel.audioState == State.STOP ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/button_audio_controller"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/button_audio_controller" />
 
                 <TextView
-                    android:id="@+id/btn_next"
+                    android:id="@+id/button_next"
                     style="@style/NextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

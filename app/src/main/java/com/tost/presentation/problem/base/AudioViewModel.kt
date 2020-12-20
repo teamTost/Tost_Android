@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.tost.data.repository.RecordsRepository
 import com.tost.presentation.problem.TostRecorder
 import com.tost.presentation.problem.widget.AudioStateButton
-import com.tost.presentation.utils.printLog
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -36,6 +35,7 @@ abstract class AudioViewModel constructor(
 
     private val recordPlayer = MediaPlayer()
     private val tostRecorder = TostRecorder()
+    private var isRecordPlayFinished: Boolean = false
 
     private var progressJob: Job? = null
     private var onProgressFinishListener: OnProgressFinishListener? = null
@@ -44,55 +44,65 @@ abstract class AudioViewModel constructor(
         this.onProgressFinishListener = l
     }
 
-    fun startCountDown(time: Int) = viewModelScope.launch {
-        resetProgress()
-        val tick = time.calculateTick()
-        while (time > getCurrentProgress()) {
-            delay(tick)
-            _progress.postValue(getCurrentProgress() + tick.toInt())
-        }
-        onProgressFinishListener?.onFinish()
-    }
-
     fun prepareRecorder(baseFilePath: String) {
         val fileName = "$baseFilePath$part"
         tostRecorder.prepare(fileName)
     }
 
-    fun startRecord() {
+    fun startRecord(duration: Int) {
         tostRecorder.start()
-//        _audioState.value = AudioStateButton.State.STOP
+        startCountDown(duration)
+        _audioState.value = AudioStateButton.State.STOP
+    }
+
+    fun startCountDown(duration: Int) {
+        progressJob = viewModelScope.launch {
+            resetProgress()
+            val tick = duration.calculateTick()
+            while (duration > getCurrentProgress()) {
+                delay(tick)
+                _progress.postValue(getCurrentProgress() + tick.toInt())
+            }
+            onProgressFinishListener?.onFinish()
+        }
+    }
+
+    fun skipProgress() {
+        progressJob?.cancel()
+        onProgressFinishListener?.onFinish()
     }
 
     fun finishRecord() {
         tostRecorder.stop()
-        tostRecorder.release()
+        tostRecorder.reset()
         recordPlayer.setDataSource(tostRecorder.fileName)
         recordPlayer.prepare()
-        println("finish record : ${recordPlayer.duration}")
     }
 
     fun cancelRecord() {
+        progressJob?.cancel()
         tostRecorder.stop()
-        tostRecorder.release()
-        _progress.value = 0
-        _audioState.value = AudioStateButton.State.STOP
+        tostRecorder.reset()
+        resetProgress()
+        _audioState.value = AudioStateButton.State.RECORDING
         recordsRepository.deleteRecord(tostRecorder.fileName)
     }
 
     @JvmOverloads
-    fun playRecord(duration: Int = getCurrentProgress()) {
+    fun playRecord(duration: Int = if (isRecordPlayFinished) 0 else getCurrentProgress()) {
         progressJob?.cancel()
+        recordPlayer.seekTo(duration)
+        recordPlayer.start()
+        isRecordPlayFinished = false
+        _audioState.value = AudioStateButton.State.PAUSE
         progressJob = viewModelScope.launch {
-            recordPlayer.seekTo(duration)
-            recordPlayer.start()
-            _audioState.value = (AudioStateButton.State.PAUSE)
             val tick = recordPlayer.duration.calculateTick()
             while (recordPlayer.isPlaying) {
                 delay(tick)
                 _progress.postValue(recordPlayer.currentPosition)
             }
-            _audioState.value = (AudioStateButton.State.PLAYING)
+            _audioState.value = AudioStateButton.State.PLAYING
+            isRecordPlayFinished = true
         }
     }
 
@@ -107,7 +117,8 @@ abstract class AudioViewModel constructor(
 
     fun pausePlayRecord() {
         recordPlayer.pause()
-        _audioState.value = AudioStateButton.State.PAUSE
+        progressJob?.cancel()
+        _audioState.value = AudioStateButton.State.PLAYING
     }
 
     override fun onCleared() {
