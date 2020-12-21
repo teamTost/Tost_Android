@@ -83,4 +83,12 @@
     <string name="login">로그인</string>
     <string name="signup">회원가입</string>
     <string name="google_login_fail">구글 로그인에 실패했습니다.</string>
+    <string name="welcome_nickname">%s님 반가워요</string>
+    <string name="lets_set_goal">목표를 설정하고 달성해보세요!</string>
+    <string name="my_goal">My Goal</string>
+    <string name="yyyy_mm_dd">YYYY. MM. DD </string>
+    <string name="to">까지</string>
+    <string name="level_n">Level. N </string>
+    <string name="to_achieve">달성하기</string>
+    <string name="start_with_tost">TOST와 함께 시작하기</string>
 </resources>

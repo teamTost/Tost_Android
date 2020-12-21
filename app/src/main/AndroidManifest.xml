@@ -20,7 +20,8 @@
         android:roundIcon="@drawable/logo_final_3"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tost">
-        <activity android:name=".presentation.SplashActivity"/>
+        <activity android:name=".presentation.goal.GoalActivity"></activity>
+        <activity android:name=".presentation.SplashActivity" />
         <activity android:name=".presentation.auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.problem.part2.Part2Activity">
-
-        </activity>
+        <activity android:name=".presentation.problem.part2.Part2Activity"></activity>
         <activity android:name=".test.TestFinishActivity" />
         <activity android:name=".test.TestActivity" />
         <activity android:name=".presentation.problem.ProblemGuideActivity" />
