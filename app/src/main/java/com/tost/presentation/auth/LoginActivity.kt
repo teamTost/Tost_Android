@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.tost.R
 import com.tost.databinding.ActivityLoginBinding
+import com.tost.presentation.MainActivity
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +29,13 @@ class LoginActivity : AppCompatActivity() {
             deployGoogleAuth(createGoogleSignInOptions())
         }
         loginViewModel.toastMessage.observe(this) { showToast(it) }
+        loginViewModel.loginSuccess.observe(this) {
+            if (!it) return@observe
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        loginViewModel.runAutoLogin()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -2,6 +2,7 @@ package com.tost.presentation
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 /**
  * Created By Malibin
@@ -9,4 +10,10 @@ import dagger.hilt.android.HiltAndroidApp
  */
 
 @HiltAndroidApp
-class TostApplication : Application()
+class TostApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        Timber.plant(Timber.DebugTree())
+    }
+}

@@ -7,4 +7,5 @@ package com.tost.data.service.request
 
 data class TostLoginRequestParams(
     val idToken: String,
+    val fcmToken: String,
 )

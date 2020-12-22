@@ -19,7 +19,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_final_3"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tost">
+        android:theme="@style/Theme.Tost"
+        android:usesCleartextTraffic="true">
         <activity android:name=".presentation.goal.GoalActivity"></activity>
         <activity android:name=".presentation.SplashActivity" />
         <activity android:name=".presentation.auth.LoginActivity">
