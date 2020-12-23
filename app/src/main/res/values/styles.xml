@@ -49,4 +49,16 @@
         <item name="android:paddingBottom">16dp</item>
         <item name="android:gravity">center</item>
     </style>
+
+    <style name="Widget.AppTheme.BottomSheet" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+        <item name="android:colorBackground">#00000000</item>
+    </style>
+
+    <style name="lightDatePicker">
+        <item name="android:textColorPrimary">@color/blue_grey_22</item>
+        <item name="colorControlNormal">@color/main_orange</item>
+    </style>
 </resources>

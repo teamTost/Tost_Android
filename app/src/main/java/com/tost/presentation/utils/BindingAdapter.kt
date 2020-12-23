@@ -1,10 +1,13 @@
 package com.tost.presentation.utils
 
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.tost.R
 import com.tost.presentation.problem.widget.TostProgressBar
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created By Malibin
@@ -23,4 +26,11 @@ fun bindingImageUrl(imageView: ImageView, imageUrl: String?) {
 @BindingAdapter("progress")
 fun bindingProgress(tostProgressBar: TostProgressBar, progress: Int?) {
     tostProgressBar.progress = progress ?: return
+}
+
+@BindingAdapter("date")
+fun bindingDate(textView: TextView, date: Date?) {
+    if (date == null) return
+    val format = SimpleDateFormat("yyyy. MM. dd", Locale.KOREA)
+    textView.text = format.format(date)
 }
