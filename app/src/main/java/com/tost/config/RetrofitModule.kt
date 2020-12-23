@@ -5,8 +5,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import javax.inject.Singleton
 
 /**
@@ -20,17 +23,26 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun provideTostService(gsonConverterFactory: GsonConverterFactory): TostService {
+    fun provideTostService(): TostService {
         return Retrofit.Builder()
-            .addConverterFactory(gsonConverterFactory)
+            .addConverterFactory(createGsonConverterFactory())
+            .client(createOkHttpClient())
             .baseUrl(TostService.BASE_URL)
             .build()
             .create(TostService::class.java)
     }
 
-    @Singleton
-    @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory {
+    private fun createGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
+    }
+
+    private fun createOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(createHttpLoggingInterceptor())
+            .build()
+    }
+
+    private fun createHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor {
+        Timber.tag("OK_HTTP").d(it)
     }
 }

@@ -1,6 +1,8 @@
 package com.tost.presentation
 
 import android.app.Application
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -14,6 +16,13 @@ class TostApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Timber.plant(Timber.DebugTree())
+        Logger.addLogAdapter(AndroidLogAdapter())
+        Timber.plant(LoggerEntangledTree())
+    }
+
+    private class LoggerEntangledTree : Timber.DebugTree() {
+        override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
+            Logger.log(priority, tag, message, t)
+        }
     }
 }
