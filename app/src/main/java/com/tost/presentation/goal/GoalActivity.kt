@@ -27,11 +27,12 @@ class GoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickListener
     }
 
     private fun initView(binding: ActivityGoalBinding) {
+        window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
         binding.lifecycleOwner = this
         binding.viewModel = goalViewModel
         binding.buttonGoalDate.setOnClickListener { deployDatePicker() }
         binding.buttonGoalLevel.setOnClickListener { deployLevelPicker() }
-        window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
+        binding.buttonStart.setOnClickListener { saveGoal() }
     }
 
     private fun deployDatePicker() {
@@ -60,6 +61,14 @@ class GoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickListener
 
     override fun onLevelPick(level: Int) {
         goalViewModel.refreshSelectedLevel(level)
+    }
+
+    private fun saveGoal() {
+        if (goalViewModel.isBothGoalSelected()) {
+            goalViewModel.saveGoal()
+            return
+        }
+        showToast(R.string.select_goals)
     }
 
     companion object {

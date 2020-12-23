@@ -16,16 +16,6 @@ import com.tost.databinding.BottomSheetLevelSelectBinding
 class LevelPickBottomSheet : BottomSheetDialogFragment() {
 
     private var onLevelPickListener: OnLevelPickListener? = null
-    private val levels = arrayOf(
-        "Level 1",
-        "Level 2",
-        "Level 3",
-        "Level 4",
-        "Level 5",
-        "Level 6",
-        "Level 7",
-        "Level 8"
-    )
 
     override fun getTheme() = R.style.Widget_AppTheme_BottomSheet
 
@@ -42,8 +32,8 @@ class LevelPickBottomSheet : BottomSheetDialogFragment() {
     private fun initView(binding: BottomSheetLevelSelectBinding) {
         binding.buttonSubmit.setOnClickListener { onSubmitClick(getPickedLevel(binding)) }
         binding.pickerLevel.minValue = 0
-        binding.pickerLevel.maxValue = levels.size - 1
-        binding.pickerLevel.displayedValues = levels
+        binding.pickerLevel.maxValue = LEVELS.size - 1
+        binding.pickerLevel.displayedValues = LEVELS
     }
 
     private fun getPickedLevel(binding: BottomSheetLevelSelectBinding): Int {
@@ -61,5 +51,18 @@ class LevelPickBottomSheet : BottomSheetDialogFragment() {
 
     fun interface OnLevelPickListener {
         fun onLevelPick(level: Int)
+    }
+
+    companion object{
+        private val LEVELS = arrayOf(
+            "Level 1",
+            "Level 2",
+            "Level 3",
+            "Level 4",
+            "Level 5",
+            "Level 6",
+            "Level 7",
+            "Level 8"
+        )
     }
 }

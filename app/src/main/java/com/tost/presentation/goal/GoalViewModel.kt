@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tost.data.repository.GoalRepository
 import com.tost.data.repository.GoogleAuthRepository
 import com.tost.data.repository.UserRepository
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -16,7 +18,9 @@ import java.util.*
  */
 
 class GoalViewModel @ViewModelInject constructor(
-    private val googleAuthRepository: GoogleAuthRepository
+    private val userRepository: UserRepository,
+    private val googleAuthRepository: GoogleAuthRepository,
+    private val goalRepository: GoalRepository,
 ) : ViewModel() {
     private val _userName = MutableLiveData<String>()
     val userName: LiveData<String>
@@ -29,6 +33,10 @@ class GoalViewModel @ViewModelInject constructor(
     private val _selectedLevel = MutableLiveData<Int>()
     val selectedLevel: LiveData<Int>
         get() = _selectedLevel
+
+    private val _isLoading = MutableLiveData(false)
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
 
     init {
         initViewModel()
@@ -44,5 +52,23 @@ class GoalViewModel @ViewModelInject constructor(
 
     fun refreshSelectedLevel(level: Int) {
         _selectedLevel.value = level
+    }
+
+    fun isBothGoalSelected(): Boolean {
+        return selectedDate.value != null && selectedLevel.value != null
+    }
+
+    fun saveGoal() = viewModelScope.launch(goalSaveFailHandler()) {
+        _isLoading.value = true
+        val selectedDate = _selectedDate.value ?: throw IllegalStateException("date must be selected")
+        val selectedLevel = _selectedLevel.value ?: throw IllegalStateException("level must be selected")
+        val tostToken = userRepository.getTostToken() ?: throw IllegalStateException("로그인 이상")
+        goalRepository.saveGoal(tostToken, selectedDate, selectedLevel)
+        _isLoading.value = false
+    }
+
+    private fun goalSaveFailHandler() = CoroutineExceptionHandler { _, t ->
+        _isLoading.value = false
+        t.printStackTrace()
     }
 }

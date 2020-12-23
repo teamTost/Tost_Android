@@ -1,8 +1,10 @@
 package com.tost.data.service
 
+import com.tost.data.service.request.SaveGoalRequestParams
 import com.tost.data.service.request.TostLoginRequestParams
 import com.tost.data.service.response.TostLoginResponse
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 /**
@@ -16,6 +18,12 @@ interface TostService {
     suspend fun login(
         @Body loginRequestParams: TostLoginRequestParams
     ): TostLoginResponse
+
+    @POST("/target")
+    suspend fun saveGoal(
+        @Header("token") token: String,
+        @Body saveGoalRequestParams: SaveGoalRequestParams
+    )
 
     companion object {
         const val BASE_URL = "http://13.124.234.226:8080"
