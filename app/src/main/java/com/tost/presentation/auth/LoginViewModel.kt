@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.tost.R
+import com.tost.data.repository.GoogleAuthRepository
 import com.tost.data.repository.UserRepository
 import com.tost.presentation.auth.LoginActivity.Companion.REQUEST_CODE_GOOGLE_AUTH
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
+    private val googleAuthRepository: GoogleAuthRepository,
 ) : ViewModel() {
     private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean>
@@ -50,16 +52,17 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     private fun saveUser(account: GoogleSignInAccount) = viewModelScope.launch(loginFailHandler()) {
-        userRepository.saveAccount(account)
-        runAutoLogin(account.idToken)
+        googleAuthRepository.saveAccount(account)
+        userRepository.saveTostToken(
+            googleAuthRepository.getGoogleToken(),
+            googleAuthRepository.getFcmToken(),
+        )
+        runAutoLogin()
     }
 
-    @JvmOverloads
-    fun runAutoLogin(_googleToken: String? = null) = viewModelScope.launch(loginFailHandler()) {
-        val googleToken = _googleToken ?: userRepository.getGoogleToken()
-        require(googleToken.isNotBlank()) { "google Token not saved" }
-        val tostToken = userRepository.getTostToken()
-        require(tostToken.isNotBlank()) { "Tost Token not saved" }
+    fun runAutoLogin() = viewModelScope.launch(loginFailHandler()) {
+        userRepository.getTostToken()
+            ?: throw IllegalStateException("Tost Token not exist in Local")
         loginSuccess()
     }
 

@@ -42,7 +42,8 @@ object RetrofitModule {
             .build()
     }
 
-    private fun createHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor {
-        Timber.tag("OK_HTTP").d(it)
+    private fun createHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor { Timber.tag("OK_HTTP").d(it) }
+            .apply { level = HttpLoggingInterceptor.Level.BODY }
     }
 }

@@ -24,17 +24,9 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.buttonLogin.setOnClickListener {
-            binding.windowLoading.root.visibility = View.VISIBLE
-            deployGoogleAuth(createGoogleSignInOptions())
-        }
-        loginViewModel.toastMessage.observe(this) { showToast(it) }
-        loginViewModel.loginSuccess.observe(this) {
-            if (!it) return@observe
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        initView(binding)
+        subscribeViewModel()
+
         loginViewModel.runAutoLogin()
     }
 
@@ -42,6 +34,25 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         loginViewModel.handleActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun initView(binding: ActivityLoginBinding) {
+        binding.buttonLogin.setOnClickListener {
+            binding.windowLoading.root.visibility = View.VISIBLE
+            deployGoogleAuth(createGoogleSignInOptions())
+        }
+        binding.buttonTry.setOnClickListener { deployHomeActivityAndFinish() }
+    }
+
+    private fun subscribeViewModel() {
+        loginViewModel.toastMessage.observe(this) { showToast(it) }
+        loginViewModel.loginSuccess.observe(this) { isSuccess -> if (isSuccess) deployHomeActivityAndFinish() }
+    }
+
+    private fun deployHomeActivityAndFinish() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun deployGoogleAuth(gso: GoogleSignInOptions) {
