@@ -1,7 +1,5 @@
 package com.tost.presentation.goal.dialog
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +17,8 @@ import java.util.*
 
 class DatePickBottomSheet : BottomSheetDialogFragment() {
 
+    private var onDatePickListener: OnDatePickListener? = null
+
     override fun getTheme() = R.style.Widget_AppTheme_BottomSheet
 
     override fun onCreateView(
@@ -35,6 +35,11 @@ class DatePickBottomSheet : BottomSheetDialogFragment() {
         binding.buttonSubmit.setOnClickListener { onSubmitClick(getPickedDate(binding)) }
     }
 
+    private fun onSubmitClick(date: Date) {
+        onDatePickListener?.onDatePick(date)
+        dismiss()
+    }
+
     private fun getPickedDate(binding: BottomSheetDateSelectBinding): Date {
         val day = NUMBER_FORMAT.format(binding.pickerDate.dayOfMonth)
         val month = NUMBER_FORMAT.format(binding.pickerDate.month + 1)
@@ -44,18 +49,16 @@ class DatePickBottomSheet : BottomSheetDialogFragment() {
             ?: throw IllegalArgumentException("Cannot convert date")
     }
 
-    private fun onSubmitClick(date: Date) {
-        val intent = Intent()
-        intent.putExtra(KEY_DATE, date)
-        targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, intent)
-        dismiss()
+    fun setOnDatePickListener(listener: OnDatePickListener?) {
+        this.onDatePickListener = listener
     }
 
     companion object {
-        const val REQUEST_CODE = 2000
-        const val KEY_DATE = "date"
-
         private const val NUMBER_FORMAT = "%02d"
         private const val DATE_FORMAT = "yyyyMMdd"
+    }
+
+    fun interface OnDatePickListener {
+        fun onDatePick(date: Date)
     }
 }

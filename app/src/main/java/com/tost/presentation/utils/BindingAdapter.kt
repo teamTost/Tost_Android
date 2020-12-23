@@ -2,6 +2,7 @@ package com.tost.presentation.utils
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.tost.R
@@ -28,7 +29,7 @@ fun bindingProgress(tostProgressBar: TostProgressBar, progress: Int?) {
     tostProgressBar.progress = progress ?: return
 }
 
-@BindingAdapter("date")
+@BindingAdapter("date_text")
 fun bindingDate(textView: TextView, date: Date?) {
     if (date == null) return
     val format = SimpleDateFormat("yyyy. MM. dd", Locale.KOREA)
