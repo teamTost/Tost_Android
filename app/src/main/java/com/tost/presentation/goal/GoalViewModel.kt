@@ -26,6 +26,10 @@ class GoalViewModel @ViewModelInject constructor(
     val selectedDate: LiveData<Date>
         get() = _selectedDate
 
+    private val _selectedLevel = MutableLiveData<Int>()
+    val selectedLevel: LiveData<Int>
+        get() = _selectedLevel
+
     init {
         initViewModel()
     }
@@ -36,5 +40,9 @@ class GoalViewModel @ViewModelInject constructor(
 
     fun refreshSelectedDate(date: Date) {
         _selectedDate.value = date
+    }
+
+    fun refreshSelectedLevel(level: Int) {
+        _selectedLevel.value = level
     }
 }
