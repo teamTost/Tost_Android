@@ -4,11 +4,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
+import com.tost.data.dao.get
 import com.tost.data.service.TostService
 import com.tost.data.service.request.TostLoginRequestParams
 import com.tost.presentation.utils.printLog
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
@@ -21,7 +21,7 @@ class UserRepository @Inject constructor(
     private val tostService: TostService,
 ) {
     suspend fun getTostToken(): String? {
-        return dataStore.data.map { it[KEY_TOST_TOKEN] }.first()
+        return dataStore[KEY_TOST_TOKEN].first()
     }
 
     suspend fun saveTostToken(googleToken: String, fcmToken: String) {

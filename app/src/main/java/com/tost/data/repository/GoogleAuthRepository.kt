@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.messaging.FirebaseMessaging
+import com.tost.data.dao.get
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
@@ -22,13 +23,11 @@ class GoogleAuthRepository @Inject constructor(
     private val firebaseMessaging: FirebaseMessaging,
 ) {
     suspend fun getGoogleToken(): String {
-        return dataStore.data.map { it[KEY_GOOGLE_TOKEN] }.first()
-            ?: throw USER_NOT_SAVED_EXCEPTION
+        return dataStore[KEY_GOOGLE_TOKEN].first() ?: throw USER_NOT_SAVED_EXCEPTION
     }
 
     suspend fun getName(): String {
-        return dataStore.data.map { it[KEY_NAME] }.first()
-            ?: throw USER_NOT_SAVED_EXCEPTION
+        return dataStore[KEY_NAME].first() ?: throw USER_NOT_SAVED_EXCEPTION
     }
 
     suspend fun saveAccount(account: GoogleSignInAccount) {
@@ -44,7 +43,7 @@ class GoogleAuthRepository @Inject constructor(
     }
 
     private suspend fun getLocalFcmToken(): String? {
-        return dataStore.data.map { it[KEY_FCM_TOKEN] }.first()
+        return dataStore[KEY_FCM_TOKEN].first()
     }
 
     private suspend fun getRemoteFcmToken(): String {
