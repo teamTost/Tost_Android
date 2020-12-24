@@ -94,4 +94,14 @@
     <string name="start_with_tost">TOST와 함께 시작하기</string>
     <string name="cannot_select_past">과거는 설정할 수 없어요</string>
     <string name="select_goals">목표를 설정해주세요!</string>
+    <string name="n">N</string>
+    <string name="complete_settings">설정완료</string>
+    <string name="my_weekly_goal">My Weekly Goal</string>
+    <string name="my_weekly_goal_description">이번 주 목표 학습량을 설정해 주세요!\n주간 학습량은 매주 월요일 오전 12시에 재설정됩니다.</string>
+    <string name="part_6">Part 6</string>
+    <string name="part_5">Part 5</string>
+    <string name="part_4">Part 4</string>
+    <string name="part_3">Part 3</string>
+    <string name="part_2">Part 2</string>
+    <string name="part_1">Part 1</string>
 </resources>

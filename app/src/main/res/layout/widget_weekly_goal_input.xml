@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_count"
+        app:srcCompat="@drawable/ic_arrow_right_line_sm" />
+
+    <EditText
+        android:id="@+id/text_count"
+        style="@style/EmphasisStyle.Title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/transparent"
+        android:gravity="right"
+        android:hint="@string/n"
+        android:includeFontPadding="false"
+        android:inputType="number"
+        android:textColor="@color/blue_grey_22"
+        android:textColorHint="@color/blue_grey_cf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/text_problem"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_problem"
+        style="@style/ParagraphStyle.Text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:includeFontPadding="false"
+        android:text="@string/problem"
+        android:textColor="@color/blue_grey_cf"
+        app:layout_constraintBottom_toBottomOf="@+id/text_count"
+        app:layout_constraintLeft_toRightOf="@id/text_count"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_count"
+        app:layout_constraintVertical_bias="1.0" />
+</merge>
