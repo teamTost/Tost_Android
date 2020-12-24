@@ -17,8 +17,4 @@
             <enum name="PAUSE" value="3" />
         </attr>
     </declare-styleable>
-
-    <declare-styleable name="WeeklyGoalInputField">
-        <attr name="countText" format="string" />
-    </declare-styleable>
 </resources>

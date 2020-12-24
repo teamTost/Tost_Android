@@ -1,195 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <data>
 
-    <ScrollView
+        <variable
+            name="viewModel"
+            type="com.tost.presentation.goal.weekly.WeeklyGoalViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".presentation.goal.weekly.WeeklyGoalActivity">
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView23"
-                style="@style/EmphasisStyle.Big2"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="58dp"
-                android:text="@string/my_weekly_goal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                tools:context=".presentation.goal.weekly.WeeklyGoalActivity">
 
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/applesdgothicneolight"
-                android:lineSpacingExtra="4dp"
-                android:text="@string/my_weekly_goal_description"
-                android:textColor="@color/blue_grey_87"
-                android:textSize="14dp"
-                app:layout_constraintStart_toStartOf="@+id/textView23"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                <TextView
+                    android:id="@+id/textView23"
+                    style="@style/EmphasisStyle.Big2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="58dp"
+                    android:text="@string/my_weekly_goal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView28"
-                style="@style/EmphasisStyle.Title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:text="@string/part_1"
-                app:layout_constraintStart_toStartOf="@+id/textView26"
-                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/applesdgothicneolight"
+                    android:lineSpacingExtra="4dp"
+                    android:text="@string/my_weekly_goal_description"
+                    android:textColor="@color/blue_grey_87"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
-            <com.tost.presentation.goal.weekly.WeeklyGoalInputField
-                android:id="@+id/weeklyGoalInputField"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="20dp"
-                android:background="@android:color/white"
-                android:elevation="20dp"
-                android:outlineSpotShadowColor="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView28"
-                app:layout_constraintTop_toBottomOf="@+id/textView28" />
+                <TextView
+                    android:id="@+id/textView28"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:text="@string/part_1"
+                    app:layout_constraintStart_toStartOf="@+id/textView26"
+                    app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
-            <TextView
-                android:id="@+id/textView29"
-                style="@style/EmphasisStyle.Title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/part_2"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField"
-                app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField" />
+                <com.tost.presentation.goal.weekly.WeeklyGoalInputField
+                    android:id="@+id/weeklyGoalInputField"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@android:color/white"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:countText="@={viewModel.part1Goal}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView28"
+                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
-            <com.tost.presentation.goal.weekly.WeeklyGoalInputField
-                android:id="@+id/weeklyGoalInputField3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@android:color/white"
-                android:elevation="20dp"
-                android:outlineSpotShadowColor="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="@id/weeklyGoalInputField"
-                app:layout_constraintStart_toStartOf="@id/weeklyGoalInputField"
-                app:layout_constraintTop_toBottomOf="@id/textView29" />
+                <TextView
+                    android:id="@+id/textView29"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/part_2"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField" />
 
-            <TextView
-                android:id="@+id/textView30"
-                style="@style/EmphasisStyle.Title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/part_3"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField3"
-                app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField3" />
+                <com.tost.presentation.goal.weekly.WeeklyGoalInputField
+                    android:id="@+id/weeklyGoalInputField3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:countText="@={viewModel.part2Goal}"
+                    app:layout_constraintEnd_toEndOf="@id/weeklyGoalInputField"
+                    app:layout_constraintStart_toStartOf="@id/weeklyGoalInputField"
+                    app:layout_constraintTop_toBottomOf="@id/textView29" />
 
-            <com.tost.presentation.goal.weekly.WeeklyGoalInputField
-                android:id="@+id/weeklyGoalInputField4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@android:color/white"
-                android:elevation="20dp"
-                android:outlineSpotShadowColor="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField3"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField3"
-                app:layout_constraintTop_toBottomOf="@+id/textView30" />
+                <TextView
+                    android:id="@+id/textView30"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/part_3"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField3"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField3" />
 
-            <TextView
-                android:id="@+id/textView31"
-                style="@style/EmphasisStyle.Title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/part_4"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField4"
-                app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField4" />
+                <com.tost.presentation.goal.weekly.WeeklyGoalInputField
+                    android:id="@+id/weeklyGoalInputField4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:countText="@={viewModel.part3Goal}"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField3"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField3"
+                    app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
-            <com.tost.presentation.goal.weekly.WeeklyGoalInputField
-                android:id="@+id/weeklyGoalInputField5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@android:color/white"
-                android:elevation="20dp"
-                android:outlineSpotShadowColor="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField4"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField4"
-                app:layout_constraintTop_toBottomOf="@+id/textView31" />
+                <TextView
+                    android:id="@+id/textView31"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/part_4"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField4"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField4" />
 
-            <TextView
-                android:id="@+id/textView32"
-                style="@style/EmphasisStyle.Title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/part_5"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField5"
-                app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField5" />
+                <com.tost.presentation.goal.weekly.WeeklyGoalInputField
+                    android:id="@+id/weeklyGoalInputField5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:countText="@={viewModel.part4Goal}"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField4"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField4"
+                    app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
-            <com.tost.presentation.goal.weekly.WeeklyGoalInputField
-                android:id="@+id/weeklyGoalInputField6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@android:color/white"
-                android:elevation="20dp"
-                android:outlineSpotShadowColor="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField5"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField5"
-                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                <TextView
+                    android:id="@+id/textView32"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/part_5"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField5"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField5" />
 
-            <TextView
-                android:id="@+id/textView33"
-                style="@style/EmphasisStyle.Title1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/part_6"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField6"
-                app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField6" />
+                <com.tost.presentation.goal.weekly.WeeklyGoalInputField
+                    android:id="@+id/weeklyGoalInputField6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:countText="@={viewModel.part5Goal}"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField5"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField5"
+                    app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
-            <com.tost.presentation.goal.weekly.WeeklyGoalInputField
-                android:id="@+id/weeklyGoalInputField7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@android:color/white"
-                android:elevation="20dp"
-                android:outlineSpotShadowColor="@android:color/transparent"
-                app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField6"
-                app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField6"
-                app:layout_constraintTop_toBottomOf="@id/textView33" />
+                <TextView
+                    android:id="@+id/textView33"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/part_6"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField6"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField6" />
 
-            <TextView
-                style="@style/BlackButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="60dp"
-                android:layout_marginBottom="60dp"
-                android:text="@string/complete_settings"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField7" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <com.tost.presentation.goal.weekly.WeeklyGoalInputField
+                    android:id="@+id/weeklyGoalInputField7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:countText="@={viewModel.part6Goal}"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalInputField6"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalInputField6"
+                    app:layout_constraintTop_toBottomOf="@id/textView33" />
+
+                <TextView
+                    android:id="@+id/button_submit"
+                    style="@style/BlackButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginBottom="60dp"
+                    android:text="@string/complete_settings"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalInputField7" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <include
+            android:id="@+id/window_loading"
+            layout="@layout/window_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:isLoading="@{viewModel.isLoading()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

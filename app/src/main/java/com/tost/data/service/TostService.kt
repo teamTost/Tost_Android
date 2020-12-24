@@ -1,11 +1,13 @@
 package com.tost.data.service
 
 import com.tost.data.service.request.SaveGoalRequestParams
+import com.tost.data.service.request.SaveWeeklyGoalParams
 import com.tost.data.service.request.TostLoginRequestParams
 import com.tost.data.service.response.TostLoginResponse
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 /**
  * Created By Malibin
@@ -23,6 +25,12 @@ interface TostService {
     suspend fun saveGoal(
         @Header("token") token: String,
         @Body saveGoalRequestParams: SaveGoalRequestParams
+    )
+
+    @PUT("/target/solve")
+    suspend fun saveWeeklyGoal(
+        @Header("token") token: String,
+        @Body saveWeeklyGoalParams: SaveWeeklyGoalParams,
     )
 
     companion object {
