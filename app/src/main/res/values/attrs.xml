@@ -17,4 +17,9 @@
             <enum name="PAUSE" value="3" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="WeeklyGoalDisplayHome">
+        <attr name="count" format="integer" />
+        <attr name="part" format="integer" />
+    </declare-styleable>
 </resources>

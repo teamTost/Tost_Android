@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue_grey_f8">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:context=".presentation.home.HomeActivity">
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/gmarketsansbold"
+                        android:text="TOST"
+                        android:textColor="@color/blue_grey_22"
+                        android:textSize="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView34"
+                        style="@style/EmphasisStyle.SubTitle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="56dp"
+                        android:text="Level 8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView35"
+                        style="@style/EmphasisStyle.Header2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/doing_well"
+                        app:layout_constraintStart_toStartOf="@+id/textView34"
+                        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="20dp"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:progressDrawable="@drawable/round_progressbar"
+                        android:thumb="@android:color/transparent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/textView35"
+                        app:layout_constraintTop_toBottomOf="@+id/textView35"
+                        tools:progress="30" />
+
+                    <TextView
+                        android:id="@+id/textView36"
+                        style="@style/EmphasisStyle.SubTitle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="D-Day"
+                        android:textColor="@color/main_orange"
+                        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                        app:layout_constraintEnd_toEndOf="@+id/seekBar" />
+
+                    <TextView
+                        android:id="@+id/textView37"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/gmarketsansmedium"
+                        android:text="2020. 12. 06"
+                        android:textColor="@color/blue_grey_87"
+                        android:textSize="12dp"
+                        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+                        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+                    <TextView
+                        android:id="@+id/textView38"
+                        style="@style/EmphasisStyle.Title1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="56dp"
+                        android:text="@string/weekly_goal"
+                        app:layout_constraintStart_toStartOf="@+id/seekBar"
+                        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+                    <TextView
+                        android:id="@+id/textView39"
+                        style="@style/ParagraphStyle.Text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="수정하기"
+                        android:textColor="@color/blue_grey_cf"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView38"
+                        app:layout_constraintEnd_toEndOf="@+id/textView37"
+                        app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+                    <com.tost.presentation.home.WeeklyGoalDisplayHome
+                        android:id="@+id/weeklyGoalDisplayHome1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome2"
+                        app:layout_constraintTop_toBottomOf="@id/textView38" />
+
+                    <com.tost.presentation.home.WeeklyGoalDisplayHome
+                        android:id="@+id/weeklyGoalDisplayHome2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome1"
+                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome1"
+                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome3"
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome1" />
+
+                    <com.tost.presentation.home.WeeklyGoalDisplayHome
+                        android:id="@+id/weeklyGoalDisplayHome3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome2"
+                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome2"
+                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome4"
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome2" />
+
+                    <com.tost.presentation.home.WeeklyGoalDisplayHome
+                        android:id="@+id/weeklyGoalDisplayHome4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome3"
+                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome3"
+                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome5"
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome3" />
+
+                    <com.tost.presentation.home.WeeklyGoalDisplayHome
+                        android:id="@+id/weeklyGoalDisplayHome5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome4"
+                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome4"
+                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome6"
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome4" />
+
+                    <com.tost.presentation.home.WeeklyGoalDisplayHome
+                        android:id="@+id/weeklyGoalDisplayHome6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome5"
+                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome5"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/textView40"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="40dp"
+                    android:text="Practice"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+                <TextView
+                    android:id="@+id/textView41"
+                    style="@style/BlackButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginBottom="60dp"
+                    android:text="시험보기"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+                <TextView
+                    android:id="@+id/textView42"
+                    style="@style/GreyBorderWhiteButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:text="복습하기"
+                    app:layout_constraintEnd_toEndOf="@+id/textView41"
+                    app:layout_constraintStart_toStartOf="@+id/textView41"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="20dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView40"
+                    tools:listitem="@layout/item_practice_part" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
