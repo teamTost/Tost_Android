@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.tost.presentation.goal.weekly.change.ChangeWeeklyGoalViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,6 +17,7 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +53,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
                 <TextView
-                    android:id="@+id/textView45"
+                    android:id="@+id/button_modify"
                     style="@style/BlackButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -79,8 +83,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="20dp"
+                    android:background="@android:color/white"
                     android:elevation="20dp"
                     android:outlineSpotShadowColor="@android:color/transparent"
+                    app:count="@={viewModel.part1Goal}"
+                    app:existCount="@{viewModel.weeklyGoal.part1}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/textView46"
                     app:layout_constraintTop_toBottomOf="@id/textView46" />
@@ -100,8 +107,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
                     android:elevation="20dp"
                     android:outlineSpotShadowColor="@android:color/transparent"
+                    app:count="@={viewModel.part2Goal}"
+                    app:existCount="@{viewModel.weeklyGoal.part2}"
                     app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField1"
                     app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField1"
                     app:layout_constraintTop_toBottomOf="@id/textView47" />
@@ -121,8 +131,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
                     android:elevation="20dp"
                     android:outlineSpotShadowColor="@android:color/transparent"
+                    app:count="@={viewModel.part3Goal}"
+                    app:existCount="@{viewModel.weeklyGoal.part3}"
                     app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField2"
                     app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField2"
                     app:layout_constraintTop_toBottomOf="@id/textView473" />
@@ -142,8 +155,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
                     android:elevation="20dp"
                     android:outlineSpotShadowColor="@android:color/transparent"
+                    app:count="@={viewModel.part4Goal}"
+                    app:existCount="@{viewModel.weeklyGoal.part4}"
                     app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField3"
                     app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField3"
                     app:layout_constraintTop_toBottomOf="@id/textView474" />
@@ -163,8 +179,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
                     android:elevation="20dp"
                     android:outlineSpotShadowColor="@android:color/transparent"
+                    app:count="@={viewModel.part5Goal}"
+                    app:existCount="@{viewModel.weeklyGoal.part5}"
                     app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField4"
                     app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField4"
                     app:layout_constraintTop_toBottomOf="@id/textView475" />
@@ -184,12 +203,27 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
+                    android:background="@android:color/white"
                     android:elevation="20dp"
                     android:outlineSpotShadowColor="@android:color/transparent"
+                    app:count="@={viewModel.part6Goal}"
+                    app:existCount="@{viewModel.weeklyGoal.part6}"
                     app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField5"
                     app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField5"
                     app:layout_constraintTop_toBottomOf="@id/textView476" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <include
+            android:id="@+id/window_loading"
+            layout="@layout/window_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:isLoading="@{viewModel.isLoading()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

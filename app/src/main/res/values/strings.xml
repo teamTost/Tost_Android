@@ -117,4 +117,5 @@
     <string name="go_to_test">시험보기</string>
     <string name="repeat">복습하기</string>
     <string name="change">수정하기</string>
+    <string name="goal_changed">수정이 완료되었습니다!</string>
 </resources>

@@ -4,7 +4,9 @@ import android.content.Context
 import android.text.Editable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
@@ -30,30 +32,57 @@ class WeeklyGoalChangeField @JvmOverloads constructor(
             binding.textCountExist.text = value
         }
 
-    fun getCountToChange(): String {
-        return binding.textCountToChange.text.toString()
+    var countToChange: String = ""
+        get() = binding.textCountToChange.text.toString()
+        set(value) {
+            field = value
+            setCountToChangeText(value)
+        }
+
+    init {
+        binding.root.setOnClickListener { deploySoftKeyboard() }
+    }
+
+    private fun deploySoftKeyboard() {
+        binding.textCountToChange.requestFocus()
+        if (countToChange.isNotEmpty()) {
+            binding.textCountToChange.setSelection(countToChange.length)
+        }
+        val imm = ContextCompat.getSystemService(context, InputMethodManager::class.java)
+        imm?.showSoftInput(binding.textCountToChange, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    private fun setCountToChangeText(text: String) {
+        binding.textCountToChange.setText(text)
     }
 
     fun addTextChangedListener(listener: (text: Editable?) -> Unit) {
-        binding.textCountToChange.addTextChangedListener {
-            listener(it)
-        }
+        binding.textCountToChange.addTextChangedListener { listener(it) }
     }
 
     companion object {
         @JvmStatic
-        @BindingAdapter("countText")
+        @BindingAdapter("existCount")
+        fun bindingExistCount(view: WeeklyGoalChangeField, text: Int?) {
+            view.existCount = text.toString()
+        }
+
+        @JvmStatic
+        @BindingAdapter("count")
         fun bindingCountText(view: WeeklyGoalChangeField, text: String?) {
+            if (view.countToChange != text) {
+                view.countToChange = text.orEmpty()
+            }
         }
 
         @JvmStatic
-        @InverseBindingAdapter(attribute = "app:countText", event = "countTextAttrChanged")
+        @InverseBindingAdapter(attribute = "count", event = "countAttrChanged")
         fun getCountText(view: WeeklyGoalChangeField): String {
-            return view.getCountToChange()
+            return view.countToChange
         }
 
         @JvmStatic
-        @BindingAdapter("countTextAttrChanged")
+        @BindingAdapter("countAttrChanged")
         fun setCountTextInverseListener(
             view: WeeklyGoalChangeField,
             listener: InverseBindingListener

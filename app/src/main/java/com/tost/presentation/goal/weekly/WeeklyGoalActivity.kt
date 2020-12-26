@@ -1,11 +1,10 @@
 package com.tost.presentation.goal.weekly
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.tost.R
 import com.tost.databinding.ActivityWeeklyGoalBinding
-import com.tost.presentation.utils.printLog
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 

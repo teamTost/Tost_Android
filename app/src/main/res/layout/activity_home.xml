@@ -124,7 +124,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
                     <TextView
-                        android:id="@+id/textView39"
+                        android:id="@+id/button_change_goal"
                         style="@style/ParagraphStyle.Text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
