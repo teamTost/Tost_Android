@@ -3,11 +3,9 @@ package com.tost.data.service
 import com.tost.data.service.request.SaveGoalRequestParams
 import com.tost.data.service.request.SaveWeeklyGoalParams
 import com.tost.data.service.request.TostLoginRequestParams
+import com.tost.data.service.response.GoalsResponse
 import com.tost.data.service.response.TostLoginResponse
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 /**
  * Created By Malibin
@@ -32,6 +30,11 @@ interface TostService {
         @Header("token") token: String,
         @Body saveWeeklyGoalParams: SaveWeeklyGoalParams,
     )
+
+    @GET("/target")
+    suspend fun getGoals(
+        @Header("token") token: String
+    ): GoalsResponse
 
     companion object {
         const val BASE_URL = "http://13.124.234.226:8080"

@@ -5,13 +5,12 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
 import com.tost.data.dao.get
-import com.tost.data.entity.Part
+import com.tost.data.entity.EntireGoal
 import com.tost.data.entity.WeeklyGoal
 import com.tost.data.service.TostService
 import com.tost.data.service.request.SaveGoalRequestParams
-import kotlinx.coroutines.flow.Flow
+import com.tost.data.service.response.GoalsResponse
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import java.util.*
 import javax.inject.Inject
 
@@ -24,18 +23,17 @@ class GoalRepository @Inject constructor(
     private val dataStore: DataStore<Preferences>,
     private val tostService: TostService,
 ) {
-    suspend fun saveWeeklyGoal(weeklyGoal: WeeklyGoal) {
-        dataStore.edit {
-            it[KEY_GOAL_PART1] = weeklyGoal.part1
-            it[KEY_GOAL_PART2] = weeklyGoal.part2
-            it[KEY_GOAL_PART3] = weeklyGoal.part3
-            it[KEY_GOAL_PART4] = weeklyGoal.part4
-            it[KEY_GOAL_PART5] = weeklyGoal.part5
-            it[KEY_GOAL_PART6] = weeklyGoal.part6
-        }
+    suspend fun saveWeeklyGoal(token: String, weeklyGoal: WeeklyGoal) {
+        tostService.saveWeeklyGoal(token, weeklyGoal.toParams())
+        saveWeeklyGoalLocal(weeklyGoal)
     }
 
-    suspend fun getWeeklyGoal(): WeeklyGoal? {
+    suspend fun getWeeklyGoal(token: String): WeeklyGoal? {
+        if (isLocalWeeklyGoalEmpty()) {
+            val remoteGoals = tostService.getGoals(token)
+            saveGoalsLocal(remoteGoals)
+            return remoteGoals.getWeeklyGoal()
+        }
         return WeeklyGoal(
             part1 = dataStore[KEY_GOAL_PART1].first() ?: return null,
             part2 = dataStore[KEY_GOAL_PART2].first() ?: return null,
@@ -46,21 +44,52 @@ class GoalRepository @Inject constructor(
         )
     }
 
-    suspend fun saveGoal(token: String, date: Date, level: Int) {
-        tostService.saveGoal(token, SaveGoalRequestParams(date, level))
+    private suspend fun isLocalWeeklyGoalEmpty(): Boolean {
+        return dataStore[KEY_GOAL_PART1].first() == null
+    }
+
+    suspend fun saveEntireGoal(token: String, entireGoal: EntireGoal) {
+        tostService.saveGoal(token, SaveGoalRequestParams(entireGoal))
+        saveEntireGoalLocal(entireGoal)
+    }
+
+    suspend fun getEntireGoal(token: String): EntireGoal? {
+        if (isLocalEntireGoalEmpty()) {
+            val remoteGoals = tostService.getGoals(token)
+            saveGoalsLocal(remoteGoals)
+            return remoteGoals.getEntireGoal()
+        }
+        return EntireGoal(
+            level = dataStore[KEY_GOAL_LEVEL].first() ?: return null,
+            date = Date(dataStore[KEY_GOAL_DATE].first() ?: return null),
+        )
+    }
+
+    private suspend fun isLocalEntireGoalEmpty(): Boolean {
+        return dataStore[KEY_GOAL_LEVEL].first() == null
+    }
+
+    private suspend fun saveGoalsLocal(remoteGoals: GoalsResponse) {
+        saveEntireGoalLocal(remoteGoals.getEntireGoal())
+        saveWeeklyGoalLocal(remoteGoals.getWeeklyGoal())
+    }
+
+    private suspend fun saveEntireGoalLocal(entireGoal: EntireGoal) {
         dataStore.edit {
-            it[KEY_GOAL_DATE] = date.time
-            it[KEY_GOAL_LEVEL] = level
+            it[KEY_GOAL_DATE] = entireGoal.date.time
+            it[KEY_GOAL_LEVEL] = entireGoal.level
         }
     }
 
-    suspend fun getDate(): Date? {
-        val time = dataStore[KEY_GOAL_DATE].first() ?: return null
-        return Date(time)
-    }
-
-    suspend fun getLevel(): Int? {
-        return dataStore[KEY_GOAL_LEVEL].first()
+    private suspend fun saveWeeklyGoalLocal(weeklyGoal: WeeklyGoal) {
+        dataStore.edit {
+            it[KEY_GOAL_PART1] = weeklyGoal.part1
+            it[KEY_GOAL_PART2] = weeklyGoal.part2
+            it[KEY_GOAL_PART3] = weeklyGoal.part3
+            it[KEY_GOAL_PART4] = weeklyGoal.part4
+            it[KEY_GOAL_PART5] = weeklyGoal.part5
+            it[KEY_GOAL_PART6] = weeklyGoal.part6
+        }
     }
 
     companion object {

@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 class WeeklyGoalViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
     private val goalRepository: GoalRepository,
-    private val tostService: TostService,
 ) : ViewModel() {
     val part1Goal = MutableLiveData<String>()
     val part2Goal = MutableLiveData<String>()
@@ -43,11 +42,9 @@ class WeeklyGoalViewModel @ViewModelInject constructor(
 
     fun saveWeeklyGoals() = viewModelScope.launch {
         _isLoading.value = true
-        val weeklyGoal = getWeeklyGoal()
         val tostToken = userRepository.getTostToken()
             ?: throw IllegalStateException("login requested")
-        tostService.saveWeeklyGoal(tostToken, getWeeklyGoal().toParams())
-        goalRepository.saveWeeklyGoal(weeklyGoal)
+        goalRepository.saveWeeklyGoal(tostToken, getWeeklyGoal())
         _isLoading.value = false
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tost.data.entity.EntireGoal
 import com.tost.data.repository.GoalRepository
 import com.tost.data.repository.GoogleAuthRepository
 import com.tost.data.repository.UserRepository
@@ -17,7 +18,7 @@ import java.util.*
  * on 12월 23, 2020
  */
 
-class GoalViewModel @ViewModelInject constructor(
+class EntireGoalViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
     private val googleAuthRepository: GoogleAuthRepository,
     private val goalRepository: GoalRepository,
@@ -60,15 +61,19 @@ class GoalViewModel @ViewModelInject constructor(
 
     fun saveGoal() = viewModelScope.launch(goalSaveFailHandler()) {
         _isLoading.value = true
-        val selectedDate = _selectedDate.value ?: throw IllegalStateException("date must be selected")
-        val selectedLevel = _selectedLevel.value ?: throw IllegalStateException("level must be selected")
         val tostToken = userRepository.getTostToken() ?: throw IllegalStateException("로그인 이상")
-        goalRepository.saveGoal(tostToken, selectedDate, selectedLevel)
+        goalRepository.saveEntireGoal(tostToken, getEntireGoal())
         _isLoading.value = false
     }
+
+    private fun getEntireGoal(): EntireGoal = EntireGoal(
+        _selectedLevel.value ?: throw IllegalStateException("level must be selected"),
+        _selectedDate.value ?: throw IllegalStateException("date must be selected"),
+    )
 
     private fun goalSaveFailHandler() = CoroutineExceptionHandler { _, t ->
         _isLoading.value = false
         t.printStackTrace()
     }
 }
+//TODO 양방향데이터바인딩 으로 리팩터링 가능하려나?

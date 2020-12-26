@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tost.R
-import com.tost.databinding.ActivityGoalBinding
+import com.tost.databinding.ActivityEntireGoalBinding
 import com.tost.presentation.goal.dialog.DatePickBottomSheet
 import com.tost.presentation.goal.dialog.LevelPickBottomSheet
 import com.tost.presentation.utils.showToast
@@ -13,23 +13,23 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class GoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickListener,
+class EntireGoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickListener,
     LevelPickBottomSheet.OnLevelPickListener {
 
-    private val goalViewModel: GoalViewModel by viewModels()
+    private val entireGoalViewModel: EntireGoalViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityGoalBinding.inflate(layoutInflater)
+        val binding = ActivityEntireGoalBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView(binding)
     }
 
-    private fun initView(binding: ActivityGoalBinding) {
+    private fun initView(binding: ActivityEntireGoalBinding) {
         window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
         binding.lifecycleOwner = this
-        binding.viewModel = goalViewModel
+        binding.viewModel = entireGoalViewModel
         binding.buttonGoalDate.setOnClickListener { deployDatePicker() }
         binding.buttonGoalLevel.setOnClickListener { deployLevelPicker() }
         binding.buttonStart.setOnClickListener { saveGoal() }
@@ -56,16 +56,16 @@ class GoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickListener
             showToast("과거는 설정할 수 없어요")
             return
         }
-        goalViewModel.refreshSelectedDate(date)
+        entireGoalViewModel.refreshSelectedDate(date)
     }
 
     override fun onLevelPick(level: Int) {
-        goalViewModel.refreshSelectedLevel(level)
+        entireGoalViewModel.refreshSelectedLevel(level)
     }
 
     private fun saveGoal() {
-        if (goalViewModel.isBothGoalSelected()) {
-            goalViewModel.saveGoal()
+        if (entireGoalViewModel.isBothGoalSelected()) {
+            entireGoalViewModel.saveGoal()
             return
         }
         showToast(R.string.select_goals)
