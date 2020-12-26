@@ -15,6 +15,8 @@ class HomePracticesAdapter(
     private val parts: Array<Part>
 ) : RecyclerView.Adapter<HomePracticesAdapter.ViewHolder>() {
 
+    private var onPracticeClickListener: ((Part) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemPracticePartBinding.inflate(layoutInflater, parent, false)
@@ -27,12 +29,17 @@ class HomePracticesAdapter(
 
     override fun getItemCount(): Int = parts.size
 
+    fun setOnPracticeClickListener(listener: ((Part) -> Unit)?) {
+        this.onPracticeClickListener = listener
+    }
+
     inner class ViewHolder(
         private val binding: ItemPracticePartBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(part: Part) {
             binding.part = part
+            binding.root.setOnClickListener { onPracticeClickListener?.invoke(part) }
         }
     }
 }

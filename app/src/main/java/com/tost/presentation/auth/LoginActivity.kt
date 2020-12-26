@@ -9,7 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.tost.R
 import com.tost.databinding.ActivityLoginBinding
-import com.tost.presentation.MainActivity
+import com.tost.presentation.home.HomeActivity
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun deployHomeActivityAndFinish() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
     }

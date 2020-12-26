@@ -9,6 +9,7 @@ import com.tost.R
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityHomeBinding
 import com.tost.presentation.goal.weekly.change.ChangeWeeklyGoalActivity
+import com.tost.presentation.problem.ProblemEntryActivity
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -40,11 +41,20 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView(binding: ActivityHomeBinding) {
+        val adapter = HomePracticesAdapter(Part.values())
+        adapter.setOnPracticeClickListener { deployProblemEntryActivity(it) }
+
+        binding.listPractices.adapter = adapter
         binding.viewModel = homeViewModel
         binding.lifecycleOwner = this
-        binding.listPractices.adapter = HomePracticesAdapter(Part.values())
         binding.seekBar.setOnTouchListener { _, _ -> true }
         binding.buttonChangeGoal.setOnClickListener { deployChangeWeeklyGoalActivity() }
+    }
+
+    private fun deployProblemEntryActivity(part: Part) {
+        val intent = Intent(this, ProblemEntryActivity::class.java)
+        intent.putExtra(ProblemEntryActivity.KEY_PART, part)
+        startActivity(intent)
     }
 
     private fun deployChangeWeeklyGoalActivity() {

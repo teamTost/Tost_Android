@@ -27,15 +27,10 @@ class ProblemEntryActivity : AppCompatActivity() {
 //        )
         binding.buttonStart.setOnClickListener { deployProblemPrepareActivity() }
         setContentView(binding.root)
-
-        FirebaseMessaging.getInstance().token
-            .addOnCompleteListener { printLog("fcm token : ${it.result}") }
     }
 
     private fun getPart(): Part = intent.getSerializableExtra(KEY_PART) as? Part
-        ?: Part.FIVE
         ?: throw IllegalArgumentException("part must be send")
-    // TODO: 디폴트값 지우기
 
     private fun deployProblemPrepareActivity() {
         val intent = Intent(this, ProblemGuideActivity::class.java)

@@ -12,7 +12,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.tost.R
-import com.tost.presentation.MainActivity
+import com.tost.presentation.SplashActivity
 import com.tost.presentation.utils.printLog
 
 /**
@@ -30,7 +30,7 @@ class TostNotificationService : FirebaseMessagingService() {
     }
 
     private fun getDeployingAppIntent(): PendingIntent {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, SplashActivity::class.java)
         return PendingIntent.getActivity(this, 0, intent, 0)
     }
 
