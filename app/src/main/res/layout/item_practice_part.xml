@@ -1,46 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="217dp"
-    android:layout_height="254dp"
-    android:layout_marginStart="8dp"
-    android:background="@drawable/round_rectangle_10dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/text_part"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/gmarketsansbold"
-        android:text="Part 1"
-        android:textColor="@color/blue_grey_22"
-        android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/text_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/gmarketsansmedium"
-        android:text="Read a text aloud"
-        android:textColor="@color/blue_grey_22"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="@+id/text_part"
-        app:layout_constraintTop_toBottomOf="@+id/text_part" />
+        <variable
+            name="part"
+            type="com.tost.data.entity.Part" />
+    </data>
 
-    <TextView
-        android:id="@+id/text_question_numbers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/gmarketsansmedium"
-        android:text="Q.1~2"
-        android:textColor="@color/blue_grey_22"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="@+id/text_description"
-        app:layout_constraintTop_toBottomOf="@+id/text_description" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="217dp"
+        android:layout_height="254dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/round_rectangle_10dp">
+
+        <TextView
+            android:id="@+id/text_part"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:fontFamily="@font/gmarketsansbold"
+            android:text="@{@string/part_n_no_dot(part.number)}"
+            android:textColor="@color/blue_grey_22"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Part 0" />
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/gmarketsansmedium"
+            android:lineSpacingExtra="6dp"
+            android:text="@{part.topic}"
+            android:textColor="@color/blue_grey_22"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/text_part"
+            app:layout_constraintTop_toBottomOf="@+id/text_part"
+            tools:text="Read a text aloud\nasdfas dfas dfa dsf " />
+
+        <TextView
+            android:id="@+id/text_question_numbers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/gmarketsansmedium"
+            android:text="@{part.questionNumbers}"
+            android:textColor="@color/blue_grey_22"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/text_description"
+            app:layout_constraintTop_toBottomOf="@+id/text_description"
+            tools:text="Q.1~2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

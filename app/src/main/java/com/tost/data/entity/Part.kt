@@ -12,6 +12,7 @@ enum class Part(
     @StringRes val howToSolve: Int,
     @StringRes val topic: Int,
     @StringRes val guideText: Int,
+    @StringRes val questionNumbers: Int,
     @RawRes val guideAudio: Int,
 ) : Serializable {
     ONE(
@@ -21,6 +22,7 @@ enum class Part(
         R.string.part1_how_to_solve,
         R.string.part1_topic,
         R.string.part1_directions,
+        R.string.part1_question_numbers,
         R.raw.guide_part1
     ),
     TWO(
@@ -30,6 +32,7 @@ enum class Part(
         R.string.part2_how_to_solve,
         R.string.part2_topic,
         R.string.part2_directions,
+        R.string.part2_question_numbers,
         R.raw.guide_part2
     ),
     THREE(
@@ -39,6 +42,7 @@ enum class Part(
         R.string.part3_how_to_solve,
         R.string.part3_topic,
         R.string.part3_directions,
+        R.string.part3_question_numbers,
         R.raw.guide_part3
     ),
     FOUR(
@@ -48,6 +52,7 @@ enum class Part(
         R.string.part4_how_to_solve,
         R.string.part4_topic,
         R.string.part4_directions,
+        R.string.part4_question_numbers,
         R.raw.guide_part4
     ),
     FIVE(
@@ -57,6 +62,7 @@ enum class Part(
         R.string.part5_how_to_solve,
         R.string.part5_topic,
         R.string.part5_directions,
+        R.string.part5_question_numbers,
         R.raw.guide_part5
     ),
     SIX(
@@ -66,6 +72,7 @@ enum class Part(
         R.string.part6_how_to_solve,
         R.string.part6_topic,
         R.string.part6_directions,
+        R.string.part6_question_numbers,
         R.raw.guide_part6
     );
 

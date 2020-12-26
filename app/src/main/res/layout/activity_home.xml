@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.tost.presentation.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,6 +17,7 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +58,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="56dp"
-                        android:text="Level 8"
+                        android:text='@{String.format("Level %d", viewModel.entireGoal.level)}'
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Level 0" />
 
                     <TextView
                         android:id="@+id/textView35"
@@ -100,11 +105,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/gmarketsansmedium"
-                        android:text="2020. 12. 06"
                         android:textColor="@color/blue_grey_87"
                         android:textSize="12dp"
+                        app:date_text="@{viewModel.entireGoal.date}"
                         app:layout_constraintEnd_toEndOf="@+id/seekBar"
-                        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+                        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+                        tools:text="0000. 00. 00" />
 
                     <TextView
                         android:id="@+id/textView38"
@@ -135,57 +141,69 @@
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="24dp"
                         android:layout_marginBottom="16dp"
+                        app:count="@{viewModel.weeklyGoal.part1}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome2"
-                        app:layout_constraintTop_toBottomOf="@id/textView38" />
+                        app:layout_constraintTop_toBottomOf="@id/textView38"
+                        app:part_number="1" />
 
                     <com.tost.presentation.home.WeeklyGoalDisplayHome
                         android:id="@+id/weeklyGoalDisplayHome2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:count="@{viewModel.weeklyGoal.part2}"
                         app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome1"
                         app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome1"
                         app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome3"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome1" />
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome1"
+                        app:part_number="2" />
 
                     <com.tost.presentation.home.WeeklyGoalDisplayHome
                         android:id="@+id/weeklyGoalDisplayHome3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:count="@{viewModel.weeklyGoal.part3}"
                         app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome2"
                         app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome2"
                         app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome4"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome2" />
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome2"
+                        app:part_number="3" />
 
                     <com.tost.presentation.home.WeeklyGoalDisplayHome
                         android:id="@+id/weeklyGoalDisplayHome4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:count="@{viewModel.weeklyGoal.part4}"
                         app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome3"
                         app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome3"
                         app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome5"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome3" />
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome3"
+                        app:part_number="4" />
 
                     <com.tost.presentation.home.WeeklyGoalDisplayHome
                         android:id="@+id/weeklyGoalDisplayHome5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:count="@{viewModel.weeklyGoal.part5}"
                         app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome4"
                         app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome4"
                         app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome6"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome4" />
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome4"
+                        app:part_number="5" />
 
                     <com.tost.presentation.home.WeeklyGoalDisplayHome
                         android:id="@+id/weeklyGoalDisplayHome6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
+                        app:count="@{viewModel.weeklyGoal.part6}"
                         app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome5"
                         app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome5"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome5" />
+                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome5"
+                        app:part_number="6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -223,15 +241,16 @@
                     android:text="복습하기"
                     app:layout_constraintEnd_toEndOf="@+id/textView41"
                     app:layout_constraintStart_toStartOf="@+id/textView41"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+                    app:layout_constraintTop_toBottomOf="@+id/list_practices" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/list_practices"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:clipToPadding="false"
                     android:orientation="horizontal"
+                    android:overScrollMode="never"
                     android:paddingStart="12dp"
                     android:paddingEnd="20dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

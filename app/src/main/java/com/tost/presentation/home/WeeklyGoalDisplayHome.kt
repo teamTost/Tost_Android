@@ -41,7 +41,7 @@ class WeeklyGoalDisplayHome @JvmOverloads constructor(
 
     private fun applyAttributes(typedArray: TypedArray) {
         count = typedArray.getInt(R.styleable.WeeklyGoalDisplayHome_count, 0)
-        part = typedArray.getInt(R.styleable.WeeklyGoalDisplayHome_part, 0)
+        part = typedArray.getInt(R.styleable.WeeklyGoalDisplayHome_part_number, -1)
     }
 
     private fun setCountText(count: Int) {
@@ -49,6 +49,6 @@ class WeeklyGoalDisplayHome @JvmOverloads constructor(
     }
 
     private fun setPartText(part: Int) {
-        binding.textPart.text = context.getString(R.string.part_n, part)
+        binding.textPart.text = context.getString(R.string.part__n, part)
     }
 }

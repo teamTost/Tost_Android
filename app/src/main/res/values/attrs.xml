@@ -20,6 +20,6 @@
 
     <declare-styleable name="WeeklyGoalDisplayHome">
         <attr name="count" format="integer" />
-        <attr name="part" format="integer" />
+        <attr name="part_number" format="integer" />
     </declare-styleable>
 </resources>

@@ -7,36 +7,42 @@
     <string name="part1_how_to_solve">답변 준비 시간 45초 / 답변 시간 45초 이내</string>
     <string name="part1_topic">Read a text aloud</string>
     <string name="part1_directions">In this part of the test,\nyou will read aloud the text on the screen.\n\nYou will have 45 seconds to prepare.\nThen you will have 45 seconds\nto read the text aloud.</string>
+    <string name="part1_question_numbers">Q.1~2</string>
 
     <string name="part2_know_how">3번 문항의 문제가 출제되는 파트로,\n주어진 사진을 정해진 시간 내로\n상세하게 설명하는 것이 문제 풀이 방법입니다.</string>
     <string name="part2_core_point">발음, 강세, 억양, 문법, 어휘, 논리성</string>
     <string name="part2_how_to_solve">답변 준비 시간 45초 / 답변 시간 45초 이내</string>
     <string name="part2_topic">Describe a picture</string>
     <string name="part2_directions">In this part of the test,\nyou will describe the picture on your screen\nin as much detail as you can\n\nYou will have 45 seconds\nto prepare your response.\nThen You will have 45 seconds to speak.\nabout the picture</string>
+    <string name="part2_question_numbers">Q.3</string>
 
     <string name="part3_know_how">4–6번 문항의 문제가 출제되는 파트로,\n특정한 주제의 설문조사나 통화 상황에서\n질문에 대답하는 것이 문제 풀이 방법입니다.</string>
     <string name="part3_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
     <string name="part3_how_to_solve">답변 준비 시간 : 모든 문항 3초\n답변 시간 : 4, 5번 문항 15초 / 6번 문항 30초</string>
     <string name="part3_topic">Respond to Questions</string>
     <string name="part3_directions">In this part of the test,\nyou will answer three questions.\n\nYou will have three seconds to prepare\nafter you hear each question\n\nYou will have 15 seconds to respond\nto questions 4 and 5, and 30 seconds\nto respond to question 6</string>
+    <string name="part3_question_numbers">Q.4~6</string>
 
     <string name="part4_know_how">7–9번 문항의 문제가 출제되는 파트로,\n주어진 정보(표)를 해석하고, 활용하여\n질문에 대답하는 것이 문제 풀이 방법입니다.\n\n= Part.4 문제는 음성으로만 출제됩니다.</string>
     <string name="part4_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
     <string name="part4_how_to_solve">답변 준비 시간 : 모든 문항 3초\n답변 시간 : 7, 8번 문항 15초 / 9번 문항 30초</string>
     <string name="part4_topic">Respond to Questions\nusing information provided</string>
     <string name="part4_directions">In this part of the test,\nyou will answer three questions\nbased on the information provided.\n\nYou will have 45 seconds to read\nthe information before the questions begin.\n\nYou will have 3 seconds to prepare\nafter you hear each question.\n\nYou will have 15 seconds\nto respond to question 7 and 8,\nand 30 seconds to respond to question 9.</string>
+    <string name="part4_question_numbers">Q.7~9</string>
 
     <string name="part5_know_how">10번 문항의 문제가 출제되는 파트로,\n녹음된 메세지나 회의 내용을 듣고 질문에 따른\n문제 상황에 대한 해결책을 제시하는 것이\n문제 풀이 방법입니다.\n\n* Part.5 문제는 음성으로만 출제됩니다.</string>
     <string name="part5_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
     <string name="part5_how_to_solve">답변 준비 시간 45초 / 답변 시간 60초 이내</string>
     <string name="part5_topic">Propose a solution</string>
     <string name="part5_directions">In this part of the test,\nyou will be presented with a problem\nand asked to propose a solution.\n\nYou will have 45 seconds to prepare.\nThen you will have 60 seconds to speak.\n\nIn your response, be sure to\n• Show that you recognize the problem.\n• Propose a way of dealing with the problem.</string>
+    <string name="part5_question_numbers">Q.10</string>
 
     <string name="part6_know_how">11번 문항의 문제가 출제되는 파트로,\n특정한 주제에 대해 자신의 의견과 근거를 더하여\n논리적으로 표현하는 것이 문제 풀이 방법입니다.</string>
     <string name="part6_core_point">발음, 강세, 억양, 문법, 어휘,\n논리성, 답변의 내용의 적합성과 완전성</string>
     <string name="part6_how_to_solve">답변 준비 시간 30초 / 답변 시간 60초 이내</string>
     <string name="part6_topic">Express an opinion</string>
     <string name="part6_directions">In this part of the test, you will give\nyour opinion about a specific topic.\n\nBe sure to say\nas much as you can in the time allowed.\n\nYou will have 30 seconds to prepare.\nThen you will have 60 seconds to speak.</string>
+    <string name="part6_question_numbers">Q.11</string>
 
     <string name="main_test_content">실제 시험과 동일한 문제 유형 및 환경입니다.\n실전처럼 연습하고 목표레벨을 달성해보세요!</string>
     <string name="main_test_ex_warning_env">- 컴퓨터 펜으로 OMR 카드에 인적사항 표기\n- 헤드셋 착용 후 시험 진행\n- 다수의 수험자가 한 시험장에서 동시 진행</string>
@@ -44,6 +50,8 @@
 
     <string name="my_note">My Note</string>
     <string name="part_n">Part.%d</string>
+    <string name="part_n_no_dot">Part %d</string>
+    <string name="part__n">Part. %d</string>
     <string name="problem_solved">풀이 완료</string>
     <string name="problem_remain">남은 문제</string>
     <string name="problem_whole">전체 문제</string>
