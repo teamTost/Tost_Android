@@ -1,7 +1,6 @@
 package com.tost.presentation.goal.weekly
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.text.Editable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -9,14 +8,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.withStyledAttributes
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
 import com.tost.R
 import com.tost.databinding.WidgetWeeklyGoalInputBinding
-import com.tost.presentation.utils.printLog
 
 /**
  * Created By Malibin

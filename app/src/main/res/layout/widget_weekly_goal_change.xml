@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/text_count_exist"
+        style="@style/EmphasisStyle.Title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="right"
+        android:includeFontPadding="false"
+        android:textColor="@color/blue_grey_cf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/text_problem"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/n" />
+
+    <TextView
+        android:id="@+id/text_problem"
+        style="@style/ParagraphStyle.Text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="29dp"
+        android:includeFontPadding="false"
+        android:text="@string/problem"
+        android:textColor="@color/blue_grey_cf"
+        app:layout_constraintBottom_toBottomOf="@+id/text_count_exist"
+        app:layout_constraintLeft_toRightOf="@id/text_count_exist"
+        app:layout_constraintRight_toLeftOf="@id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/text_count_exist"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4375"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_next" />
+
+    <EditText
+        android:id="@+id/text_count_to_change"
+        style="@style/EmphasisStyle.Title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/transparent"
+        android:gravity="right"
+        android:hint="@string/n"
+        android:includeFontPadding="false"
+        android:inputType="number"
+        android:textColor="@color/blue_grey_22"
+        android:textColorHint="@color/blue_grey_cf"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toRightOf="@+id/imageView5"
+        app:layout_constraintRight_toLeftOf="@id/text_problem2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_problem2"
+        style="@style/ParagraphStyle.Text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="29dp"
+        android:includeFontPadding="false"
+        android:text="@string/problem"
+        android:textColor="@color/blue_grey_22"
+        app:layout_constraintBottom_toBottomOf="@+id/text_count_to_change"
+        app:layout_constraintLeft_toRightOf="@id/text_count_to_change"
+        app:layout_constraintRight_toLeftOf="@id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/text_count_to_change"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_count_exist"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_count_exist"
+        app:srcCompat="@drawable/ic_arrow_right_line_sm" />
+</merge>

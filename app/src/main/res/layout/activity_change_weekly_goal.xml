@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".presentation.goal.weekly.change.ChangeWeeklyGoalActivity">
+
+                <TextView
+                    android:id="@+id/textView43"
+                    style="@style/EmphasisStyle.Big2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="58dp"
+                    android:text="@string/my_weekly_goal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/applesdgothicneolight"
+                    android:lineSpacingExtra="4dp"
+                    android:text="@string/my_weekly_goal_description"
+                    android:textColor="@color/blue_grey_87"
+                    android:textSize="14dp"
+                    app:layout_constraintStart_toStartOf="@+id/textView43"
+                    app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+                <TextView
+                    android:id="@+id/textView45"
+                    style="@style/BlackButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginBottom="60dp"
+                    android:text="설정완료"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalChangeField6" />
+
+                <TextView
+                    android:id="@+id/textView46"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:text="@string/part_1"
+                    app:layout_constraintStart_toStartOf="@+id/textView44"
+                    app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+                <com.tost.presentation.goal.weekly.change.WeeklyGoalChangeField
+                    android:id="@+id/weeklyGoalChangeField1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="20dp"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/textView46"
+                    app:layout_constraintTop_toBottomOf="@id/textView46" />
+
+                <TextView
+                    android:id="@+id/textView47"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/part_2"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField1"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalChangeField1" />
+
+                <com.tost.presentation.goal.weekly.change.WeeklyGoalChangeField
+                    android:id="@+id/weeklyGoalChangeField2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField1"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField1"
+                    app:layout_constraintTop_toBottomOf="@id/textView47" />
+
+                <TextView
+                    android:id="@+id/textView473"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/part_3"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField2"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalChangeField2" />
+
+                <com.tost.presentation.goal.weekly.change.WeeklyGoalChangeField
+                    android:id="@+id/weeklyGoalChangeField3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField2"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField2"
+                    app:layout_constraintTop_toBottomOf="@id/textView473" />
+
+                <TextView
+                    android:id="@+id/textView474"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/part_4"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField3"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalChangeField3" />
+
+                <com.tost.presentation.goal.weekly.change.WeeklyGoalChangeField
+                    android:id="@+id/weeklyGoalChangeField4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField3"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField3"
+                    app:layout_constraintTop_toBottomOf="@id/textView474" />
+
+                <TextView
+                    android:id="@+id/textView475"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/part_5"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField4"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalChangeField4" />
+
+                <com.tost.presentation.goal.weekly.change.WeeklyGoalChangeField
+                    android:id="@+id/weeklyGoalChangeField5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField4"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField4"
+                    app:layout_constraintTop_toBottomOf="@id/textView475" />
+
+                <TextView
+                    android:id="@+id/textView476"
+                    style="@style/EmphasisStyle.Title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/part_6"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField5"
+                    app:layout_constraintTop_toBottomOf="@+id/weeklyGoalChangeField5" />
+
+                <com.tost.presentation.goal.weekly.change.WeeklyGoalChangeField
+                    android:id="@+id/weeklyGoalChangeField6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:elevation="20dp"
+                    android:outlineSpotShadowColor="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="@+id/weeklyGoalChangeField5"
+                    app:layout_constraintStart_toStartOf="@+id/weeklyGoalChangeField5"
+                    app:layout_constraintTop_toBottomOf="@id/textView476" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
