@@ -11,7 +11,7 @@ import java.util.*
 
 class SaveGoalRequestParams(entireGoal: EntireGoal) {
     val targetLevel: Int = entireGoal.level
-    val targetDate: String = DATE_FORMAT.format(entireGoal.date)
+    val targetDate: String = DATE_FORMAT.format(entireGoal.endDate)
 
     companion object {
         private val DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)

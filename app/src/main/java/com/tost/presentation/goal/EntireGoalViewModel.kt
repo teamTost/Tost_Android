@@ -67,8 +67,9 @@ class EntireGoalViewModel @ViewModelInject constructor(
     }
 
     private fun getEntireGoal(): EntireGoal = EntireGoal(
-        _selectedLevel.value ?: throw IllegalStateException("level must be selected"),
-        _selectedDate.value ?: throw IllegalStateException("date must be selected"),
+        level = _selectedLevel.value ?: throw IllegalStateException("level must be selected"),
+        startDate = Date(),
+        endDate = _selectedDate.value ?: throw IllegalStateException("date must be selected"),
     )
 
     private fun goalSaveFailHandler() = CoroutineExceptionHandler { _, t ->

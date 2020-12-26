@@ -36,7 +36,9 @@ class WeeklyGoalDisplayHome @JvmOverloads constructor(
         }
 
     init {
-        context.withStyledAttributes(attrs, R.styleable.ProblemToolBar) { applyAttributes(this) }
+        context.withStyledAttributes(attrs, R.styleable.WeeklyGoalDisplayHome) {
+            applyAttributes(this)
+        }
     }
 
     private fun applyAttributes(typedArray: TypedArray) {

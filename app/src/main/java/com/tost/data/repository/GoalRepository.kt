@@ -61,7 +61,8 @@ class GoalRepository @Inject constructor(
         }
         return EntireGoal(
             level = dataStore[KEY_GOAL_LEVEL].first() ?: return null,
-            date = Date(dataStore[KEY_GOAL_DATE].first() ?: return null),
+            startDate = Date(dataStore[KEY_GOAL_START_DATE].first() ?: return null),
+            endDate = Date(dataStore[KEY_GOAL_END_DATE].first() ?: return null),
         )
     }
 
@@ -76,7 +77,8 @@ class GoalRepository @Inject constructor(
 
     private suspend fun saveEntireGoalLocal(entireGoal: EntireGoal) {
         dataStore.edit {
-            it[KEY_GOAL_DATE] = entireGoal.date.time
+            it[KEY_GOAL_START_DATE] = entireGoal.startDate.time
+            it[KEY_GOAL_END_DATE] = entireGoal.endDate.time
             it[KEY_GOAL_LEVEL] = entireGoal.level
         }
     }
@@ -93,7 +95,8 @@ class GoalRepository @Inject constructor(
     }
 
     companion object {
-        private val KEY_GOAL_DATE = preferencesKey<Long>("KEY_GOAL_DATE")
+        private val KEY_GOAL_START_DATE = preferencesKey<Long>("KEY_GOAL_START_DATE")
+        private val KEY_GOAL_END_DATE = preferencesKey<Long>("KEY_GOAL_END_DATE")
         private val KEY_GOAL_LEVEL = preferencesKey<Int>("KEY_GOAL_LEVEL")
 
         private val KEY_GOAL_PART1 = preferencesKey<Int>("part1")

@@ -9,6 +9,7 @@ import com.tost.data.entity.EntireGoal
 import com.tost.data.entity.WeeklyGoal
 import com.tost.data.repository.GoalRepository
 import com.tost.data.repository.UserRepository
+import com.tost.presentation.utils.printLog
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -30,14 +31,16 @@ class HomeViewModel @ViewModelInject constructor(
     val weeklyGoal: LiveData<WeeklyGoal>
         get() = _weeklyGoal
 
-    init {
-        initViewModel()
-    }
+    private val _goalProgress = MutableLiveData<Int>()
+    val goalProgress: LiveData<Int>
+        get() = _goalProgress
 
-    private fun initViewModel() = viewModelScope.launch {
+    fun loadGoals(now: Date) = viewModelScope.launch {
         val tostToken = userRepository.getTostToken()
             ?: throw IllegalStateException("login requested")
-        _entireGoal.value = goalRepository.getEntireGoal(tostToken)
+        val entireGoal = goalRepository.getEntireGoal(tostToken)
+        _goalProgress.value = entireGoal?.getNowGoalProgress(now)
+        _entireGoal.value = entireGoal
         _weeklyGoal.value = goalRepository.getWeeklyGoal(tostToken)
     }
 }

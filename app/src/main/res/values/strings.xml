@@ -113,4 +113,8 @@
     <string name="part_2">Part 2</string>
     <string name="part_1">Part 1</string>
     <string name="doing_well">잘 하고 있어요!</string>
+    <string name="practice">Practice</string>
+    <string name="go_to_test">시험보기</string>
+    <string name="repeat">복습하기</string>
+    <string name="change">수정하기</string>
 </resources>

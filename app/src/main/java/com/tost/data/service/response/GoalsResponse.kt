@@ -24,7 +24,8 @@ class GoalsResponse(
 ) {
     fun getEntireGoal(): EntireGoal = EntireGoal(
         level = targetLevel,
-        date = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(targetDate)!!,
+        startDate = Date(),//요기 서버에서 받아야야함
+        endDate = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).parse(targetDate)!!,
     )
 
     fun getWeeklyGoal(): WeeklyGoal = WeeklyGoal(
