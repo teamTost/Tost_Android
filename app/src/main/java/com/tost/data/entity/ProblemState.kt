@@ -1,4 +1,4 @@
-package com.tost.presentation.problem
+package com.tost.data.entity
 
 import androidx.annotation.StringRes
 import com.tost.R

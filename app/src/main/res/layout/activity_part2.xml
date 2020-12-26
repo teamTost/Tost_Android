@@ -7,7 +7,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.tost.presentation.problem.ProblemState" />
+        <import type="com.tost.data.entity.ProblemState" />
 
         <import type="com.tost.presentation.problem.widget.AudioStateButton.State" />
 

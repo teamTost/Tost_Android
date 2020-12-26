@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import com.tost.R
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityPart2Binding
-import com.tost.presentation.problem.ProblemState
+import com.tost.data.entity.ProblemState
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.problem.widget.AudioStateButton
