@@ -3,10 +3,7 @@ package com.tost.data.service
 import com.tost.data.service.request.SaveGoalRequestParams
 import com.tost.data.service.request.SaveWeeklyGoalParams
 import com.tost.data.service.request.TostLoginRequestParams
-import com.tost.data.service.response.GoalsResponse
-import com.tost.data.service.response.NextProblemNumberResponse
-import com.tost.data.service.response.ProblemStateResponse
-import com.tost.data.service.response.TostLoginResponse
+import com.tost.data.service.response.*
 import retrofit2.http.*
 
 /**
@@ -49,6 +46,13 @@ interface TostService {
         @Header("token") token: String,
         @Path("part") part: String,
     ): NextProblemNumberResponse
+
+    @GET("/part/{part}/question/{questionNum}")
+    suspend fun getProblemInfo(
+        @Header("token") token: String,
+        @Path("part") part: Int,
+        @Path("questionNum") questionNum: Int,
+    ): List<ProblemResponse>
 
     companion object {
         const val BASE_URL = "http://13.124.234.226:8080"

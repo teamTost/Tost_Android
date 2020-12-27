@@ -2,7 +2,7 @@ package com.tost.presentation.utils
 
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.tost.R
@@ -34,4 +34,9 @@ fun bindingDate(textView: TextView, date: Date?) {
     if (date == null) return
     val format = SimpleDateFormat("yyyy. MM. dd", Locale.KOREA)
     textView.text = format.format(date)
+}
+
+@BindingAdapter("html_text")
+fun bindingHtmlText(textView: TextView, content: String?) {
+    textView.text = HtmlCompat.fromHtml(content.orEmpty(), HtmlCompat.FROM_HTML_MODE_COMPACT)
 }

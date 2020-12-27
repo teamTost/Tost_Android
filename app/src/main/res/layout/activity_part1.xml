@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/question_n(part.number)}"
+            app:title="@{@string/question_n(viewModel.problem.questionNumber)}"
             tools:title="Question 3" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -140,11 +140,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
-            android:text="TextView"
+            app:html_text="@{viewModel.problem.passage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/problemToolBar" />
-
-
+            app:layout_constraintTop_toBottomOf="@+id/problemToolBar"
+            tools:text="This is John Greer with the six o’clock weather update. The National Weather Bureau has just announced that a severe blizzard will hit the city early tomorrow morning. Residents should expect heavy snow, high winds, and icy road conditions. Motorists are advised to drive carefully and avoid routes that have not been cleared by municipal workers. Parents should also note that all public schools will likely be closed tomorrow. Please stay tuned to this radio station for further details." />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

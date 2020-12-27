@@ -7,9 +7,10 @@ import android.os.Bundle
 import android.widget.Toast
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityProblemGuideBinding
+import com.tost.presentation.problem.part1.Part1Activity
+import com.tost.presentation.problem.part2.Part2Activity
 import com.tost.presentation.utils.showTostToast
 
-// TODO: 들어온 문제번호와 파트에 따라 해당 파트 액티비티 띄우기
 class ProblemGuideActivity : AppCompatActivity() {
 
     private var guideAudioPlayer: MediaPlayer? = null
@@ -36,7 +37,7 @@ class ProblemGuideActivity : AppCompatActivity() {
     private fun getPart(): Part = intent.getSerializableExtra(KEY_PART) as? Part
         ?: throw IllegalArgumentException("part must be send")
 
-    private fun getProblemNumber(): Int = intent.getIntExtra(KEY_PART, -1)
+    private fun getProblemNumber(): Int = intent.getIntExtra(KEY_PART, 1)
 
     private fun finishActivity() {
         guideAudioPlayer?.stop()
@@ -45,15 +46,21 @@ class ProblemGuideActivity : AppCompatActivity() {
 
     private fun deployProblemPartActivity() {
         guideAudioPlayer?.stop()
-        val intent = Intent()
-//        intent.putExtra()
-//        startActivity(intent)
-        Toast.makeText(this, "다음문제 시작", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, getPartActivityClass(getPart()))
+        intent.putExtra(KEY_PROBLEM_NUMBER, getProblemNumber())
+        startActivity(intent)
         finish()
+    }
+
+    private fun getPartActivityClass(part: Part): Class<*> = when (part) {
+        Part.ONE -> Part1Activity::class.java
+        Part.TWO -> Part2Activity::class.java
+        else -> Part1Activity::class.java
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        guideAudioPlayer?.stop()
         guideAudioPlayer?.release()
         guideAudioPlayer = null
     }
