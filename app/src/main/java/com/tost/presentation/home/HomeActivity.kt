@@ -10,6 +10,7 @@ import com.tost.data.entity.Part
 import com.tost.databinding.ActivityHomeBinding
 import com.tost.presentation.goal.weekly.change.ChangeWeeklyGoalActivity
 import com.tost.presentation.problem.ProblemEntryActivity
+import com.tost.presentation.test.TestActivity
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -49,6 +50,7 @@ class HomeActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.seekBar.setOnTouchListener { _, _ -> true }
         binding.buttonChangeGoal.setOnClickListener { deployChangeWeeklyGoalActivity() }
+        binding.buttonTestStart.setOnClickListener { deployTestActivity() }
     }
 
     private fun deployProblemEntryActivity(part: Part) {
@@ -60,5 +62,10 @@ class HomeActivity : AppCompatActivity() {
     private fun deployChangeWeeklyGoalActivity() {
         val intent = Intent(this, ChangeWeeklyGoalActivity::class.java)
         startActivityForResult(intent, ChangeWeeklyGoalActivity.REQUEST_CODE)
+    }
+
+    private fun deployTestActivity() {
+        val intent = Intent(this, TestActivity::class.java)
+        startActivity(intent)
     }
 }

@@ -44,10 +44,6 @@
     <string name="part6_directions">In this part of the test, you will give\nyour opinion about a specific topic.\n\nBe sure to say\nas much as you can in the time allowed.\n\nYou will have 30 seconds to prepare.\nThen you will have 60 seconds to speak.</string>
     <string name="part6_question_numbers">Q.11</string>
 
-    <string name="main_test_content">실제 시험과 동일한 문제 유형 및 환경입니다.\n실전처럼 연습하고 목표레벨을 달성해보세요!</string>
-    <string name="main_test_ex_warning_env">- 컴퓨터 펜으로 OMR 카드에 인적사항 표기\n- 헤드셋 착용 후 시험 진행\n- 다수의 수험자가 한 시험장에서 동시 진행</string>
-    <string name="main_test_ex_order">시험장 입실 > 신분증 확인 및 OMR 작성\n> 시험진행 > 녹음 확인 후 퇴실</string>
-
     <string name="my_note">My Note</string>
     <string name="part_n">Part.%d</string>
     <string name="part_n_no_dot">Part %d</string>
@@ -118,4 +114,6 @@
     <string name="repeat">복습하기</string>
     <string name="change">수정하기</string>
     <string name="goal_changed">수정이 완료되었습니다!</string>
+    <string name="mock_test">모의고사</string>
+    <string name="to_be_continued">아직 준비 중이에요~</string>
 </resources>

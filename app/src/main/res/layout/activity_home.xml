@@ -219,7 +219,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
                 <TextView
-                    android:id="@+id/textView41"
+                    android:id="@+id/button_test_start"
                     style="@style/BlackButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -240,8 +240,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
                     android:text="@string/repeat"
-                    app:layout_constraintEnd_toEndOf="@+id/textView41"
-                    app:layout_constraintStart_toStartOf="@+id/textView41"
+                    app:layout_constraintEnd_toEndOf="@+id/button_test_start"
+                    app:layout_constraintStart_toStartOf="@+id/button_test_start"
                     app:layout_constraintTop_toBottomOf="@+id/list_practices" />
 
                 <androidx.recyclerview.widget.RecyclerView

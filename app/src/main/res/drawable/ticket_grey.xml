@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/border_round_rectangle_white_10dp" />
+    <item
+        android:width="24dp"
+        android:drawable="@drawable/round_rectangle_half_right_light_grey_10dp"
+        android:gravity="right" />
+</layer-list>
