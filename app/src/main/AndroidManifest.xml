@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tost"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.test.TestActivity"></activity>
+        <activity android:name=".presentation.problem.part1.Part1Activity"></activity>
+        <activity android:name=".presentation.test.TestActivity" />
         <activity android:name=".presentation.goal.weekly.change.ChangeWeeklyGoalActivity" />
         <activity android:name=".presentation.home.HomeActivity">
             <intent-filter>
