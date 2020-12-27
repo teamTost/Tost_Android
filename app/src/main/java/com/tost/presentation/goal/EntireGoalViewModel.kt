@@ -9,6 +9,7 @@ import com.tost.data.entity.EntireGoal
 import com.tost.data.repository.GoalRepository
 import com.tost.data.repository.GoogleAuthRepository
 import com.tost.data.repository.UserRepository
+import com.tost.presentation.utils.BaseViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.util.*
@@ -22,7 +23,7 @@ class EntireGoalViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
     private val googleAuthRepository: GoogleAuthRepository,
     private val goalRepository: GoalRepository,
-) : ViewModel() {
+) : BaseViewModel() {
     private val _userName = MutableLiveData<String>()
     val userName: LiveData<String>
         get() = _userName
@@ -34,10 +35,6 @@ class EntireGoalViewModel @ViewModelInject constructor(
     private val _selectedLevel = MutableLiveData<Int>()
     val selectedLevel: LiveData<Int>
         get() = _selectedLevel
-
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
 
     init {
         initViewModel()

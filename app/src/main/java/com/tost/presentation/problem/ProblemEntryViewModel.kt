@@ -2,6 +2,7 @@ package com.tost.presentation.problem
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
+import com.tost.presentation.utils.BaseViewModel
 
 /**
  * Created By Malibin
@@ -10,5 +11,5 @@ import androidx.lifecycle.ViewModel
 
 class ProblemEntryViewModel @ViewModelInject constructor(
 
-) : ViewModel() {
+) : BaseViewModel() {
 }

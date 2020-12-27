@@ -22,10 +22,6 @@ class Part2ViewModel @ViewModelInject constructor(
     val problemState: LiveData<ProblemState>
         get() = _problemState
 
-    private val _toastMessage = MutableLiveData<Int>()
-    val toastMessage: LiveData<Int>
-        get() = _toastMessage
-
     fun changeState(state: ProblemState) {
         _problemState.value = state
     }

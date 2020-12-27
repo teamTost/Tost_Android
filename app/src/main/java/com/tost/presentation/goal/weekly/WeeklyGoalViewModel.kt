@@ -9,6 +9,7 @@ import com.tost.data.entity.WeeklyGoal
 import com.tost.data.repository.GoalRepository
 import com.tost.data.repository.UserRepository
 import com.tost.data.service.TostService
+import com.tost.presentation.utils.BaseViewModel
 import kotlinx.coroutines.launch
 
 /**
@@ -19,17 +20,13 @@ import kotlinx.coroutines.launch
 class WeeklyGoalViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
     private val goalRepository: GoalRepository,
-) : ViewModel() {
+) : BaseViewModel() {
     val part1Goal = MutableLiveData<String>()
     val part2Goal = MutableLiveData<String>()
     val part3Goal = MutableLiveData<String>()
     val part4Goal = MutableLiveData<String>()
     val part5Goal = MutableLiveData<String>()
     val part6Goal = MutableLiveData<String>()
-
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
 
     fun isAllGoalsInserted(): Boolean {
         return !part1Goal.value.isNullOrBlank()

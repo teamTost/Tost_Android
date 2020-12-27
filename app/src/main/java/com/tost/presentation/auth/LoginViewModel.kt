@@ -13,6 +13,7 @@ import com.tost.R
 import com.tost.data.repository.GoogleAuthRepository
 import com.tost.data.repository.UserRepository
 import com.tost.presentation.auth.LoginActivity.Companion.REQUEST_CODE_GOOGLE_AUTH
+import com.tost.presentation.utils.BaseViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
@@ -24,18 +25,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
     private val googleAuthRepository: GoogleAuthRepository,
-) : ViewModel() {
-    private val _isLoading = MutableLiveData(true)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
-
-    private val _toastMessage = MutableLiveData<Int>()
-    val toastMessage: LiveData<Int>
-        get() = _toastMessage
-
-    private val _loginSuccess = MutableLiveData(false)
-    val loginSuccess: LiveData<Boolean>
-        get() = _loginSuccess
+) : BaseViewModel() {
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         if (requestCode != REQUEST_CODE_GOOGLE_AUTH) return
@@ -68,7 +58,7 @@ class LoginViewModel @ViewModelInject constructor(
 
     private fun loginSuccess() {
         _isLoading.value = false
-        _loginSuccess.value = true
+        _isSuccess.value = true
     }
 
     private fun loginFailHandler() = CoroutineExceptionHandler { _, t ->

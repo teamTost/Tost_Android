@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun subscribeViewModel() {
         loginViewModel.toastMessage.observe(this) { showToast(it) }
-        loginViewModel.loginSuccess.observe(this) { isSuccess -> if (isSuccess) deployHomeActivityAndFinish() }
+        loginViewModel.isSuccess.observe(this) { isSuccess -> if (isSuccess) deployHomeActivityAndFinish() }
     }
 
     private fun deployHomeActivityAndFinish() {

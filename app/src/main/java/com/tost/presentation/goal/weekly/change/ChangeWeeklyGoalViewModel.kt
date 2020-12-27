@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.tost.data.entity.WeeklyGoal
 import com.tost.data.repository.GoalRepository
 import com.tost.data.repository.UserRepository
+import com.tost.presentation.utils.BaseViewModel
 import kotlinx.coroutines.launch
 
 /**
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 class ChangeWeeklyGoalViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
     private val goalRepository: GoalRepository,
-) : ViewModel() {
+) : BaseViewModel() {
 
     val part1Goal = MutableLiveData<String>()
     val part2Goal = MutableLiveData<String>()
@@ -30,14 +31,6 @@ class ChangeWeeklyGoalViewModel @ViewModelInject constructor(
     private val _weeklyGoal = MutableLiveData<WeeklyGoal>()
     val weeklyGoal: LiveData<WeeklyGoal>
         get() = _weeklyGoal
-
-    private val _isSuccess = MutableLiveData(false)
-    val isSuccess: LiveData<Boolean>
-        get() = _isSuccess
-
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
 
     fun loadExistWeeklyGoal() = viewModelScope.launch {
         val tostToken = userRepository.getTostToken()

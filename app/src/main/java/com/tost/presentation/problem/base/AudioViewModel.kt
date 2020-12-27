@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.tost.data.repository.RecordsRepository
 import com.tost.presentation.problem.TostRecorder
 import com.tost.presentation.problem.widget.AudioStateButton
+import com.tost.presentation.utils.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ import kotlinx.coroutines.launch
 
 abstract class AudioViewModel constructor(
     private val recordsRepository: RecordsRepository,
-) : ViewModel() {
+) : BaseViewModel() {
 
     abstract val part: String
 
