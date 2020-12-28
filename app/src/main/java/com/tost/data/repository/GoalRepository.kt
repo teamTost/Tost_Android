@@ -71,8 +71,8 @@ class GoalRepository @Inject constructor(
     }
 
     private suspend fun saveGoalsLocal(remoteGoals: GoalsResponse) {
-        saveEntireGoalLocal(remoteGoals.getEntireGoal())
-        saveWeeklyGoalLocal(remoteGoals.getWeeklyGoal())
+        saveEntireGoalLocal(remoteGoals.getEntireGoal() ?: return)
+        saveWeeklyGoalLocal(remoteGoals.getWeeklyGoal() ?: return)
     }
 
     private suspend fun saveEntireGoalLocal(entireGoal: EntireGoal) {

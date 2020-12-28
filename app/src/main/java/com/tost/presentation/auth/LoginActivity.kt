@@ -41,18 +41,22 @@ class LoginActivity : AppCompatActivity() {
             binding.windowLoading.root.visibility = View.VISIBLE
             deployGoogleAuth(createGoogleSignInOptions())
         }
-        binding.buttonTry.setOnClickListener { deployHomeActivityAndFinish() }
+        binding.buttonTry.setOnClickListener { deployHomeActivity(true) }
     }
 
     private fun subscribeViewModel() {
         loginViewModel.toastMessage.observe(this) { showToast(it) }
-        loginViewModel.isSuccess.observe(this) { isSuccess -> if (isSuccess) deployHomeActivityAndFinish() }
+        loginViewModel.isSuccess.observe(this) { isSuccess ->
+            if (isSuccess) {
+                deployHomeActivity(); finish()
+            }
+        }
     }
 
-    private fun deployHomeActivityAndFinish() {
+    private fun deployHomeActivity(isTrial: Boolean = false) {
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra(HomeActivity.KEY_TRIAL, isTrial)
         startActivity(intent)
-        finish()
     }
 
     private fun deployGoogleAuth(gso: GoogleSignInOptions) {

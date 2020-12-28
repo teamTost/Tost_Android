@@ -61,6 +61,7 @@ class EntireGoalViewModel @ViewModelInject constructor(
         val tostToken = userRepository.getTostToken() ?: throw IllegalStateException("로그인 이상")
         goalRepository.saveEntireGoal(tostToken, getEntireGoal())
         _isLoading.value = false
+        _isSuccess.value = true
     }
 
     private fun getEntireGoal(): EntireGoal = EntireGoal(

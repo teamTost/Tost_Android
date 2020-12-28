@@ -43,6 +43,7 @@ class WeeklyGoalViewModel @ViewModelInject constructor(
             ?: throw IllegalStateException("login requested")
         goalRepository.saveWeeklyGoal(tostToken, getWeeklyGoal())
         _isLoading.value = false
+        _isSuccess.value = true
     }
 
     private fun getWeeklyGoal(): WeeklyGoal {

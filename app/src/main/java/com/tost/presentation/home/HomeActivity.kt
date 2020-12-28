@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tost.R
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityHomeBinding
+import com.tost.presentation.goal.EntireGoalActivity
+import com.tost.presentation.goal.weekly.WeeklyGoalActivity
 import com.tost.presentation.goal.weekly.change.ChangeWeeklyGoalActivity
 import com.tost.presentation.problem.ProblemEntryActivity
 import com.tost.presentation.test.TestActivity
+import com.tost.presentation.utils.printLog
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -27,19 +30,23 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initView(binding)
+        if (this.isTrial()) return
         homeViewModel.loadGoals(Date())
+
+        subscribeEntireGoals()
+        subscribeWeeklyGoals()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == ChangeWeeklyGoalActivity.REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                homeViewModel.refreshWeeklyGoal()
-                showToast(R.string.goal_changed)
-            }
+        if (requestCode == ChangeWeeklyGoalActivity.REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            homeViewModel.refreshWeeklyGoal()
+            showToast(R.string.goal_changed)
         }
     }
+
+    private fun isTrial(): Boolean = intent.getBooleanExtra(KEY_TRIAL, false)
 
     private fun initView(binding: ActivityHomeBinding) {
         val adapter = HomePracticesAdapter(Part.values())
@@ -50,7 +57,30 @@ class HomeActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.seekBar.setOnTouchListener { _, _ -> true }
         binding.buttonChangeGoal.setOnClickListener { deployChangeWeeklyGoalActivity() }
-        binding.buttonTestStart.setOnClickListener { deployTestActivity() }
+        binding.buttonTestStart.setOnClickListener { deployActivityOf(TestActivity::class.java) }
+    }
+
+    private fun subscribeEntireGoals() {
+        homeViewModel.entireGoal.observe(this) {
+            if (it == null) {
+                deployActivityOf(EntireGoalActivity::class.java)
+                finish()
+            }
+        }
+    }
+
+    private fun subscribeWeeklyGoals() {
+        homeViewModel.weeklyGoal.observe(this) {
+            if (homeViewModel.isEntireGoalNotNull() && it == null) {
+                deployActivityOf(WeeklyGoalActivity::class.java)
+                finish()
+            }
+        }
+    }
+
+    private fun <T> deployActivityOf(targetActivity: Class<T>) {
+        val intent = Intent(this, targetActivity)
+        startActivity(intent)
     }
 
     private fun deployProblemEntryActivity(part: Part) {
@@ -64,8 +94,7 @@ class HomeActivity : AppCompatActivity() {
         startActivityForResult(intent, ChangeWeeklyGoalActivity.REQUEST_CODE)
     }
 
-    private fun deployTestActivity() {
-        val intent = Intent(this, TestActivity::class.java)
-        startActivity(intent)
+    companion object {
+        const val KEY_TRIAL = "KEY_TRIAL"
     }
 }

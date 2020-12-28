@@ -9,6 +9,7 @@ import com.tost.data.entity.EntireGoal
 import com.tost.data.entity.WeeklyGoal
 import com.tost.data.repository.GoalRepository
 import com.tost.data.repository.UserRepository
+import com.tost.presentation.utils.printLog
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -41,11 +42,15 @@ class HomeViewModel @ViewModelInject constructor(
         _goalProgress.value = entireGoal?.getNowGoalProgress(now)
         _entireGoal.value = entireGoal
         _weeklyGoal.value = goalRepository.getWeeklyGoal(tostToken)
-    }
+    }// FIXME  이렇게 짜니까 goal remote 를 두 번 찌름
 
     fun refreshWeeklyGoal() = viewModelScope.launch {
         val tostToken = userRepository.getTostToken()
             ?: throw IllegalStateException("login requested")
         _weeklyGoal.value = goalRepository.getWeeklyGoal(tostToken)
+    }
+
+    fun isEntireGoalNotNull(): Boolean {
+        return entireGoal.value != null
     }
 }

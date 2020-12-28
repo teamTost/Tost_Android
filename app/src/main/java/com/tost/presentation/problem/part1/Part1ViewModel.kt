@@ -44,7 +44,7 @@ class Part1ViewModel @ViewModelInject constructor(
     fun changeState(state: ProblemState) {
         _problemState.value = state
     }
-
+    //TODO 토큰이 없으면 체험하기니까 체험하기로 문제를 따로 뽑아오는게 맞는거같다.
     private suspend fun getTostToken(): String = userRepository.getTostToken()
         ?: throw IllegalStateException("Login Requested")
 }

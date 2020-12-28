@@ -1,13 +1,16 @@
 package com.tost.presentation.goal
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tost.R
+import com.tost.data.entity.WeeklyGoal
 import com.tost.databinding.ActivityEntireGoalBinding
 import com.tost.presentation.goal.dialog.DatePickBottomSheet
 import com.tost.presentation.goal.dialog.LevelPickBottomSheet
+import com.tost.presentation.goal.weekly.WeeklyGoalActivity
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -24,6 +27,7 @@ class EntireGoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickLi
         val binding = ActivityEntireGoalBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView(binding)
+        subscribeSaveSuccess()
     }
 
     private fun initView(binding: ActivityEntireGoalBinding) {
@@ -69,6 +73,15 @@ class EntireGoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickLi
             return
         }
         showToast(R.string.select_goals)
+    }
+
+    private fun subscribeSaveSuccess() {
+        entireGoalViewModel.isSuccess.observe(this) { if (it == true) deployWeeklyGoalActivityAndFinish() }
+    }
+
+    private fun deployWeeklyGoalActivityAndFinish() {
+        val intent = Intent(this, WeeklyGoalActivity::class.java)
+        startActivity(intent)
     }
 
     companion object {
