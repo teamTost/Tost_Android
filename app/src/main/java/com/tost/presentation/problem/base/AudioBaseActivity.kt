@@ -2,8 +2,7 @@ package com.tost.presentation.problem.base
 
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
-import android.widget.Toast
-import androidx.annotation.StringRes
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.tost.R
@@ -16,7 +15,29 @@ import com.tost.presentation.utils.showToast
 
 abstract class AudioBaseActivity : AppCompatActivity() {
 
+    protected var prepareNoticePlayer: MediaPlayer? = null
+    protected var readingNoticePlayer: MediaPlayer? = null
+    protected var beepPlayer: MediaPlayer? = null
+
     abstract fun onInitialPermissionGranted()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initAudio()
+    }
+
+    private fun initAudio() {
+        prepareNoticePlayer = MediaPlayer.create(this, R.raw.begin_preparing_now)
+        readingNoticePlayer = MediaPlayer.create(this, R.raw.begin_reading_aloud_now)
+        beepPlayer = MediaPlayer.create(this, R.raw.beep)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        prepareNoticePlayer?.release()
+        readingNoticePlayer?.release()
+        beepPlayer?.release()
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -33,7 +54,7 @@ abstract class AudioBaseActivity : AppCompatActivity() {
     }
 
     private fun showPermissionRejected() {
-        showToast( R.string.audio_permission_rejected)
+        showToast(R.string.audio_permission_rejected)
         finish()
     }
 
@@ -64,5 +85,3 @@ abstract class AudioBaseActivity : AppCompatActivity() {
         private const val AUDIO_PERMISSION = android.Manifest.permission.RECORD_AUDIO
     }
 }
-
-// TODO 아 BASE 존나 만들기 싫었는데.. 문제는 전부 Fragment로, 시험과 연습을 각각 액티비티로 하는게 가장 좋은 설계인 것 같다.

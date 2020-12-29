@@ -1,12 +1,10 @@
 package com.tost.presentation.problem.part2
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.tost.R
 import com.tost.data.entity.Part
-import com.tost.databinding.ActivityPart2Binding
 import com.tost.data.entity.ProblemState
+import com.tost.databinding.ActivityPart2Binding
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.problem.widget.AudioStateButton
@@ -16,10 +14,6 @@ import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
-
-    private var prepareNoticePlayer: MediaPlayer? = null
-    private var readingNoticePlayer: MediaPlayer? = null
-    private var beepPlayer: MediaPlayer? = null
 
     private var binding: ActivityPart2Binding? = null
 
@@ -42,6 +36,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding.part = Part.TWO
         binding.imageUrl = ""
         binding.viewModel = part2ViewModel
+        binding.problemToolBar.setOnCloseClickListener { finish() }
         binding.buttonAudioController.setOnStateClickListener(this)
         binding.buttonRestart.setOnClickListener { cancelRecord() }
         binding.buttonSkip.setOnClickListener { skipPreparation() }
@@ -49,14 +44,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     override fun onInitialPermissionGranted() {
-        initAudio()
         startProblem()
-    }
-
-    private fun initAudio() {
-        prepareNoticePlayer = MediaPlayer.create(this, R.raw.begin_preparing_now)
-        readingNoticePlayer = MediaPlayer.create(this, R.raw.begin_reading_aloud_now)
-        beepPlayer = MediaPlayer.create(this, R.raw.beep)
     }
 
     override fun onAudioButtonClick(state: AudioStateButton.State) = when (state) {
@@ -134,9 +122,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        prepareNoticePlayer?.release()
-        readingNoticePlayer?.release()
-        beepPlayer?.release()
+
         binding = null
     }
 

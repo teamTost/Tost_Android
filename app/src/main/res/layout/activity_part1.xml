@@ -12,10 +12,6 @@
         <import type="com.tost.presentation.problem.widget.AudioStateButton.State" />
 
         <variable
-            name="part"
-            type="com.tost.data.entity.Part" />
-
-        <variable
             name="viewModel"
             type="com.tost.presentation.problem.part1.Part1ViewModel" />
     </data>
