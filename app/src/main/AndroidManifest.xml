@@ -22,11 +22,7 @@
         android:theme="@style/Theme.Tost"
         android:usesCleartextTraffic="true">
         <activity android:name=".presentation.problem.part1.Part1Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".presentation.test.TestActivity" />
         <activity android:name=".presentation.goal.weekly.change.ChangeWeeklyGoalActivity" />
@@ -36,7 +32,11 @@
         <activity android:name=".presentation.goal.weekly.WeeklyGoalActivity" />
         <activity android:name=".presentation.goal.EntireGoalActivity" />
         <activity android:name=".presentation.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".presentation.auth.LoginActivity" />
         <activity android:name=".presentation.problem.part2.Part2Activity" />

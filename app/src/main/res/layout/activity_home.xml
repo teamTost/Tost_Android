@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.tost.presentation.home.HomeViewModel" />
@@ -12,7 +14,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".presentation.home.HomeActivity">
 
         <ScrollView
             android:layout_width="0dp"
@@ -29,182 +32,249 @@
                 android:background="@color/blue_grey_f8">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout4"
+                    android:id="@+id/zone_user_goal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:context=".presentation.home.HomeActivity">
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/zone_user_goal_login"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/gmarketsansbold"
-                        android:text="TOST"
-                        android:textColor="@color/blue_grey_22"
-                        android:textSize="16dp"
+                        android:visibility="@{viewModel.weeklyGoal == null ? View.GONE : View.VISIBLE}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/textView34"
-                        style="@style/EmphasisStyle.SubTitle2"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/textView24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/gmarketsansbold"
+                            android:text="@string/tost"
+                            android:textColor="@color/blue_grey_22"
+                            android:textSize="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView34"
+                            style="@style/EmphasisStyle.SubTitle2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="56dp"
+                            android:text='@{String.format("Level %d", viewModel.entireGoal.level)}'
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Level 0" />
+
+                        <TextView
+                            android:id="@+id/textView35"
+                            style="@style/EmphasisStyle.Header2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/doing_well"
+                            app:layout_constraintStart_toStartOf="@+id/textView34"
+                            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+
+                        <SeekBar
+                            android:id="@+id/seekBar"
+                            android:layout_width="0dp"
+                            android:layout_height="8dp"
+                            android:layout_marginTop="36dp"
+                            android:layout_marginEnd="20dp"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="0dp"
+                            android:progress="@{viewModel.goalProgress}"
+                            android:progressDrawable="@drawable/round_goal_progressbar"
+                            android:thumb="@android:color/transparent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/textView35"
+                            app:layout_constraintTop_toBottomOf="@+id/textView35"
+                            tools:progress="30" />
+
+                        <TextView
+                            android:id="@+id/textView36"
+                            style="@style/EmphasisStyle.SubTitle2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:text="D-Day"
+                            android:textColor="@color/main_orange"
+                            app:layout_constraintBottom_toTopOf="@+id/seekBar"
+                            app:layout_constraintEnd_toEndOf="@+id/seekBar" />
+
+                        <TextView
+                            android:id="@+id/textView37"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/gmarketsansmedium"
+                            android:textColor="@color/blue_grey_87"
+                            android:textSize="12dp"
+                            app:date_text="@{viewModel.entireGoal.endDate}"
+                            app:layout_constraintEnd_toEndOf="@+id/seekBar"
+                            app:layout_constraintTop_toBottomOf="@+id/seekBar"
+                            tools:text="0000. 00. 00" />
+
+                        <TextView
+                            android:id="@+id/textView38"
+                            style="@style/EmphasisStyle.Title1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="56dp"
+                            android:text="@string/weekly_goal"
+                            app:layout_constraintStart_toStartOf="@+id/seekBar"
+                            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+                        <TextView
+                            android:id="@+id/button_change_goal"
+                            style="@style/ParagraphStyle.Text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:text="@string/change"
+                            android:textColor="@color/blue_grey_cf"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView38"
+                            app:layout_constraintEnd_toEndOf="@+id/textView37"
+                            app:layout_constraintTop_toTopOf="@+id/textView38" />
+
+                        <com.tost.presentation.home.WeeklyGoalDisplayHome
+                            android:id="@+id/weeklyGoalDisplayHome1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="16dp"
+                            app:count="@{viewModel.weeklyGoal.part1}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome2"
+                            app:layout_constraintTop_toBottomOf="@id/textView38"
+                            app:part_number="1" />
+
+                        <com.tost.presentation.home.WeeklyGoalDisplayHome
+                            android:id="@+id/weeklyGoalDisplayHome2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:count="@{viewModel.weeklyGoal.part2}"
+                            app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome1"
+                            app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome1"
+                            app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome3"
+                            app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome1"
+                            app:part_number="2" />
+
+                        <com.tost.presentation.home.WeeklyGoalDisplayHome
+                            android:id="@+id/weeklyGoalDisplayHome3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:count="@{viewModel.weeklyGoal.part3}"
+                            app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome2"
+                            app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome2"
+                            app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome4"
+                            app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome2"
+                            app:part_number="3" />
+
+                        <com.tost.presentation.home.WeeklyGoalDisplayHome
+                            android:id="@+id/weeklyGoalDisplayHome4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:count="@{viewModel.weeklyGoal.part4}"
+                            app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome3"
+                            app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome3"
+                            app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome5"
+                            app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome3"
+                            app:part_number="4" />
+
+                        <com.tost.presentation.home.WeeklyGoalDisplayHome
+                            android:id="@+id/weeklyGoalDisplayHome5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:count="@{viewModel.weeklyGoal.part5}"
+                            app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome4"
+                            app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome4"
+                            app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome6"
+                            app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome4"
+                            app:part_number="5" />
+
+                        <com.tost.presentation.home.WeeklyGoalDisplayHome
+                            android:id="@+id/weeklyGoalDisplayHome6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            app:count="@{viewModel.weeklyGoal.part6}"
+                            app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome5"
+                            app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome5"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome5"
+                            app:part_number="6" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/zone_not_login"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="56dp"
-                        android:text='@{String.format("Level %d", viewModel.entireGoal.level)}'
+                        android:visibility="@{viewModel.weeklyGoal == null ? View.VISIBLE : View.GONE}"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="Level 0" />
+                        tools:visibility="gone">
 
-                    <TextView
-                        android:id="@+id/textView35"
-                        style="@style/EmphasisStyle.Header2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/doing_well"
-                        app:layout_constraintStart_toStartOf="@+id/textView34"
-                        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+                        <ImageView
+                            android:id="@+id/imageView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintEnd_toEndOf="@+id/button_get_login"
+                            app:layout_constraintStart_toStartOf="@+id/button_get_login"
+                            app:layout_constraintTop_toBottomOf="@+id/textView55"
+                            app:srcCompat="@drawable/img_login_blank" />
 
-                    <SeekBar
-                        android:id="@+id/seekBar"
-                        android:layout_width="0dp"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="36dp"
-                        android:layout_marginEnd="20dp"
-                        android:paddingStart="0dp"
-                        android:paddingEnd="0dp"
-                        android:progress="@{viewModel.goalProgress}"
-                        android:progressDrawable="@drawable/round_goal_progressbar"
-                        android:thumb="@android:color/transparent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/textView35"
-                        app:layout_constraintTop_toBottomOf="@+id/textView35"
-                        tools:progress="30" />
+                        <TextView
+                            android:id="@+id/textView49"
+                            style="@style/EmphasisStyle.SubTitle2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="56dp"
+                            android:text="@string/start_with_tost_en"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView36"
-                        style="@style/EmphasisStyle.SubTitle2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:text="D-Day"
-                        android:textColor="@color/main_orange"
-                        app:layout_constraintBottom_toTopOf="@+id/seekBar"
-                        app:layout_constraintEnd_toEndOf="@+id/seekBar" />
+                        <TextView
+                            android:id="@+id/textView55"
+                            style="@style/ParagraphStyle.Text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/login_and_manage_goals"
+                            android:textSize="20dp"
+                            app:layout_constraintStart_toStartOf="@+id/textView49"
+                            app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
-                    <TextView
-                        android:id="@+id/textView37"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/gmarketsansmedium"
-                        android:textColor="@color/blue_grey_87"
-                        android:textSize="12dp"
-                        app:date_text="@{viewModel.entireGoal.endDate}"
-                        app:layout_constraintEnd_toEndOf="@+id/seekBar"
-                        app:layout_constraintTop_toBottomOf="@+id/seekBar"
-                        tools:text="0000. 00. 00" />
+                        <TextView
+                            android:id="@+id/button_get_login"
+                            style="@style/BlackButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginEnd="60dp"
+                            android:layout_marginBottom="36dp"
+                            android:text="@string/get_login"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/textView38"
-                        style="@style/EmphasisStyle.Title1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="56dp"
-                        android:text="@string/weekly_goal"
-                        app:layout_constraintStart_toStartOf="@+id/seekBar"
-                        app:layout_constraintTop_toBottomOf="@+id/textView37" />
-
-                    <TextView
-                        android:id="@+id/button_change_goal"
-                        style="@style/ParagraphStyle.Text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:text="@string/change"
-                        android:textColor="@color/blue_grey_cf"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView38"
-                        app:layout_constraintEnd_toEndOf="@+id/textView37"
-                        app:layout_constraintTop_toTopOf="@+id/textView38" />
-
-                    <com.tost.presentation.home.WeeklyGoalDisplayHome
-                        android:id="@+id/weeklyGoalDisplayHome1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="16dp"
-                        app:count="@{viewModel.weeklyGoal.part1}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome2"
-                        app:layout_constraintTop_toBottomOf="@id/textView38"
-                        app:part_number="1" />
-
-                    <com.tost.presentation.home.WeeklyGoalDisplayHome
-                        android:id="@+id/weeklyGoalDisplayHome2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:count="@{viewModel.weeklyGoal.part2}"
-                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome1"
-                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome1"
-                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome3"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome1"
-                        app:part_number="2" />
-
-                    <com.tost.presentation.home.WeeklyGoalDisplayHome
-                        android:id="@+id/weeklyGoalDisplayHome3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:count="@{viewModel.weeklyGoal.part3}"
-                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome2"
-                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome2"
-                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome4"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome2"
-                        app:part_number="3" />
-
-                    <com.tost.presentation.home.WeeklyGoalDisplayHome
-                        android:id="@+id/weeklyGoalDisplayHome4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:count="@{viewModel.weeklyGoal.part4}"
-                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome3"
-                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome3"
-                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome5"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome3"
-                        app:part_number="4" />
-
-                    <com.tost.presentation.home.WeeklyGoalDisplayHome
-                        android:id="@+id/weeklyGoalDisplayHome5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:count="@{viewModel.weeklyGoal.part5}"
-                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome4"
-                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome4"
-                        app:layout_constraintRight_toLeftOf="@id/weeklyGoalDisplayHome6"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome4"
-                        app:part_number="5" />
-
-                    <com.tost.presentation.home.WeeklyGoalDisplayHome
-                        android:id="@+id/weeklyGoalDisplayHome6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        app:count="@{viewModel.weeklyGoal.part6}"
-                        app:layout_constraintBottom_toBottomOf="@id/weeklyGoalDisplayHome5"
-                        app:layout_constraintLeft_toRightOf="@id/weeklyGoalDisplayHome5"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/weeklyGoalDisplayHome5"
-                        app:part_number="6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
@@ -216,33 +286,7 @@
                     android:layout_marginTop="40dp"
                     android:text="@string/practice"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
-
-                <TextView
-                    android:id="@+id/button_test_start"
-                    style="@style/BlackButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="60dp"
-                    android:layout_marginBottom="60dp"
-                    android:text="@string/go_to_test"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView42" />
-
-                <TextView
-                    android:id="@+id/textView42"
-                    style="@style/GreyBorderWhiteButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:text="@string/repeat"
-                    app:layout_constraintEnd_toEndOf="@+id/button_test_start"
-                    app:layout_constraintStart_toStartOf="@+id/button_test_start"
-                    app:layout_constraintTop_toBottomOf="@+id/list_practices" />
+                    app:layout_constraintTop_toBottomOf="@+id/zone_user_goal" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list_practices"
@@ -259,6 +303,57 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView40"
                     tools:listitem="@layout/item_practice_part" />
+
+                <TextView
+                    android:id="@+id/button_review"
+                    style="@style/GreyBorderWhiteButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:text="@string/repeat"
+                    app:layout_constraintEnd_toEndOf="@+id/button_test_start"
+                    app:layout_constraintStart_toStartOf="@+id/button_test_start"
+                    app:layout_constraintTop_toBottomOf="@+id/list_practices" />
+
+                <TextView
+                    android:id="@+id/button_test_start"
+                    style="@style/BlackButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginBottom="60dp"
+                    android:text="@string/go_to_test"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_review" />
+
+                <View
+                    android:id="@+id/mask_button_review"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/round_rectangle_6dp"
+                    android:backgroundTint="#AAFFFFFF"
+                    android:visibility="@{viewModel.weeklyGoal == null ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_review"
+                    app:layout_constraintEnd_toEndOf="@+id/button_review"
+                    app:layout_constraintStart_toStartOf="@+id/button_review"
+                    app:layout_constraintTop_toTopOf="@+id/button_review" />
+
+                <View
+                    android:id="@+id/mask_button_test"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/round_rectangle_6dp"
+                    android:backgroundTint="#AAFFFFFF"
+                    android:visibility="@{viewModel.weeklyGoal == null ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_test_start"
+                    app:layout_constraintEnd_toEndOf="@+id/button_test_start"
+                    app:layout_constraintStart_toStartOf="@+id/button_test_start"
+                    app:layout_constraintTop_toTopOf="@+id/button_test_start" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

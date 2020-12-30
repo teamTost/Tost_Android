@@ -116,4 +116,9 @@
     <string name="goal_changed">수정이 완료되었습니다!</string>
     <string name="mock_test">모의고사</string>
     <string name="to_be_continued">아직 준비 중이에요~</string>
+    <string name="start_with_tost_en">Start with TOST</string>
+    <string name="tost">TOST</string>
+    <string name="login_and_manage_goals">로그인하고 목표를 관리해보세요!</string>
+    <string name="get_login">로그인하기</string>
+    <string name="login_required">로그인 후 이용 가능합니다.</string>
 </resources>

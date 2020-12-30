@@ -50,7 +50,7 @@ class HomeViewModel @ViewModelInject constructor(
         _weeklyGoal.value = goalRepository.getWeeklyGoal(tostToken)
     }
 
-    fun isEntireGoalNotNull(): Boolean {
-        return entireGoal.value != null
-    }
+    fun isEntireGoalNotNull(): Boolean = entireGoal.value != null
+
+    fun isWeeklyGoalEmpty(): Boolean = weeklyGoal.value == null
 }

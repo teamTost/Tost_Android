@@ -57,7 +57,9 @@ class HomeActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         binding.seekBar.setOnTouchListener { _, _ -> true }
         binding.buttonChangeGoal.setOnClickListener { deployChangeWeeklyGoalActivity() }
-        binding.buttonTestStart.setOnClickListener { deployActivityOf(TestActivity::class.java) }
+        binding.buttonGetLogin.setOnClickListener { finish() }
+        binding.buttonReview.setOnClickListener { deployActivityWhenLogin(TestActivity::class.java) }
+        binding.buttonTestStart.setOnClickListener { deployActivityWhenLogin(TestActivity::class.java) }
     }
 
     private fun subscribeEntireGoals() {
@@ -92,6 +94,14 @@ class HomeActivity : AppCompatActivity() {
     private fun deployChangeWeeklyGoalActivity() {
         val intent = Intent(this, ChangeWeeklyGoalActivity::class.java)
         startActivityForResult(intent, ChangeWeeklyGoalActivity.REQUEST_CODE)
+    }
+
+    private fun <T> deployActivityWhenLogin(targetActivity: Class<T>) {
+        if (homeViewModel.isWeeklyGoalEmpty()) {
+            showToast(R.string.login_required)
+            return
+        }
+        deployActivityOf(targetActivity)
     }
 
     companion object {
