@@ -36,16 +36,10 @@ interface TostService {
     ): GoalsResponse
 
     @GET("/part/{part}")
-    suspend fun getProblemStateOf(
+    suspend fun getMyNote(
         @Header("token") token: String,
         @Path("part") part: String,
-    ): ProblemStateResponse
-
-    @GET("/solved/part/{part}")
-    suspend fun getNextProblemNumber(
-        @Header("token") token: String,
-        @Path("part") part: String,
-    ): NextProblemNumberResponse
+    ): MyNoteResponse
 
     @GET("/part/{part}/question/{questionNum}")
     suspend fun getProblemInfo(

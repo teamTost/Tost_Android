@@ -11,7 +11,7 @@ import java.util.*
  */
 
 class GoalsResponse(
-    val userIdx: String,
+    val userIdx: String?,
     val targetDate: String?,
     val targetLevel: Int?,
     val partOne: String?,
@@ -20,7 +20,7 @@ class GoalsResponse(
     val partFour: String?,
     val partFive: String?,
     val partSix: String?,
-    val isUpdate: Boolean,
+    val isUpdate: Boolean?,
 ) {
     fun getEntireGoal(): EntireGoal? {
         return EntireGoal(

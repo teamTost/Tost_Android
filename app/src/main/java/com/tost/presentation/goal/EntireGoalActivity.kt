@@ -82,6 +82,7 @@ class EntireGoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickLi
     private fun deployWeeklyGoalActivityAndFinish() {
         val intent = Intent(this, WeeklyGoalActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     companion object {

@@ -12,4 +12,5 @@ data class MyNote(
     val weeklyGoalRatio: Int,
     val weeklySolvedProblemCount: Int,
     val weeklyGoalCount: Int,
+    val nextProblemIndex: Int,
 )
