@@ -12,16 +12,13 @@ import androidx.lifecycle.ViewModel
 
 open class BaseViewModel : ViewModel() {
     protected val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
+    val isLoading: LiveData<Boolean> = _isLoading
 
     protected val _isSuccess = MutableLiveData(false)
-    val isSuccess: LiveData<Boolean>
-        get() = _isSuccess
+    val isSuccess: LiveData<Boolean> = _isSuccess
 
     protected val _toastMessage = MutableLiveData<Int>()
-    val toastMessage: LiveData<Int>
-        get() = _toastMessage
+    val toastMessage: LiveData<Int> = _toastMessage
 
     protected fun changeLoadingTo(flag: Boolean) {
         _isLoading.value = flag

@@ -19,8 +19,7 @@ class Part2ViewModel @ViewModelInject constructor(
     override val part: String = "part2"
 
     private val _problemState = MutableLiveData(ProblemState.PREPARE)
-    val problemState: LiveData<ProblemState>
-        get() = _problemState
+    val problemState: LiveData<ProblemState> = _problemState
 
     fun changeState(state: ProblemState) {
         _problemState.value = state

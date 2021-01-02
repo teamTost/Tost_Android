@@ -29,8 +29,7 @@ class ChangeWeeklyGoalViewModel @ViewModelInject constructor(
     val part6Goal = MutableLiveData<String>()
 
     private val _weeklyGoal = MutableLiveData<WeeklyGoal>()
-    val weeklyGoal: LiveData<WeeklyGoal>
-        get() = _weeklyGoal
+    val weeklyGoal: LiveData<WeeklyGoal> = _weeklyGoal
 
     fun loadExistWeeklyGoal() = viewModelScope.launch {
         val tostToken = userRepository.getTostToken()

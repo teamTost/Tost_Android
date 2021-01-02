@@ -25,16 +25,13 @@ class EntireGoalViewModel @ViewModelInject constructor(
     private val goalRepository: GoalRepository,
 ) : BaseViewModel() {
     private val _userName = MutableLiveData<String>()
-    val userName: LiveData<String>
-        get() = _userName
+    val userName: LiveData<String> = _userName
 
     private val _selectedDate = MutableLiveData<Date>()
-    val selectedDate: LiveData<Date>
-        get() = _selectedDate
+    val selectedDate: LiveData<Date> = _selectedDate
 
     private val _selectedLevel = MutableLiveData<Int>()
-    val selectedLevel: LiveData<Int>
-        get() = _selectedLevel
+    val selectedLevel: LiveData<Int> = _selectedLevel
 
     init {
         initViewModel()

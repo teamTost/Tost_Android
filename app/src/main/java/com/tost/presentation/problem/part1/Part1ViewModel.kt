@@ -27,12 +27,10 @@ class Part1ViewModel @ViewModelInject constructor(
     override val part: String = "Part1"
 
     private val _problem = MutableLiveData<Problem>()
-    val problem: LiveData<Problem>
-        get() = _problem
+    val problem: LiveData<Problem> = _problem
 
     private val _problemState = MutableLiveData(ProblemState.PREPARE)
-    val problemState: LiveData<ProblemState>
-        get() = _problemState
+    val problemState: LiveData<ProblemState> = _problemState
 
     fun loadProblem(problemNumber: Int) = viewModelScope.launch {
         changeLoadingTo(true)

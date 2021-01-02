@@ -24,16 +24,13 @@ class HomeViewModel @ViewModelInject constructor(
 ) : ViewModel() {
 
     private val _entireGoal = MutableLiveData<EntireGoal>()
-    val entireGoal: LiveData<EntireGoal>
-        get() = _entireGoal
+    val entireGoal: LiveData<EntireGoal> = _entireGoal
 
     private val _weeklyGoal = MutableLiveData<WeeklyGoal>()
-    val weeklyGoal: LiveData<WeeklyGoal>
-        get() = _weeklyGoal
+    val weeklyGoal: LiveData<WeeklyGoal> = _weeklyGoal
 
     private val _goalProgress = MutableLiveData<Int>()
-    val goalProgress: LiveData<Int>
-        get() = _goalProgress
+    val goalProgress: LiveData<Int> = _goalProgress
 
     fun loadGoals(now: Date) = viewModelScope.launch {
         val tostToken = userRepository.getTostToken()
