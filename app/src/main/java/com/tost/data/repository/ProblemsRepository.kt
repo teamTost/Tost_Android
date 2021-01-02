@@ -1,5 +1,6 @@
 package com.tost.data.repository
 
+import com.tost.data.entity.MyNote
 import com.tost.data.entity.Part
 import com.tost.data.entity.Problem
 import com.tost.data.service.TostService
@@ -14,6 +15,10 @@ import javax.inject.Inject
 class ProblemsRepository @Inject constructor(
     private val tostService: TostService,
 ) {
+    suspend fun getMyNote(token: String, part: Part): MyNote {
+        return tostService.getMyNote(token, part.number).toMyNote()
+    }
+
     suspend fun getProblemInfo(token: String, part: Part, problemNumber: Int): Problem {
         return tostService.getProblemInfo(token, part.number, problemNumber).toProblem()
     }

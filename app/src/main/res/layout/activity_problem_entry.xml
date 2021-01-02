@@ -8,8 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="mynote"
-            type="com.tost.data.entity.MyNote" />
+            name="viewModel"
+            type="com.tost.presentation.problem.ProblemEntryViewModel" />
 
         <variable
             name="part"
@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/applesdgothicneobold"
-                    android:text='@{mynote == null ? "-" : String.valueOf(mynote.solvedProblemCount)}'
+                    android:text='@{viewModel.myNote == null ? "-" : String.valueOf(viewModel.myNote.solvedProblemCount)}'
                     android:textColor="@color/blue_grey_22"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="@+id/textView3"
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/applesdgothicneobold"
-                    android:text='@{mynote == null ? "-" : String.valueOf(mynote.remainProblemCount)}'
+                    android:text='@{viewModel.myNote == null ? "-" : String.valueOf(viewModel.myNote.remainProblemCount)}'
                     android:textColor="@color/blue_grey_22"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="@+id/textView4"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/applesdgothicneobold"
-                    android:text='@{mynote == null ? "-" : String.valueOf(mynote.wholeProblemCount)}'
+                    android:text='@{viewModel.myNote == null ? "-" : String.valueOf(viewModel.myNote.wholeProblemCount)}'
                     android:textColor="@color/blue_grey_87"
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="@+id/textView5"
@@ -166,7 +166,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="34dp"
-                        android:visibility="@{mynote == null ? View.GONE : View.VISIBLE}"
+                        android:visibility="@{viewModel.myNote == null ? View.GONE : View.VISIBLE}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView9"
                         app:layout_constraintTop_toBottomOf="@+id/textView9">
@@ -179,7 +179,7 @@
                             android:layout_marginBottom="24dp"
                             android:fontFamily="@font/gmarketsansbold"
                             android:includeFontPadding="true"
-                            android:text="@{@string/n_percent(mynote.weeklyGoalRatio)}"
+                            android:text="@{@string/n_percent(viewModel.myNote.weeklyGoalRatio)}"
                             android:textColor="@color/main_orange"
                             android:textSize="20dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -204,7 +204,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@{@string/n_slash_n(mynote.weeklySolvedProblemCount, mynote.weeklyGoalCount)}"
+                            android:text="@{@string/n_slash_n(viewModel.myNote.weeklySolvedProblemCount, viewModel.myNote.weeklyGoalCount)}"
                             android:textColor="@color/blue_grey_87"
                             app:layout_constraintBottom_toBottomOf="@+id/textView11"
                             app:layout_constraintStart_toEndOf="@+id/textView11"
@@ -229,7 +229,7 @@
                             android:layout_marginEnd="2dp"
                             android:fontFamily="@font/gmarketsansbold"
                             android:includeFontPadding="false"
-                            android:text="@{String.valueOf(mynote.weeklyGoalCount)}"
+                            android:text="@{String.valueOf(viewModel.myNote.weeklyGoalCount)}"
                             android:textColor="@color/blue_grey_22"
                             android:textSize="30dp"
                             app:layout_constraintBottom_toBottomOf="@+id/text_goal_ratio"
@@ -361,8 +361,8 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    style="@style/BlackButton"
                     android:id="@+id/button_start"
+                    style="@style/BlackButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="56dp"

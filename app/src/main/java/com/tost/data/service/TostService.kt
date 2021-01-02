@@ -38,7 +38,7 @@ interface TostService {
     @GET("/part/{part}")
     suspend fun getMyNote(
         @Header("token") token: String,
-        @Path("part") part: String,
+        @Path("part") part: Int,
     ): MyNoteResponse
 
     @GET("/part/{part}/question/{questionNum}")
