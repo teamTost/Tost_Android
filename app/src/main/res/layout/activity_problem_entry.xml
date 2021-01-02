@@ -168,6 +168,7 @@
                         android:layout_marginEnd="34dp"
                         android:visibility="@{viewModel.myNote == null ? View.GONE : View.VISIBLE}"
                         app:layout_constraintEnd_toEndOf="parent"
+                        tools:visibility="gone"
                         app:layout_constraintStart_toStartOf="@+id/textView9"
                         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
@@ -246,10 +247,11 @@
                         android:fontFamily="@font/applesdgothicneobold"
                         android:text="@string/mynote_login_notice"
                         android:textColor="@color/main_orange"
+                        android:visibility="@{viewModel.myNote == null ? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/textView9"
                         app:layout_constraintTop_toBottomOf="@+id/textView9"
-                        tools:visibility="gone" />
+                        tools:visibility="visible" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

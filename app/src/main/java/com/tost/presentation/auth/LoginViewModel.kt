@@ -30,7 +30,7 @@ class LoginViewModel @ViewModelInject constructor(
     fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         if (requestCode != REQUEST_CODE_GOOGLE_AUTH) return
         if (resultCode != Activity.RESULT_OK) {
-            _isLoading.value = false
+            changeLoadingTo(false)
             return
         }
         val googleAccount = GoogleSignIn.getSignedInAccountFromIntent(intent).result
@@ -51,18 +51,19 @@ class LoginViewModel @ViewModelInject constructor(
     }
 
     fun runAutoLogin() = viewModelScope.launch(loginFailHandler()) {
+        changeLoadingTo(true)
         userRepository.getTostToken()
             ?: throw IllegalStateException("Tost Token not exist in Local")
         loginSuccess()
     }
 
     private fun loginSuccess() {
-        _isLoading.value = false
+        changeLoadingTo(false)
         _isSuccess.value = true
     }
 
     private fun loginFailHandler() = CoroutineExceptionHandler { _, t ->
-        _isLoading.value = false
+        changeLoadingTo(false)
         t.printStackTrace()
     }
 }

@@ -48,6 +48,11 @@ interface TostService {
         @Path("questionNum") questionNum: Int,
     ): List<ProblemResponse>
 
+    @GET("/experience/part/{part}")
+    suspend fun getTrialProblemInfo(
+        @Path("part") part: Int,
+    ): List<ProblemResponse>
+
     companion object {
         const val BASE_URL = "http://13.124.234.226:8080"
     }

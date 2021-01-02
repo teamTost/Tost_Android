@@ -34,15 +34,16 @@ class Part1ViewModel @ViewModelInject constructor(
 
     fun loadProblem(problemNumber: Int) = viewModelScope.launch {
         changeLoadingTo(true)
-        val tostToken = getTostToken()
-        _problem.value = problemsRepository.getProblemInfo(tostToken, Part.ONE, problemNumber)
+        val tostToken = userRepository.getTostToken()
+        _problem.value = if (tostToken == null) {
+            problemsRepository.getTrialProblemInfo(Part.ONE)
+        } else {
+            problemsRepository.getProblemInfo(tostToken, Part.ONE, problemNumber)
+        }
         changeLoadingTo(false)
     }
 
     fun changeState(state: ProblemState) {
         _problemState.value = state
     }
-    //TODO 토큰이 없으면 체험하기니까 체험하기로 문제를 따로 뽑아오는게 맞는거같다.
-    private suspend fun getTostToken(): String = userRepository.getTostToken()
-        ?: throw IllegalStateException("Login Requested")
 }
