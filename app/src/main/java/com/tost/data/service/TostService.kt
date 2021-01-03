@@ -1,9 +1,6 @@
 package com.tost.data.service
 
-import com.tost.data.service.request.SaveGoalRequestParams
-import com.tost.data.service.request.SaveSolvedProblemParams
-import com.tost.data.service.request.SaveWeeklyGoalParams
-import com.tost.data.service.request.TostLoginRequestParams
+import com.tost.data.service.request.*
 import com.tost.data.service.response.*
 import retrofit2.http.*
 
@@ -58,6 +55,18 @@ interface TostService {
     suspend fun saveSolvedProblem(
         @Header("token") token: String,
         @Body saveSolvedProblemParams: SaveSolvedProblemParams,
+    )
+
+    @POST("/addBookmark")
+    suspend fun saveBookmark(
+        @Header("token") token: String,
+        @Body bookmarkParams: BookmarkParams,
+    )
+
+    @DELETE("deleteBookmark")
+    suspend fun deleteBookmark(
+        @Header("token") token: String,
+        @Body bookmarkParams: BookmarkParams,
     )
 
     companion object {

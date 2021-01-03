@@ -4,6 +4,7 @@ import com.tost.data.entity.MyNote
 import com.tost.data.entity.Part
 import com.tost.data.entity.Problem
 import com.tost.data.service.TostService
+import com.tost.data.service.request.BookmarkParams
 import com.tost.data.service.request.SaveSolvedProblemParams
 import com.tost.data.service.response.toProblem
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +41,20 @@ class ProblemsRepository @Inject constructor(
         return withContext(Dispatchers.IO) {
             val params = SaveSolvedProblemParams(part.number.toString(), problemNumber.toString())
             tostService.saveSolvedProblem(token, params)
+        }
+    }
+
+    suspend fun saveBookmark(token: String, part: Part, problemNumber: Int) {
+        return withContext(Dispatchers.IO) {
+            val params = BookmarkParams(part.number, problemNumber)
+            tostService.saveBookmark(token, params)
+        }
+    }
+
+    suspend fun deleteBookmark(token: String, part: Part, problemNumber: Int) {
+        return withContext(Dispatchers.IO) {
+            val params = BookmarkParams(part.number, problemNumber)
+            tostService.deleteBookmark(token, params)
         }
     }
 }
