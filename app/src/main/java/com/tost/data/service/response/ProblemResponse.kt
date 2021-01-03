@@ -12,7 +12,7 @@ data class ProblemResponse(
     val part: String,
     val questionNum: String,
     val smallQuestionNum: String,
-    val img: String,
+    val img: String?,
     val question: String,
     val voice: String,
 )
@@ -22,7 +22,7 @@ fun List<ProblemResponse>.toProblem(): Problem {
         partNumber = this[0].part.toInt(),
         questionNumber = this[0].questionNum.toInt(),
         passage = this[0].question,
-        imageUrl = this[0].img,
+        imageUrl = this[0].img.orEmpty(),
         audioUrl = this[0].voice,
         subProblems = this.drop(1)
             .map {
@@ -30,7 +30,7 @@ fun List<ProblemResponse>.toProblem(): Problem {
                     partNumber = it.part.toInt(),
                     questionNumber = it.questionNum.toInt(),
                     passage = it.question,
-                    imageUrl = it.img,
+                    imageUrl = it.img.orEmpty(),
                     audioUrl = it.voice,
                     subProblems = emptyList(),
                 )

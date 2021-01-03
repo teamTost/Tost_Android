@@ -11,6 +11,9 @@ import com.tost.data.repository.ProblemsRepository
 import com.tost.data.repository.RecordsRepository
 import com.tost.data.repository.UserRepository
 import com.tost.presentation.problem.base.AudioViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 /**
@@ -45,5 +48,11 @@ class Part1ViewModel @ViewModelInject constructor(
 
     fun changeState(state: ProblemState) {
         _problemState.value = state
+    }
+
+    fun saveSolvedProblem() = CoroutineScope(Dispatchers.IO).launch {
+        val tostToken = userRepository.getTostToken() ?: return@launch
+        val currentProblemNumber = _problem.value?.questionNumber ?: error("problem is null")
+        problemsRepository.saveSolvedProblem(tostToken, Part.ONE, currentProblemNumber)
     }
 }

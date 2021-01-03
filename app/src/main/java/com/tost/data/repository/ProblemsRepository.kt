@@ -4,6 +4,7 @@ import com.tost.data.entity.MyNote
 import com.tost.data.entity.Part
 import com.tost.data.entity.Problem
 import com.tost.data.service.TostService
+import com.tost.data.service.request.SaveSolvedProblemParams
 import com.tost.data.service.response.toProblem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -32,6 +33,13 @@ class ProblemsRepository @Inject constructor(
     suspend fun getTrialProblemInfo(part: Part): Problem {
         return withContext(Dispatchers.IO) {
             tostService.getTrialProblemInfo(part.number).toProblem()
+        }
+    }
+
+    suspend fun saveSolvedProblem(token: String, part: Part, problemNumber: Int) {
+        return withContext(Dispatchers.IO) {
+            val params = SaveSolvedProblemParams(part.number.toString(), problemNumber.toString())
+            tostService.saveSolvedProblem(token, params)
         }
     }
 }

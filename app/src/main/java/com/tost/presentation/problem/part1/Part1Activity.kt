@@ -1,5 +1,6 @@
 package com.tost.presentation.problem.part1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.tost.data.entity.ProblemState
@@ -39,6 +40,7 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding.buttonAudioController.setOnStateClickListener(this)
         binding.buttonRestart.setOnClickListener { cancelRecord() }
         binding.buttonSkip.setOnClickListener { skipPreparation() }
+        binding.buttonNext.setOnClickListener { startNextProblem() }
         part1ViewModel.toastMessage.observe(this) { showToast(it) }
     }
 
@@ -98,8 +100,10 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private fun deployStopTalkingDialog() {
         StopTalkingButtonsDialog(this).apply {
             setOnCheckProblemClickListener { listenMyRecord() }
-            setOnNextClickListener {}
+            setOnNextClickListener { startNextProblem() }
         }.show()
+//        part1ViewModel.saveSolvedProblem()
+        //FIXME 나중에 푼 문제 저장되는것 주석 해제 할 것.
     }
 
     private fun listenMyRecord() {
@@ -118,8 +122,14 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         }
     }
 
-    private fun requireBinding() = binding
-        ?: throw IllegalStateException("root view must be inflated")
+    private fun startNextProblem() {
+        val intent = Intent(this, Part1Activity::class.java)
+        intent.putExtra(KEY_PROBLEM_NUMBER, getProblemNumber() + 1)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun requireBinding() = binding ?: error("root view must be inflated")
 
     override fun onDestroy() {
         super.onDestroy()

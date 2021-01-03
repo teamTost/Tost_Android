@@ -1,6 +1,7 @@
 package com.tost.data.service
 
 import com.tost.data.service.request.SaveGoalRequestParams
+import com.tost.data.service.request.SaveSolvedProblemParams
 import com.tost.data.service.request.SaveWeeklyGoalParams
 import com.tost.data.service.request.TostLoginRequestParams
 import com.tost.data.service.response.*
@@ -52,6 +53,12 @@ interface TostService {
     suspend fun getTrialProblemInfo(
         @Path("part") part: Int,
     ): List<ProblemResponse>
+
+    @POST("/solved")
+    suspend fun saveSolvedProblem(
+        @Header("token") token: String,
+        @Body saveSolvedProblemParams: SaveSolvedProblemParams,
+    )
 
     companion object {
         const val BASE_URL = "http://13.124.234.226:8080"
