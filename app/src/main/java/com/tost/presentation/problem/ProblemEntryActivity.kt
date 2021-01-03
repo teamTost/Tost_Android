@@ -7,7 +7,10 @@ import androidx.activity.viewModels
 import com.google.firebase.messaging.FirebaseMessaging
 import com.tost.data.entity.Part
 import com.tost.databinding.ActivityProblemEntryBinding
+import com.tost.presentation.problem.dialog.NextOrReviewProblemDialog
+import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.utils.printLog
+import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +30,7 @@ class ProblemEntryActivity : AppCompatActivity() {
     private fun initView(binding: ActivityProblemEntryBinding) {
         val part = getPart()
         binding.part = part
-        binding.buttonStart.setOnClickListener { deployProblemPrepareActivity() }
+        binding.buttonStart.setOnClickListener { onStartClick() }
         binding.viewModel = problemEntryViewModel
         binding.lifecycleOwner = this
         problemEntryViewModel.loadMyNote(part)
@@ -35,6 +38,14 @@ class ProblemEntryActivity : AppCompatActivity() {
 
     private fun getPart(): Part = intent.getSerializableExtra(KEY_PART) as? Part
         ?: throw IllegalArgumentException("part must be send")
+
+    private fun onStartClick() {
+        if (problemEntryViewModel.isMyNoteNotNull()) {
+            deployNextOrReviewProblemDialog()
+            return
+        }
+        deployProblemPrepareActivity()
+    }
 
     private fun deployProblemPrepareActivity() {
         val intent = Intent(this, ProblemGuideActivity::class.java)
@@ -44,6 +55,13 @@ class ProblemEntryActivity : AppCompatActivity() {
             problemEntryViewModel.getNextProblemNumber()
         )
         startActivity(intent)
+    }
+
+    private fun deployNextOrReviewProblemDialog() {
+        NextOrReviewProblemDialog(this).apply {
+            setOnCheckProblemClickListener { showToast("복습하기 액티비티 띄우기") }
+            setOnNextClickListener { deployProblemPrepareActivity() }
+        }.show()
     }
 
     companion object {

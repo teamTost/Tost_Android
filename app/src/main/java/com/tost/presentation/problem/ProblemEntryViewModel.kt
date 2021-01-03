@@ -34,4 +34,6 @@ class ProblemEntryViewModel @ViewModelInject constructor(
     fun getNextProblemNumber(): Int {
         return _myNote.value?.nextProblemIndex ?: 1
     }
+
+    fun isMyNoteNotNull(): Boolean = _myNote.value != null
 }

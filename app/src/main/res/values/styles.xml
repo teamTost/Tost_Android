@@ -60,5 +60,6 @@
     <style name="lightDatePicker">
         <item name="android:textColorPrimary">@color/blue_grey_22</item>
         <item name="colorControlNormal">@color/main_orange</item>
+        <item name="android:textSize">17dp</item>
     </style>
 </resources>

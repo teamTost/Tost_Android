@@ -13,7 +13,6 @@ import com.tost.presentation.goal.weekly.WeeklyGoalActivity
 import com.tost.presentation.goal.weekly.change.ChangeWeeklyGoalActivity
 import com.tost.presentation.problem.ProblemEntryActivity
 import com.tost.presentation.test.TestActivity
-import com.tost.presentation.utils.printLog
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
