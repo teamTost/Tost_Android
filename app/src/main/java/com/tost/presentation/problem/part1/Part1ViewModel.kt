@@ -24,10 +24,10 @@ import kotlinx.coroutines.launch
 class Part1ViewModel @ViewModelInject constructor(
     recordsRepository: RecordsRepository,
     private val userRepository: UserRepository,
-    private val problemsRepository: ProblemsRepository
+    private val problemsRepository: ProblemsRepository,
 ) : AudioViewModel(recordsRepository) {
 
-    override val part: String = "Part1"
+    override val part: Part = Part.ONE
 
     private val _problem = MutableLiveData<Problem>()
     val problem: LiveData<Problem> = _problem
@@ -39,9 +39,9 @@ class Part1ViewModel @ViewModelInject constructor(
         changeLoadingTo(true)
         val tostToken = userRepository.getTostToken()
         _problem.value = if (tostToken == null) {
-            problemsRepository.getTrialProblemInfo(Part.ONE)
+            problemsRepository.getTrialProblemInfo(part)
         } else {
-            problemsRepository.getProblemInfo(tostToken, Part.ONE, problemNumber)
+            problemsRepository.getProblemInfo(tostToken, part, problemNumber)
         }
         changeLoadingTo(false)
     }
@@ -53,6 +53,6 @@ class Part1ViewModel @ViewModelInject constructor(
     fun saveSolvedProblem() = CoroutineScope(Dispatchers.IO).launch {
         val tostToken = userRepository.getTostToken() ?: return@launch
         val currentProblemNumber = _problem.value?.questionNumber ?: error("problem is null")
-        problemsRepository.saveSolvedProblem(tostToken, Part.ONE, currentProblemNumber)
+        problemsRepository.saveSolvedProblem(tostToken, part, currentProblemNumber)
     }
 }

@@ -25,6 +25,8 @@ class StopTalkingButtonsDialog(context: Context) : Dialog(context) {
             buttonCheck.setOnClickListener(onCheckProblemClickListener)
             buttonNext.setOnClickListener(onNextClickListener)
         }
+        setCancelable(false)
+        setCanceledOnTouchOutside(false)
         setContentView(binding.root)
         setTransparentWindowBackground()
     }

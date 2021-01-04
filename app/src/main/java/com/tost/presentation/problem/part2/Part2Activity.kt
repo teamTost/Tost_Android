@@ -31,7 +31,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         if (previousPermissionGranted()) onInitialPermissionGranted()
         else askAudioPermission()
 
-        part2ViewModel.loadProblem(getProblemNumber())
+        part2ViewModel.problem.observe(this) { startProblem() }
     }
 
     private fun initView(binding: ActivityPart2Binding) {
@@ -46,7 +46,7 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     override fun onInitialPermissionGranted() {
-        startProblem()
+        part2ViewModel.loadProblem(getProblemNumber())
     }
 
     override fun onAudioButtonClick(state: AudioStateButton.State) = when (state) {

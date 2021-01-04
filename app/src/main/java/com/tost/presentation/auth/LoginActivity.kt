@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initView(binding: ActivityLoginBinding) {
+        binding.lifecycleOwner = this
         binding.buttonLogin.setOnClickListener {
             binding.windowLoading.root.visibility = View.VISIBLE
             deployGoogleAuth(createGoogleSignInOptions())

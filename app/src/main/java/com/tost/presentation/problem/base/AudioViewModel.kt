@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tost.data.entity.Part
 import com.tost.data.repository.RecordsRepository
 import com.tost.presentation.problem.TostRecorder
 import com.tost.presentation.problem.widget.AudioStateButton
@@ -22,7 +23,7 @@ abstract class AudioViewModel constructor(
     private val recordsRepository: RecordsRepository,
 ) : BaseViewModel() {
 
-    abstract val part: String
+    abstract val part: Part
 
     private val _progress = MutableLiveData(0)
     val progress: LiveData<Int>
@@ -46,7 +47,7 @@ abstract class AudioViewModel constructor(
     }
 
     fun prepareRecorder(baseFilePath: String) {
-        val fileName = "$baseFilePath$part"
+        val fileName = "$baseFilePath${part.name}"
         tostRecorder.prepare(fileName)
     }
 
