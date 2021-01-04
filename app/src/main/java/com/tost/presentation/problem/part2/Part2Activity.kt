@@ -1,12 +1,15 @@
 package com.tost.presentation.problem.part2
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.tost.data.entity.Part
 import com.tost.data.entity.ProblemState
 import com.tost.databinding.ActivityPart2Binding
+import com.tost.presentation.problem.ProblemGuideActivity
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
+import com.tost.presentation.problem.part1.Part1Activity
 import com.tost.presentation.problem.widget.AudioStateButton
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,9 +17,7 @@ import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
-
     private var binding: ActivityPart2Binding? = null
-
     private val part2ViewModel: Part2ViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,17 +30,18 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         initView(binding)
         if (previousPermissionGranted()) onInitialPermissionGranted()
         else askAudioPermission()
+
+        part2ViewModel.loadProblem(getProblemNumber())
     }
 
     private fun initView(binding: ActivityPart2Binding) {
         binding.lifecycleOwner = this
-        binding.part = Part.TWO
-        binding.imageUrl = ""
         binding.viewModel = part2ViewModel
         binding.problemToolBar.setOnCloseClickListener { finish() }
         binding.buttonAudioController.setOnStateClickListener(this)
         binding.buttonRestart.setOnClickListener { cancelRecord() }
         binding.buttonSkip.setOnClickListener { skipPreparation() }
+        binding.buttonNext.setOnClickListener { startNextProblem() }
         part2ViewModel.toastMessage.observe(this) { showToast(it) }
     }
 
@@ -53,6 +55,9 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         AudioStateButton.State.PLAYING -> part2ViewModel.playRecord()
         AudioStateButton.State.PAUSE -> part2ViewModel.pausePlayRecord()
     }
+
+    private fun getProblemNumber(): Int =
+        intent.getIntExtra(ProblemGuideActivity.KEY_PROBLEM_NUMBER, 1)
 
     private fun skipPreparation() {
         part2ViewModel.skipProgress()
@@ -97,8 +102,10 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private fun deployStopTalkingDialog() {
         StopTalkingButtonsDialog(this).apply {
             setOnCheckProblemClickListener { listenMyRecord() }
-            setOnNextClickListener {}
+            setOnNextClickListener { startNextProblem() }
         }.show()
+        //        part2ViewModel.saveSolvedProblem()
+        //FIXME 나중에 푼 문제 저장되는것 주석 해제 할 것.
     }
 
     private fun listenMyRecord() {
@@ -117,12 +124,17 @@ class Part2Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         }
     }
 
-    private fun requireBinding() = binding
-        ?: throw IllegalStateException("root view must be inflated")
+    private fun startNextProblem() {
+        val intent = Intent(this, Part2Activity::class.java)
+        intent.putExtra(ProblemGuideActivity.KEY_PROBLEM_NUMBER, getProblemNumber() + 1)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun requireBinding() = binding ?: error("root view must be inflated")
 
     override fun onDestroy() {
         super.onDestroy()
-
         binding = null
     }
 

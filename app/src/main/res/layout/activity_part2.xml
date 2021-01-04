@@ -12,14 +12,6 @@
         <import type="com.tost.presentation.problem.widget.AudioStateButton.State" />
 
         <variable
-            name="part"
-            type="com.tost.data.entity.Part" />
-
-        <variable
-            name="imageUrl"
-            type="String" />
-
-        <variable
             name="viewModel"
             type="com.tost.presentation.problem.part2.Part2ViewModel" />
     </data>
@@ -36,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@{@string/question_n(part.number)}"
+            app:title="@{@string/question_n(viewModel.problem.questionNumber)}"
             tools:title="Question 3" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -143,7 +135,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="80dp"
             android:layout_marginEnd="20dp"
-            app:image_url="@{imageUrl}"
+            app:image_url="@{viewModel.problem.imageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/problemToolBar"
