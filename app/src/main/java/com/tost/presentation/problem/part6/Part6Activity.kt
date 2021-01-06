@@ -1,8 +1,10 @@
 package com.tost.presentation.problem.part6
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.tost.R
 import com.tost.data.entity.ProblemState
@@ -21,6 +23,8 @@ import java.util.concurrent.TimeUnit
 class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private var binding: ActivityPart6Binding? = null
     private val part6ViewModel: Part6ViewModel by viewModels()
+
+    private var problemPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +75,16 @@ class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun startProblem() {
+        problemPlayer = MediaPlayer().apply {
+            setDataSource(part6ViewModel.getProblemSoundUrl())
+            prepare()
+            setOnCompletionListener { startPreparation() }
+        }
+        problemPlayer?.start()
+    }
+
+    private fun startPreparation() {
+        binding?.zoneTimer?.visibility = View.VISIBLE
         rewindProgressBar(PREPARATION_TIME)
         playSound(prepareNoticePlayer) {
             playSound(beepPlayer) { part6ViewModel.startCountDown(PREPARATION_TIME) }
@@ -138,6 +152,8 @@ class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+        problemPlayer?.release()
+        problemPlayer = null
     }
 
     companion object {

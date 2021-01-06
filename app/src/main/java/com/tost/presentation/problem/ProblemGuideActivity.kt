@@ -9,6 +9,7 @@ import com.tost.data.entity.Part
 import com.tost.databinding.ActivityProblemGuideBinding
 import com.tost.presentation.problem.part1.Part1Activity
 import com.tost.presentation.problem.part2.Part2Activity
+import com.tost.presentation.problem.part6.Part6Activity
 import com.tost.presentation.utils.showTostToast
 
 class ProblemGuideActivity : AppCompatActivity() {
@@ -55,6 +56,7 @@ class ProblemGuideActivity : AppCompatActivity() {
     private fun getPartActivityClass(part: Part): Class<*> = when (part) {
         Part.ONE -> Part1Activity::class.java
         Part.TWO -> Part2Activity::class.java
+        Part.SIX -> Part6Activity::class.java
         else -> Part1Activity::class.java
     }
 

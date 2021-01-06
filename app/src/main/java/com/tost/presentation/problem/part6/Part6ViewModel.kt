@@ -11,6 +11,7 @@ import com.tost.data.repository.ProblemsRepository
 import com.tost.data.repository.RecordsRepository
 import com.tost.data.repository.UserRepository
 import com.tost.presentation.problem.base.AudioViewModel
+import com.tost.presentation.utils.printLog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,7 +43,12 @@ class Part6ViewModel @ViewModelInject constructor(
         } else {
             problemsRepository.getProblemInfo(tostToken, part, problemNumber)
         }
+        printLog(_problem.value.toString())
         changeLoadingTo(false)
+    }
+
+    fun getProblemSoundUrl(): String {
+        return _problem.value?.audioUrl ?: error("audioUrl Not Exist")
     }
 
     fun changeState(state: ProblemState) {
