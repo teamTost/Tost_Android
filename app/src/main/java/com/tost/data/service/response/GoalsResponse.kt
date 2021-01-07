@@ -12,6 +12,7 @@ import java.util.*
 
 class GoalsResponse(
     val userIdx: String?,
+    val startDate: String?,
     val targetDate: String?,
     val targetLevel: Int?,
     val partOne: String?,
@@ -26,7 +27,7 @@ class GoalsResponse(
         return EntireGoal(
             level = targetLevel ?: return null,
             startDate = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
-                .parse("2020-09-01")!!,//요기 서버에서 받아야야함
+                .parse(startDate ?: return null)!!,
             endDate = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
                 .parse(targetDate ?: return null)!!,
         )

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.tost.data.entity.ProblemState" />
+
+        <import type="com.tost.presentation.problem.widget.AudioStateButton.State" />
+
+        <variable
+            name="viewModel"
+            type="com.tost.presentation.problem.part5.Part5ViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.problem.part5.Part5Activity">
+
+        <com.tost.presentation.problem.widget.ProblemToolBar
+            android:id="@+id/problemToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@{@string/question_n(viewModel.problem.questionNumber)}"
+            tools:title="Question 3" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:elevation="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/text_state"
+                style="@style/EmphasisStyle.SubTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:text="@{context.getString(viewModel.problemState.displayName)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/preparation_time" />
+
+            <TextView
+                android:id="@+id/button_skip"
+                style="@style/SkipButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textSize="10dp"
+                android:visibility="@{viewModel.problemState == ProblemState.PREPARE ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/text_state"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_state" />
+
+            <com.tost.presentation.problem.widget.TostProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/zone_record"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_state"
+                app:layout_goneMarginBottom="42dp"
+                app:progress="@{viewModel.progress}"
+                app:reverse="true"
+                tools:duration_millis="5000" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/zone_record"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="@{viewModel.problemState == ProblemState.PREPARE ? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:visibility="visible">
+
+                <com.tost.presentation.problem.widget.AudioStateButton
+                    android:id="@+id/button_audio_controller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/responsetime_btn_record"
+                    app:state="@{viewModel.audioState}" />
+
+                <TextView
+                    android:id="@+id/button_restart"
+                    style="@style/RestartButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:visibility="@{viewModel.audioState == State.STOP ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_audio_controller"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/button_audio_controller" />
+
+                <TextView
+                    android:id="@+id/button_next"
+                    style="@style/NextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:visibility="@{viewModel.problemState == ProblemState.MY_RECORD ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/button_audio_controller"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/button_audio_controller" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="20dp"
+            app:image_url="@{viewModel.problem.imageUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/problemToolBar"
+            tools:srcCompat="@drawable/image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
