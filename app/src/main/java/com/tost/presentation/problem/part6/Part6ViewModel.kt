@@ -43,7 +43,6 @@ class Part6ViewModel @ViewModelInject constructor(
         } else {
             problemsRepository.getProblemInfo(tostToken, part, problemNumber)
         }
-        printLog(_problem.value.toString())
         changeLoadingTo(false)
     }
 

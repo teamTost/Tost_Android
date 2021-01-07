@@ -73,7 +73,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     private fun startProblem() {
         problemPlayer = MediaPlayer().apply {
-//            setDataSource(part5ViewModel.getProblemSoundUrl())
+            setDataSource(part5ViewModel.getProblemSoundUrl())
             prepare()
             setOnCompletionListener { startPreparation() }
         }
@@ -81,7 +81,8 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun startPreparation() {
-//        binding?.zoneTimer?.visibility = View.VISIBLE
+        binding?.zoneTimer?.visibility = View.VISIBLE
+        binding?.textProblem?.visibility = View.VISIBLE
         rewindProgressBar(PREPARATION_TIME)
         playSound(prepareNoticePlayer) {
             playSound(beepPlayer) { part5ViewModel.startCountDown(PREPARATION_TIME) }
@@ -117,7 +118,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
             setOnCheckProblemClickListener { listenMyRecord() }
             setOnNextClickListener { startNextProblem() }
         }.show()
-//        part6ViewModel.saveSolvedProblem()
+//        part5ViewModel.saveSolvedProblem()
         //FIXME 나중에 푼 문제 저장되는것 주석 해제 할 것.
     }
 
