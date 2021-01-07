@@ -149,8 +149,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:html_text="@{viewModel.problem.passage}"
             android:visibility="gone"
+            app:html_text="@{viewModel.problem.passage}"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />

@@ -2,18 +2,15 @@ package com.tost.presentation.problem.part6
 
 import android.content.Intent
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.tost.R
 import com.tost.data.entity.ProblemState
-import com.tost.databinding.ActivityPart1Binding
 import com.tost.databinding.ActivityPart6Binding
 import com.tost.presentation.problem.ProblemGuideActivity
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
-import com.tost.presentation.problem.part1.Part1ViewModel
 import com.tost.presentation.problem.widget.AudioStateButton
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +22,7 @@ class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private val part6ViewModel: Part6ViewModel by viewModels()
 
     private var problemPlayer: MediaPlayer? = null
+    private var speakingNoticePlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +39,7 @@ class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun initView(binding: ActivityPart6Binding) {
+        speakingNoticePlayer = MediaPlayer.create(this, R.raw.begin_speaking_now)
         binding.lifecycleOwner = this
         binding.viewModel = part6ViewModel
         binding.problemToolBar.setOnCloseClickListener { finish() }
@@ -89,13 +88,13 @@ class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         playSound(prepareNoticePlayer) {
             playSound(beepPlayer) { part6ViewModel.startCountDown(PREPARATION_TIME) }
         }
-        part6ViewModel.setOnProgressFinishListener { startReadingTime() }
+        part6ViewModel.setOnProgressFinishListener { startSpeakingTime() }
     }
 
-    private fun startReadingTime() {
+    private fun startSpeakingTime() {
         part6ViewModel.changeState(ProblemState.RESPONSE)
         rewindProgressBar(RESPONSE_TIME)
-        playSound(readingNoticePlayer) {
+        playSound(speakingNoticePlayer) {
             playSound(beepPlayer) { startRecord(RESPONSE_TIME) }
         }
     }
@@ -133,7 +132,7 @@ class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     private fun cancelRecord() {
         part6ViewModel.cancelRecord()
-        readingNoticePlayer?.pause()
+        speakingNoticePlayer?.pause()
         if (beepPlayer?.isPlaying == true) {
             beepPlayer?.pause()
             beepPlayer?.seekTo(0)
@@ -154,6 +153,7 @@ class Part6Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding = null
         problemPlayer?.release()
         problemPlayer = null
+        speakingNoticePlayer?.release()
     }
 
     companion object {

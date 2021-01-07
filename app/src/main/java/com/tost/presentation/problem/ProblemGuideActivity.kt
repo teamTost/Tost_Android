@@ -39,7 +39,7 @@ class ProblemGuideActivity : AppCompatActivity() {
     private fun getPart(): Part = intent.getSerializableExtra(KEY_PART) as? Part
         ?: throw IllegalArgumentException("part must be send")
 
-    private fun getProblemNumber(): Int = intent.getIntExtra(KEY_PART, 1)
+    private fun getProblemNumber(): Int = intent.getIntExtra(KEY_PROBLEM_NUMBER, 1)
 
     private fun finishActivity() {
         guideAudioPlayer?.stop()

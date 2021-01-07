@@ -17,7 +17,7 @@ import java.util.*
 
 @BindingAdapter("image_url")
 fun bindingImageUrl(imageView: ImageView, imageUrl: String?) {
-    if (imageUrl == null) return
+    if (imageUrl.isNullOrBlank()) return
     Glide.with(imageView)
         .load(imageUrl)
         .placeholder(R.drawable.image)
@@ -38,5 +38,6 @@ fun bindingDate(textView: TextView, date: Date?) {
 
 @BindingAdapter("html_text")
 fun bindingHtmlText(textView: TextView, content: String?) {
-    textView.text = HtmlCompat.fromHtml(content.orEmpty(), HtmlCompat.FROM_HTML_MODE_COMPACT)
+    if (content.isNullOrBlank()) return
+    textView.text = HtmlCompat.fromHtml(content, HtmlCompat.FROM_HTML_MODE_COMPACT)
 }

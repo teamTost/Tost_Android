@@ -1,8 +1,10 @@
 package com.tost.presentation.problem.part1
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.tost.R
 import com.tost.data.entity.ProblemState
 import com.tost.databinding.ActivityPart1Binding
 import com.tost.presentation.problem.ProblemGuideActivity.Companion.KEY_PROBLEM_NUMBER
@@ -19,6 +21,8 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private var binding: ActivityPart1Binding? = null
     private val part1ViewModel: Part1ViewModel by viewModels()
 
+    private var readingNoticePlayer: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +38,7 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun initView(binding: ActivityPart1Binding) {
+        readingNoticePlayer = MediaPlayer.create(this, R.raw.begin_reading_aloud_now)
         binding.lifecycleOwner = this
         binding.viewModel = part1ViewModel
         binding.problemToolBar.setOnCloseClickListener { finish() }
@@ -134,6 +139,7 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+        readingNoticePlayer?.release()
     }
 
     companion object {

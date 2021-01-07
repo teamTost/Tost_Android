@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import com.tost.R
 import com.tost.data.entity.ProblemState
 import com.tost.databinding.ActivityPart5Binding
 import com.tost.presentation.problem.ProblemGuideActivity
@@ -22,6 +23,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private val part5ViewModel: Part5ViewModel by viewModels()
 
     private var problemPlayer: MediaPlayer? = null
+    private var speakingNoticePlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun initView(binding: ActivityPart5Binding) {
+        speakingNoticePlayer = MediaPlayer.create(this, R.raw.begin_speaking_now)
         binding.lifecycleOwner = this
         binding.viewModel = part5ViewModel
         binding.problemToolBar.setOnCloseClickListener { finish() }
@@ -87,13 +90,13 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         playSound(prepareNoticePlayer) {
             playSound(beepPlayer) { part5ViewModel.startCountDown(PREPARATION_TIME) }
         }
-        part5ViewModel.setOnProgressFinishListener { startReadingTime() }
+        part5ViewModel.setOnProgressFinishListener { startSpeakingTime() }
     }
 
-    private fun startReadingTime() {
+    private fun startSpeakingTime() {
         part5ViewModel.changeState(ProblemState.RESPONSE)
         rewindProgressBar(RESPONSE_TIME)
-        playSound(readingNoticePlayer) {
+        playSound(speakingNoticePlayer) {
             playSound(beepPlayer) { startRecord(RESPONSE_TIME) }
         }
     }
@@ -131,7 +134,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     private fun cancelRecord() {
         part5ViewModel.cancelRecord()
-        readingNoticePlayer?.pause()
+        speakingNoticePlayer?.pause()
         if (beepPlayer?.isPlaying == true) {
             beepPlayer?.pause()
             beepPlayer?.seekTo(0)
@@ -152,6 +155,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding = null
         problemPlayer?.release()
         problemPlayer = null
+        speakingNoticePlayer?.release()
     }
 
     companion object {

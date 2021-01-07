@@ -16,7 +16,6 @@ import com.tost.presentation.utils.showToast
 abstract class AudioBaseActivity : AppCompatActivity() {
 
     protected var prepareNoticePlayer: MediaPlayer? = null
-    protected var readingNoticePlayer: MediaPlayer? = null
     protected var beepPlayer: MediaPlayer? = null
 
     abstract fun onInitialPermissionGranted()
@@ -28,14 +27,12 @@ abstract class AudioBaseActivity : AppCompatActivity() {
 
     private fun initAudio() {
         prepareNoticePlayer = MediaPlayer.create(this, R.raw.begin_preparing_now)
-        readingNoticePlayer = MediaPlayer.create(this, R.raw.begin_reading_aloud_now)
         beepPlayer = MediaPlayer.create(this, R.raw.beep)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         prepareNoticePlayer?.release()
-        readingNoticePlayer?.release()
         beepPlayer?.release()
     }
 
