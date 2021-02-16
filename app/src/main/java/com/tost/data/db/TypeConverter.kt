@@ -2,7 +2,7 @@ package com.tost.data.db
 
 import androidx.room.TypeConverter
 import com.tost.data.entity.Part
-import com.tost.data.entity.Record
+import com.tost.data.entity.Problem
 import java.util.*
 
 /**
@@ -24,8 +24,8 @@ class TypeConverter {
     fun fromPart(part: Part?): String? = part?.name
 
     @TypeConverter
-    fun toSubNumber(rawString: String): Record.SubNumber = Record.SubNumber.valueOf(rawString)
+    fun toSubNumber(rawString: String): Problem.SubNumber = Problem.SubNumber.valueOf(rawString)
 
     @TypeConverter
-    fun fromSubNumber(subNumber: Record.SubNumber?): String? = subNumber?.name
+    fun fromSubNumber(subNumber: Problem.SubNumber?): String? = subNumber?.name
 }

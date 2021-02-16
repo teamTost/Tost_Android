@@ -16,9 +16,5 @@ data class Record(
     val filePath: String,
     val part: Part,
     val saveDate: Date = Date(System.currentTimeMillis()),
-    val subNumber: SubNumber = SubNumber.ONE
-) {
-    enum class SubNumber {
-        ONE, TWO, THREE;
-    }
-}
+    val subNumber: Problem.SubNumber = Problem.SubNumber.ONE
+)

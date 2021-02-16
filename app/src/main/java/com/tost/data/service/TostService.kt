@@ -70,6 +70,6 @@ interface TostService {
     )
 
     companion object {
-        const val BASE_URL = "http://13.124.234.226:8080"
+        const val BASE_URL = "https://teamtost.com"
     }
 }

@@ -11,6 +11,7 @@ import com.tost.databinding.ActivityPart3Binding
 import com.tost.presentation.problem.ProblemGuideActivity
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
+import com.tost.presentation.problem.dialog.StopTalkingPauseDialog
 import com.tost.presentation.problem.part6.Part6Activity
 import com.tost.presentation.problem.widget.AudioStateButton
 import com.tost.presentation.utils.showToast
@@ -78,8 +79,19 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         problemPlayer = MediaPlayer().apply {
             setDataSource(part3ViewModel.getProblemSoundUrl())
             prepare()
-            setOnCompletionListener { startPreparation() }
+            setOnCompletionListener { it.reset(); startSubProblem() }
         }
+        problemPlayer?.start()
+    }
+
+    private fun startSubProblem() {
+        if (part3ViewModel.isFinishSubProblems()) return
+        problemPlayer?.let {
+            it.setDataSource(part3ViewModel.getSubProblemSoundUrl())
+            it.prepare()
+            it.setOnCompletionListener { end -> end.reset(); startPreparation() }
+        }
+        requireBinding().zoneSubProblem.visibility = View.VISIBLE
         problemPlayer?.start()
     }
 
@@ -109,19 +121,26 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         part3ViewModel.prepareRecorder(getExternalDirectoryPath())
         part3ViewModel.startRecord(duration)
         part3ViewModel.setOnProgressFinishListener {
-            part3ViewModel.finishRecord()
+            part3ViewModel.saveRecord()
             playSound(beepPlayer)
-            deployStopTalkingDialog()
+            if (part3ViewModel.isFinishSubProblems()) deployStopTalkingButtonsDialog()
+            else deployStopTalkingPauseDialog()
         }
     }
 
-    private fun deployStopTalkingDialog() {
+    private fun deployStopTalkingButtonsDialog() {
         StopTalkingButtonsDialog(this).apply {
             setOnCheckProblemClickListener { listenMyRecord() }
             setOnNextClickListener { startNextProblem() }
         }.show()
-//        part6ViewModel.saveSolvedProblem()
+//        part3ViewModel.saveSolvedProblem()
         //FIXME 나중에 푼 문제 저장되는것 주석 해제 할 것.
+    }
+
+    private fun deployStopTalkingPauseDialog() {
+        StopTalkingPauseDialog(this).apply {
+            setOnFinishListener { startSubProblem() }
+        }.show()
     }
 
     private fun listenMyRecord() {

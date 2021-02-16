@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tost.data.entity.Part
+import com.tost.data.entity.Problem
+import com.tost.data.entity.Record
 import com.tost.data.repository.RecordsRepository
 import com.tost.presentation.problem.TostRecorder
 import com.tost.presentation.problem.widget.AudioStateButton
@@ -46,8 +48,8 @@ abstract class AudioViewModel constructor(
         this.onProgressFinishListener = l
     }
 
-    fun prepareRecorder(baseFilePath: String) {
-        val fileName = "$baseFilePath${part.name}"
+    fun prepareRecorder(baseFilePath: String, subProblemNumber: Problem.SubNumber? = null) {
+        val fileName = "$baseFilePath${part.name}_${subProblemNumber?.name ?: ""}"
         tostRecorder.prepare(fileName)
     }
 
@@ -74,9 +76,37 @@ abstract class AudioViewModel constructor(
         onProgressFinishListener?.onFinish()
     }
 
+    fun saveRecord(subProblemNumber: Problem.SubNumber = Problem.SubNumber.ONE) {
+        tostRecorder.stop()
+        tostRecorder.reset()
+        viewModelScope.launch {
+            val record = Record(
+                filePath = tostRecorder.fileName,
+                part = part,
+                subNumber = subProblemNumber,
+            )
+            recordsRepository.saveRecord(record)
+        }
+    }
+
+    fun releaseRecord(){
+        tostRecorder.stop()
+        tostRecorder.release()
+    }
+
     fun finishRecord() {
         tostRecorder.stop()
         tostRecorder.reset()
+        viewModelScope.launch {
+            val record = Record(
+                filePath = tostRecorder.fileName,
+                part = part,
+                subNumber = Problem.SubNumber.FINISH
+            )
+            recordsRepository.saveRecord(record)
+        }
+        // 저장하고 보여주는 로직으로 고쳐야함
+
         recordPlayer.setDataSource(tostRecorder.fileName)
         recordPlayer.prepare()
     }

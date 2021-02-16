@@ -14,6 +14,10 @@ import javax.inject.Inject
 class RecordsRepository @Inject constructor(
     private val recordsDao: RecordsDao,
 ) {
+    suspend fun saveRecord(record: Record) {
+        recordsDao.insertRecord(record)
+    }
+
     suspend fun getRecordsOf(part: Part): List<Record> {
         return recordsDao.getRecordsOf(part)
     }

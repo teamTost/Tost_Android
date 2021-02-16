@@ -164,10 +164,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="28dp"
                 android:fontFamily="@font/gmarketsansbold"
-                android:text="Q 1-1"
+                android:text="@{@string/sub_problem_number(viewModel.problem.questionNumber, viewModel.subProblemNumber.index + 1)}"
                 android:textColor="@color/blue_grey_22"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Q 1-1" />
 
             <TextView
                 android:id="@+id/text_sub_problem_paragragh"

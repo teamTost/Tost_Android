@@ -35,6 +35,9 @@ class Part3ViewModel @ViewModelInject constructor(
     private val _problemState = MutableLiveData(ProblemState.PREPARE)
     val problemState: LiveData<ProblemState> = _problemState
 
+    private val _subProblemNumber = MutableLiveData(Problem.SubNumber.ONE)
+    var subProblemNumber: LiveData<Problem.SubNumber> = _subProblemNumber
+
     fun loadProblem(problemNumber: Int) = viewModelScope.launch {
         changeLoadingTo(true)
         val tostToken = userRepository.getTostToken()
@@ -47,8 +50,15 @@ class Part3ViewModel @ViewModelInject constructor(
         changeLoadingTo(false)
     }
 
+    fun isFinishSubProblems(): Boolean = currentSubProblemNumber() == Problem.SubNumber.FINISH
+
     fun getProblemSoundUrl(): String {
         return _problem.value?.audioUrl ?: error("audioUrl Not Exist")
+    }
+
+    fun getSubProblemSoundUrl(): String {
+        return _problem.value?.getSubProblem(currentSubProblemNumber())?.audioUrl
+            ?: error("audioUrl Not Exist")
     }
 
     fun changeState(state: ProblemState) {
@@ -60,4 +70,17 @@ class Part3ViewModel @ViewModelInject constructor(
         val currentProblemNumber = _problem.value?.questionNumber ?: error("problem is null")
         problemsRepository.saveSolvedProblem(tostToken, part, currentProblemNumber)
     }
+
+    fun prepareRecorder(baseFilePath: String) {
+        val currentSubProblemNumber = currentSubProblemNumber()
+        prepareRecorder(baseFilePath, currentSubProblemNumber)
+        _subProblemNumber.postValue(currentSubProblemNumber.next())
+    }
+
+    fun saveRecord(){
+        saveRecord(currentSubProblemNumber())
+    }
+
+    private fun currentSubProblemNumber(): Problem.SubNumber = _subProblemNumber.value
+        ?: error("subProblemNumber cannot be null")
 }

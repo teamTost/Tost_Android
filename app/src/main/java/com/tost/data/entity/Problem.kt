@@ -12,4 +12,22 @@ data class Problem(
     val imageUrl: String,
     val audioUrl: String,
     val subProblems: List<Problem>,
-)
+) {
+    fun getSubProblem(subNumber: SubNumber): Problem {
+        require(subNumber != SubNumber.FINISH) { "Do not exist Problem of $subNumber" }
+        return subProblems[subNumber.index]
+    }
+
+    enum class SubNumber(val index: Int) {
+        ONE(0),
+        TWO(1),
+        THREE(2),
+        FINISH(-1);
+
+        fun next(): SubNumber = when (this) {
+            ONE -> TWO
+            TWO -> THREE
+            else -> FINISH
+        }
+    }
+}
