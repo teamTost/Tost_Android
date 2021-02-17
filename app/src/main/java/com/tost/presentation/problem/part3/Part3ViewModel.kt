@@ -74,11 +74,12 @@ class Part3ViewModel @ViewModelInject constructor(
     fun prepareRecorder(baseFilePath: String) {
         val currentSubProblemNumber = currentSubProblemNumber()
         prepareRecorder(baseFilePath, currentSubProblemNumber)
-        _subProblemNumber.postValue(currentSubProblemNumber.next())
     }
 
     fun saveRecord(){
-        saveRecord(currentSubProblemNumber())
+        val currentSubProblemNumber = currentSubProblemNumber()
+        saveRecord(currentSubProblemNumber)
+        _subProblemNumber.value = currentSubProblemNumber.next()
     }
 
     private fun currentSubProblemNumber(): Problem.SubNumber = _subProblemNumber.value

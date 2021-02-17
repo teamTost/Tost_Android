@@ -10,7 +10,6 @@ import com.tost.databinding.ActivityPart1Binding
 import com.tost.presentation.problem.ProblemGuideActivity.Companion.KEY_PROBLEM_NUMBER
 import com.tost.presentation.problem.base.AudioBaseActivity
 import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
-import com.tost.presentation.problem.part2.Part2Activity
 import com.tost.presentation.problem.widget.AudioStateButton
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -96,7 +95,7 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         part1ViewModel.prepareRecorder(getExternalDirectoryPath())
         part1ViewModel.startRecord(duration)
         part1ViewModel.setOnProgressFinishListener {
-            part1ViewModel.finishRecord()
+            part1ViewModel.saveRecord()
             playSound(beepPlayer)
             deployStopTalkingDialog()
         }
@@ -112,6 +111,7 @@ class Part1Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun listenMyRecord() {
+        part1ViewModel.preparePlayingRecord()
         part1ViewModel.changeState(ProblemState.MY_RECORD)
         requireBinding().progressBar.initToProgressBar(part1ViewModel.getRecordDuration())
         requireBinding().progressBar.setOnProgressChangeListener { part1ViewModel.playRecord(it) }

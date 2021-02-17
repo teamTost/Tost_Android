@@ -14,6 +14,7 @@ import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.problem.dialog.StopTalkingPauseDialog
 import com.tost.presentation.problem.part6.Part6Activity
 import com.tost.presentation.problem.widget.AudioStateButton
+import com.tost.presentation.utils.printLog
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
@@ -97,6 +98,7 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
 
     private fun startPreparation() {
         binding?.zoneTimer?.visibility = View.VISIBLE
+        part3ViewModel.changeState(ProblemState.PREPARE)
         rewindProgressBar(PREPARATION_TIME)
         playSound(prepareNoticePlayer) {
             playSound(beepPlayer) { part3ViewModel.startCountDown(PREPARATION_TIME) }
@@ -144,6 +146,7 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun listenMyRecord() {
+        part3ViewModel.preparePlayingRecord()
         part3ViewModel.changeState(ProblemState.MY_RECORD)
         requireBinding().progressBar.initToProgressBar(part3ViewModel.getRecordDuration())
         requireBinding().progressBar.setOnProgressChangeListener { part3ViewModel.playRecord(it) }
@@ -153,6 +156,7 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     private fun cancelRecord() {
         part3ViewModel.cancelRecord()
         speakingNoticePlayer?.pause()
+        speakingNoticePlayer?.seekTo(0)
         if (beepPlayer?.isPlaying == true) {
             beepPlayer?.pause()
             beepPlayer?.seekTo(0)

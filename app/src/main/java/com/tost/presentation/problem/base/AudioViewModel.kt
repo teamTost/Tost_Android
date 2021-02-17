@@ -3,7 +3,6 @@ package com.tost.presentation.problem.base
 import android.media.MediaPlayer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tost.data.entity.Part
 import com.tost.data.entity.Problem
@@ -12,9 +11,9 @@ import com.tost.data.repository.RecordsRepository
 import com.tost.presentation.problem.TostRecorder
 import com.tost.presentation.problem.widget.AudioStateButton
 import com.tost.presentation.utils.BaseViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.tost.presentation.utils.printLog
+import kotlinx.coroutines.*
+import java.util.*
 
 /**
  * Created By Malibin
@@ -35,7 +34,8 @@ abstract class AudioViewModel constructor(
     val audioState: LiveData<AudioStateButton.State>
         get() = _audioState
 
-    var isTest = false
+    private val cachedRecords: EnumMap<Problem.SubNumber, Record> =
+        EnumMap(Problem.SubNumber::class.java)
 
     private val recordPlayer = MediaPlayer()
     private val tostRecorder = TostRecorder()
@@ -48,8 +48,11 @@ abstract class AudioViewModel constructor(
         this.onProgressFinishListener = l
     }
 
-    fun prepareRecorder(baseFilePath: String, subProblemNumber: Problem.SubNumber? = null) {
-        val fileName = "$baseFilePath${part.name}_${subProblemNumber?.name ?: ""}"
+    fun prepareRecorder(
+        baseFilePath: String,
+        subProblemNumber: Problem.SubNumber = Problem.SubNumber.ONE
+    ) {
+        val fileName = "$baseFilePath${part.name}_${subProblemNumber.name}"
         tostRecorder.prepare(fileName)
     }
 
@@ -86,29 +89,27 @@ abstract class AudioViewModel constructor(
                 subNumber = subProblemNumber,
             )
             recordsRepository.saveRecord(record)
+            cachedRecords[subProblemNumber] = record
         }
     }
 
-    fun releaseRecord(){
-        tostRecorder.stop()
-        tostRecorder.release()
-    }
+    fun preparePlayingRecord(
+        subProblemNumber: Problem.SubNumber = Problem.SubNumber.ONE
+    ) = runBlocking {
+        printLog(cachedRecords.toString())
+        if (cachedRecords[subProblemNumber] == null) loadAllRecords()
+        val cachedRecord = cachedRecords[subProblemNumber]
+            ?: error("cannot find record of $subProblemNumber")
 
-    fun finishRecord() {
-        tostRecorder.stop()
-        tostRecorder.reset()
-        viewModelScope.launch {
-            val record = Record(
-                filePath = tostRecorder.fileName,
-                part = part,
-                subNumber = Problem.SubNumber.FINISH
-            )
-            recordsRepository.saveRecord(record)
-        }
-        // 저장하고 보여주는 로직으로 고쳐야함
-
-        recordPlayer.setDataSource(tostRecorder.fileName)
+        recordPlayer.reset()
+        recordPlayer.setDataSource(cachedRecord.filePath)
         recordPlayer.prepare()
+    }
+
+    private suspend fun loadAllRecords() {
+        val records = recordsRepository.getRecordsOf(part).also { printLog(it.toString()) }
+        records.forEach { cachedRecords[it.subNumber] = it }
+        printLog(cachedRecords.toString())
     }
 
     fun cancelRecord() {
@@ -155,6 +156,9 @@ abstract class AudioViewModel constructor(
 
     override fun onCleared() {
         super.onCleared()
+        CoroutineScope(Dispatchers.IO).launch {
+            recordsRepository.deleteAllRecords()
+        }
         recordPlayer.release()
         tostRecorder.release()
     }

@@ -110,7 +110,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         part5ViewModel.prepareRecorder(getExternalDirectoryPath())
         part5ViewModel.startRecord(duration)
         part5ViewModel.setOnProgressFinishListener {
-            part5ViewModel.finishRecord()
+            part5ViewModel.saveRecord()
             playSound(beepPlayer)
             deployStopTalkingDialog()
         }
@@ -126,6 +126,7 @@ class Part5Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
     }
 
     private fun listenMyRecord() {
+        part5ViewModel.preparePlayingRecord()
         part5ViewModel.changeState(ProblemState.MY_RECORD)
         requireBinding().progressBar.initToProgressBar(part5ViewModel.getRecordDuration())
         requireBinding().progressBar.setOnProgressChangeListener { part5ViewModel.playRecord(it) }
