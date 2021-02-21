@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cloudy_orange"
+    tools:context=".NicknameInitActivity">
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_tost" />
+
+    <TextView
+        android:id="@+id/textView64"
+        style="@style/EmphasisStyle.Title1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/init_nickname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        style="@style/ParagraphStyle.Text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_rectangle_10dp"
+        android:elevation="30dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/input_five_letters"
+        android:inputType="textPersonName"
+        android:outlineSpotShadowColor="@android:color/transparent"
+        android:paddingStart="32dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView64" />
+
+    <TextView
+        android:id="@+id/textView65"
+        style="@style/ParagraphStyle.Text5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/when_sign_up"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_privacy_policy"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+
+    <TextView
+        android:id="@+id/button_privacy_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/applesdgothicneobold"
+        android:includeFontPadding="true"
+        android:text="@string/privacy_policy"
+        android:textColor="@color/blue_grey_35"
+        app:layout_constraintBottom_toBottomOf="@+id/textView65"
+        app:layout_constraintLeft_toRightOf="@id/textView65"
+        app:layout_constraintRight_toLeftOf="@id/textView67"
+        app:layout_constraintTop_toTopOf="@+id/textView65"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView67"
+        style="@style/ParagraphStyle.Text5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="@string/and"
+        app:layout_constraintBottom_toBottomOf="@+id/textView65"
+        app:layout_constraintLeft_toRightOf="@id/button_privacy_policy"
+        app:layout_constraintRight_toLeftOf="@id/button_service_condition"
+        app:layout_constraintTop_toTopOf="@+id/textView65" />
+
+    <TextView
+        android:id="@+id/button_service_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/applesdgothicneobold"
+        android:includeFontPadding="false"
+        android:text="@string/terms_and_conditions_of_service"
+        android:textColor="@color/blue_grey_35"
+        app:layout_constraintBottom_toBottomOf="@+id/textView67"
+        app:layout_constraintLeft_toRightOf="@id/textView67"
+        app:layout_constraintRight_toLeftOf="@id/textView69"
+        app:layout_constraintTop_toTopOf="@+id/textView67" />
+
+    <TextView
+        android:id="@+id/textView69"
+        style="@style/ParagraphStyle.Text5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/eh"
+        app:layout_constraintBottom_toBottomOf="@+id/textView67"
+        app:layout_constraintLeft_toRightOf="@id/button_service_condition"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView67" />
+
+    <TextView
+        android:id="@+id/textView70"
+        style="@style/ParagraphStyle.Text5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="@string/agree"
+        app:layout_constraintEnd_toEndOf="@+id/textView69"
+        app:layout_constraintStart_toStartOf="@+id/textView65"
+        app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+    <TextView
+        android:id="@+id/textView71"
+        style="@style/BlackButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="52dp"
+        android:text="@string/go_setup_goal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView70" />
+</androidx.constraintlayout.widget.ConstraintLayout>

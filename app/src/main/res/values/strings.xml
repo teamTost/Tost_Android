@@ -122,4 +122,13 @@
     <string name="get_login">로그인하기</string>
     <string name="login_required">로그인 후 이용 가능합니다.</string>
     <string name="sub_problem_number">Q %d-%d</string>
+    <string name="init_nickname">토스트의 별명을 만들어주세요!</string>
+    <string name="input_five_letters">다섯 글자 이하로 입력해주세요</string>
+    <string name="when_sign_up">가입 시 </string>
+    <string name="privacy_policy"><u>개인정보처리방침</u></string>
+    <string name="and">및 </string>
+    <string name="terms_and_conditions_of_service"><u>서비스이용약관</u></string>
+    <string name="eh"> 에</string>
+    <string name="agree">동의하게 됩니다.</string>
+    <string name="go_setup_goal">목표 설정하러 가기</string>
 </resources>
