@@ -62,4 +62,25 @@
         <item name="colorControlNormal">@color/main_orange</item>
         <item name="android:textSize">17dp</item>
     </style>
+
+    <style name="spinnerStyle" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:background">@drawable/border_round_rectangle_grey_99dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:fontFamily">@font/gmarketsansmedium</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">12dp</item>
+        <item name="drawableEndCompat">@drawable/icon_dropbox_down</item>
+    </style>
+
+    <style name="spinnerItemStyle" parent="TextAppearance.AppCompat.Widget.TextView.SpinnerItem">
+        <item name="android:fontFamily">@font/gmarketsansmedium</item>
+        <item name="android:paddingStart">18dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingEnd">18dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">12dp</item>
+    </style>
 </resources>

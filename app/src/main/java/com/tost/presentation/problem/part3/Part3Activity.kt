@@ -4,7 +4,10 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.activity.viewModels
+import androidx.appcompat.widget.AppCompatSpinner
 import com.tost.R
 import com.tost.data.entity.ProblemState
 import com.tost.databinding.ActivityPart3Binding
@@ -39,6 +42,14 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         else askAudioPermission()
 
         part3ViewModel.problem.observe(this) { startProblem() }
+
+        val arrayAdapter = ArrayAdapter<String>(
+            this,
+            R.layout.item_sub_problem_number_with_icon,
+            listOf("Q 1-1", "Q 1-2", "Q 1-3")
+        )
+        arrayAdapter.setDropDownViewResource(R.layout.item_sub_problem_number)
+        binding.spinner.adapter = arrayAdapter
     }
 
     private fun initView(binding: ActivityPart3Binding) {
