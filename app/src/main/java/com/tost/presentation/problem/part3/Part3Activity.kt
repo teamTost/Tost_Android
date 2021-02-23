@@ -4,10 +4,7 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.activity.viewModels
-import androidx.appcompat.widget.AppCompatSpinner
 import com.tost.R
 import com.tost.data.entity.ProblemState
 import com.tost.databinding.ActivityPart3Binding
@@ -17,7 +14,6 @@ import com.tost.presentation.problem.dialog.StopTalkingButtonsDialog
 import com.tost.presentation.problem.dialog.StopTalkingPauseDialog
 import com.tost.presentation.problem.part6.Part6Activity
 import com.tost.presentation.problem.widget.AudioStateButton
-import com.tost.presentation.utils.printLog
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
@@ -42,14 +38,6 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         else askAudioPermission()
 
         part3ViewModel.problem.observe(this) { startProblem() }
-
-        val arrayAdapter = ArrayAdapter<String>(
-            this,
-            R.layout.item_sub_problem_number_with_icon,
-            listOf("Q 1-1", "Q 1-2", "Q 1-3")
-        )
-        arrayAdapter.setDropDownViewResource(R.layout.item_sub_problem_number)
-        binding.spinner.adapter = arrayAdapter
     }
 
     private fun initView(binding: ActivityPart3Binding) {
@@ -62,6 +50,7 @@ class Part3Activity : AudioBaseActivity(), AudioStateButton.OnClickListener {
         binding.buttonSkip.setOnClickListener { skipPreparation() }
         binding.buttonNext.setOnClickListener { startNextProblem() }
         part3ViewModel.toastMessage.observe(this) { showToast(it) }
+        binding.spinner.setOnItemSelectedListener { showToast("$it") }
     }
 
     override fun onInitialPermissionGranted() {

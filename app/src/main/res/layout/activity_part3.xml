@@ -184,12 +184,13 @@
                 tools:text="When was the last time you saw an advertisement on a social networking website and what was the advertisement for?" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Spinner
+        <com.tost.presentation.problem.widget.SubProblemSpinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
             android:gravity="center"
+            android:spinnerMode="dropdown"
             app:layout_constraintBottom_toTopOf="@+id/zone_timer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
