@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="WhiteTextButtonLeftAlign">
+        <item name="android:textColor">@color/blue_grey_22</item>
+        <item name="android:background">@drawable/round_rectangle_10dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:fontFamily">@font/applesdgothicneoregular</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
     <style name="TextButton">
         <item name="android:background">@drawable/border_round_rectangle_grey_99dp</item>
         <item name="android:paddingStart">12dp</item>

@@ -125,10 +125,15 @@
     <string name="init_nickname">토스트의 별명을 만들어주세요!</string>
     <string name="input_five_letters">다섯 글자 이하로 입력해주세요</string>
     <string name="when_sign_up">가입 시 </string>
-    <string name="privacy_policy"><u>개인정보처리방침</u></string>
+    <string name="privacy_policy_underline"><u>개인정보처리방침</u></string>
+    <string name="privacy_policy">개인정보처리방침</string>
     <string name="and">및 </string>
-    <string name="terms_and_conditions_of_service"><u>서비스이용약관</u></string>
+    <string name="terms_and_conditions_of_service_underline"><u>서비스이용약관</u></string>
+    <string name="terms_and_conditions_of_service">서비스이용약관</string>
     <string name="eh"> 에</string>
     <string name="agree">동의하게 됩니다.</string>
     <string name="go_setup_goal">목표 설정하러 가기</string>
+    <string name="modify_nickname">별명 수정</string>
+    <string name="withdrawal_member">회원탈퇴</string>
+    <string name="logout">로그아웃</string>
 </resources>

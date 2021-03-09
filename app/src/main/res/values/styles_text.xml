@@ -37,6 +37,11 @@
         <item name="android:textSize">14dp</item>
     </style>
 
+    <style name="EmphasisStyle.SubTitle3">
+        <item name="fontFamily">@font/gmarketsansbold</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
     <style name="EmphasisStyle.Caption">
         <item name="fontFamily">@font/gmarketsansmedium</item>
         <item name="android:textSize">10dp</item>
