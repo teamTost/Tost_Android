@@ -3,10 +3,7 @@ package com.tost.presentation.web
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebChromeClient
-import android.webkit.WebSettings
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import androidx.appcompat.app.AppCompatActivity
 import com.tost.databinding.ActivityWebBinding
 import java.lang.IllegalArgumentException
@@ -45,6 +42,7 @@ class WebActivity : AppCompatActivity() {
     private fun initWebViewSettings(webView: WebView) {
         webView.settings.apply {
             javaScriptEnabled = true
+            allowFileAccess = true
             loadWithOverviewMode = true
             useWideViewPort = true
             setSupportZoom(false)
