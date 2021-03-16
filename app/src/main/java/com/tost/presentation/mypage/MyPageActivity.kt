@@ -1,10 +1,14 @@
 package com.tost.presentation.mypage
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.tost.databinding.ActivityMyPageBinding
+import com.tost.presentation.mypage.dialog.LogoutAlertDialog
+import com.tost.presentation.mypage.dialog.MemberWithdrawalAlertDialog
+import com.tost.presentation.utils.showToast
+import com.tost.presentation.utils.showTostToast
 import com.tost.presentation.web.WebActivity
 
 class MyPageActivity : AppCompatActivity() {
@@ -27,6 +31,18 @@ class MyPageActivity : AppCompatActivity() {
         val intent = Intent(this, WebActivity::class.java)
         intent.putExtra(WebActivity.WEB_URL_KEY, url)
         startActivity(intent)
+    }
+
+    fun showLogoutAlertDialog(view: View) {
+        LogoutAlertDialog(this).apply {
+            setOnButtonClickListener { showToast("로그아웃햇넹") }
+        }.show()
+    }
+
+    fun showMemberWithdrawalAlertDialog(view: View) {
+        MemberWithdrawalAlertDialog(this).apply {
+            setOnButtonClickListener { showToast("회원탈퇴햇넹 ㅠ") }
+        }.show()
     }
 
     companion object {
