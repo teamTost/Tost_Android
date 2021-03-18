@@ -3,7 +3,6 @@ package com.tost.presentation.goal
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tost.data.entity.EntireGoal
 import com.tost.data.repository.GoalRepository
@@ -39,6 +38,10 @@ class EntireGoalViewModel @ViewModelInject constructor(
 
     private fun initViewModel() = viewModelScope.launch {
         _userName.value = googleAuthRepository.getName()
+        val token = userRepository.getTostToken() ?: throw IllegalStateException("로그인 이상")
+        val entireGoal = goalRepository.getEntireGoal(token)
+        _selectedDate.value = entireGoal?.endDate
+        _selectedLevel.value = entireGoal?.level
     }
 
     fun refreshSelectedDate(date: Date) {

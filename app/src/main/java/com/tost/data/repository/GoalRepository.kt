@@ -30,9 +30,10 @@ class GoalRepository @Inject constructor(
 
     suspend fun getWeeklyGoal(token: String): WeeklyGoal? {
         if (isLocalWeeklyGoalEmpty()) {
-            val remoteGoals = tostService.getGoals(token)
-            saveGoalsLocal(remoteGoals)
-            return remoteGoals.getWeeklyGoal()
+            return tostService.getGoals(token)
+                .takeIf { it.isSuccessful }?.body()
+                ?.also { saveGoalsLocal(it) }
+                ?.getWeeklyGoal()
         }
         return WeeklyGoal(
             part1 = dataStore[KEY_GOAL_PART1].first() ?: return null,
@@ -55,9 +56,10 @@ class GoalRepository @Inject constructor(
 
     suspend fun getEntireGoal(token: String): EntireGoal? {
         if (isLocalEntireGoalEmpty()) {
-            val remoteGoals = tostService.getGoals(token)
-            saveGoalsLocal(remoteGoals)
-            return remoteGoals.getEntireGoal()
+            return tostService.getGoals(token)
+                .takeIf { it.isSuccessful }?.body()
+                ?.also { saveGoalsLocal(it) }
+                ?.getEntireGoal()
         }
         return EntireGoal(
             level = dataStore[KEY_GOAL_LEVEL].first() ?: return null,

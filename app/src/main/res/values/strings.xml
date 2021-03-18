@@ -140,4 +140,6 @@
     <string name="logout_at_moment">잠시 로그아웃 할게요!</string>
     <string name="member_withdrawal_wait">내가 녹음한 파일들과 공부한 내용은\n모두 복구할 수 없어요. 괜찮으신가요?</string>
     <string name="yes_i_am_fine">네, 괜찮아요.</string>
+    <string name="modify_my_entire_goal">나의 목표 수정하기</string>
+    <string name="nickname">닉네임</string>
 </resources>

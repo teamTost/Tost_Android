@@ -2,6 +2,7 @@ package com.tost.data.service
 
 import com.tost.data.service.request.*
 import com.tost.data.service.response.*
+import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -31,7 +32,7 @@ interface TostService {
     @GET("/target")
     suspend fun getGoals(
         @Header("token") token: String
-    ): GoalsResponse
+    ): Response<GoalsResponse>
 
     @GET("/part/{part}")
     suspend fun getMyNote(

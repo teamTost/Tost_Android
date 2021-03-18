@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.tost.R
 import com.tost.databinding.ActivityMyPageBinding
+import com.tost.presentation.goal.EntireGoalActivity
 import com.tost.presentation.mypage.dialog.LogoutAlertDialog
 import com.tost.presentation.mypage.dialog.MemberWithdrawalAlertDialog
 import com.tost.presentation.utils.showToast
@@ -17,6 +20,12 @@ class MyPageActivity : AppCompatActivity() {
 
         val binding = ActivityMyPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
+    }
+
+    fun launchModifyEntireGoalActivity(view: View) {
+        val intent = Intent(this, EntireGoalActivity::class.java)
+        startActivity(intent)
     }
 
     fun launchTermsAndConditionsOfServiceActivity(view: View) {
