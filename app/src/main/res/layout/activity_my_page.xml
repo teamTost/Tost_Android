@@ -1,197 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blue_grey_f8"
-    android:clipChildren="false"
-    tools:context=".presentation.mypage.MyPageActivity">
+<layout>
 
-    <View
-        android:id="@+id/background_top"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@color/cloudy_orange"
-        app:layout_constraintBottom_toTopOf="@+id/space"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <Space
-        android:id="@+id/space"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
+        <variable
+            name="viewModel"
+            type="com.tost.presentation.mypage.MyPageViewModel" />
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/round_rectangle_10dp"
-        android:elevation="20dp"
-        android:outlineSpotShadowColor="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/space"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/space"
-        app:layout_constraintVertical_bias="0.80">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_grey_f8"
+        android:clipChildren="false"
+        tools:context=".presentation.mypage.MyPageActivity">
 
-        <ImageView
-            android:id="@+id/imageView12"
+        <View
+            android:id="@+id/background_top"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="parent"
+            android:layout_height="0dp"
+            android:background="@color/cloudy_orange"
+            app:layout_constraintBottom_toTopOf="@+id/space"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/img_tost" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/text_nickname"
-            style="@style/EmphasisStyle.Title1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/nickname"
-            app:layout_constraintEnd_toEndOf="@+id/imageView12"
-            app:layout_constraintStart_toStartOf="@+id/imageView12"
-            app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-        <TextView
-            android:id="@+id/text_date"
-            style="@style/EmphasisStyle.SubTitle3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
-            android:text="@string/yyyy_mm_dd"
-            app:layout_constraintLeft_toLeftOf="@id/text_nickname"
-            app:layout_constraintRight_toLeftOf="@id/text_until"
-            app:layout_constraintTop_toBottomOf="@+id/text_nickname" />
-
-        <TextView
-            android:id="@+id/text_until"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/to"
-            app:layout_constraintBottom_toBottomOf="@+id/text_date"
-            app:layout_constraintLeft_toRightOf="@id/text_date"
-            app:layout_constraintRight_toRightOf="@id/text_nickname" />
-
-        <TextView
-            android:id="@+id/text_level_n"
-            style="@style/EmphasisStyle.Title1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="@string/level_n"
-
-            android:textColor="@color/main_orange"
-            app:layout_constraintLeft_toLeftOf="@id/text_nickname"
-            app:layout_constraintRight_toLeftOf="@id/text_achieve"
-            app:layout_constraintTop_toBottomOf="@+id/text_date" />
-
-        <TextView
-            android:id="@+id/text_achieve"
-            style="@style/ParagraphStyle.Text2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="@string/to_achieve"
-            app:layout_constraintLeft_toRightOf="@id/text_level_n"
-            app:layout_constraintRight_toRightOf="@id/text_nickname"
-            app:layout_constraintTop_toTopOf="@+id/text_level_n" />
-
-        <TextView
-            android:id="@+id/textView75"
-            style="@style/ParagraphStyle.Text3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/border_round_rectangle_white_6dp"
-            android:paddingStart="36dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="36dp"
-            android:onClick="launchModifyEntireGoalActivity"
-            android:paddingBottom="10dp"
-            android:text="@string/modify_my_entire_goal"
+        <Space
+            android:id="@+id/space"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_level_n" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.42" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/round_rectangle_10dp"
+            android:elevation="20dp"
+            android:outlineSpotShadowColor="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/space"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/space"
+            app:layout_constraintVertical_bias="0.80">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/img_tost" />
+
+            <TextView
+                android:id="@+id/text_nickname"
+                style="@style/EmphasisStyle.Title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@{viewModel.userName}"
+                app:layout_constraintEnd_toEndOf="@+id/imageView12"
+                app:layout_constraintStart_toStartOf="@+id/imageView12"
+                app:layout_constraintTop_toBottomOf="@+id/imageView12"
+                tools:text="@string/nickname" />
+
+            <TextView
+                android:id="@+id/text_date"
+                style="@style/EmphasisStyle.SubTitle3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:text="@string/yyyy_mm_dd"
+                app:date_text="@{viewModel.selectedDate}"
+                app:layout_constraintLeft_toLeftOf="@id/text_nickname"
+                app:layout_constraintRight_toLeftOf="@id/text_until"
+                app:layout_constraintTop_toBottomOf="@+id/text_nickname" />
+
+            <TextView
+                android:id="@+id/text_until"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                app:layout_constraintBottom_toBottomOf="@+id/text_date"
+                app:layout_constraintLeft_toRightOf="@id/text_date"
+                app:layout_constraintRight_toRightOf="@id/text_nickname" />
+
+            <TextView
+                android:id="@+id/text_level_n"
+                style="@style/EmphasisStyle.Title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@{viewModel.selectedLevel == null ? @string/level_n : @string/level_format(viewModel.selectedLevel)}"
+                android:textColor="@color/main_orange"
+                app:layout_constraintLeft_toLeftOf="@id/text_nickname"
+                app:layout_constraintRight_toLeftOf="@id/text_achieve"
+                app:layout_constraintTop_toBottomOf="@+id/text_date"
+                tools:text="@string/level_n" />
+
+            <TextView
+                android:id="@+id/text_achieve"
+                style="@style/ParagraphStyle.Text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="@string/to_achieve"
+                app:layout_constraintLeft_toRightOf="@id/text_level_n"
+                app:layout_constraintRight_toRightOf="@id/text_nickname"
+                app:layout_constraintTop_toTopOf="@+id/text_level_n" />
+
+            <TextView
+                android:id="@+id/textView75"
+                style="@style/ParagraphStyle.Text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/border_round_rectangle_white_6dp"
+                android:onClick="launchModifyEntireGoalActivity"
+                android:paddingStart="36dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="36dp"
+                android:paddingBottom="10dp"
+                android:text="@string/modify_my_entire_goal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_level_n" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/button_modify_nickname"
+            style="@style/WhiteTextButtonLeftAlign"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/modify_nickname"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+        <TextView
+            android:id="@+id/button_privacy_policy"
+            style="@style/WhiteTextButtonLeftAlign"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:onClick="launchPrivacyPolicyActivity"
+            android:text="@string/privacy_policy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_modify_nickname" />
+
+        <TextView
+            android:id="@+id/button_terms_and_conditions_of_service"
+            style="@style/WhiteTextButtonLeftAlign"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:onClick="launchTermsAndConditionsOfServiceActivity"
+            android:text="@string/terms_and_conditions_of_service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_privacy_policy" />
+
+        <TextView
+            android:id="@+id/button_withdrawal_member"
+            style="@style/ParagraphStyle.Text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:onClick="showMemberWithdrawalAlertDialog"
+            android:text="@string/withdrawal_member"
+            android:textColor="@color/blue_grey_87"
+            app:layout_constraintEnd_toEndOf="@+id/button_terms_and_conditions_of_service"
+            app:layout_constraintTop_toBottomOf="@+id/button_terms_and_conditions_of_service" />
+
+        <TextView
+            android:id="@+id/button_logout"
+            style="@style/ParagraphStyle.Text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:onClick="showLogoutAlertDialog"
+            android:text="@string/logout"
+            android:textColor="@color/blue_grey_87"
+            app:layout_constraintBottom_toBottomOf="@+id/button_withdrawal_member"
+            app:layout_constraintEnd_toStartOf="@+id/button_withdrawal_member"
+            app:layout_constraintTop_toTopOf="@+id/button_withdrawal_member" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/button_modify_nickname"
-        style="@style/WhiteTextButtonLeftAlign"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/modify_nickname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
-
-    <TextView
-        android:id="@+id/button_privacy_policy"
-        style="@style/WhiteTextButtonLeftAlign"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="launchPrivacyPolicyActivity"
-        android:text="@string/privacy_policy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_modify_nickname" />
-
-    <TextView
-        android:id="@+id/button_terms_and_conditions_of_service"
-        style="@style/WhiteTextButtonLeftAlign"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
-        android:onClick="launchTermsAndConditionsOfServiceActivity"
-        android:text="@string/terms_and_conditions_of_service"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_privacy_policy" />
-
-    <TextView
-        android:id="@+id/button_withdrawal_member"
-        style="@style/ParagraphStyle.Text5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:onClick="showMemberWithdrawalAlertDialog"
-        android:text="@string/withdrawal_member"
-        android:textColor="@color/blue_grey_87"
-        app:layout_constraintEnd_toEndOf="@+id/button_terms_and_conditions_of_service"
-        app:layout_constraintTop_toBottomOf="@+id/button_terms_and_conditions_of_service" />
-
-    <TextView
-        android:id="@+id/button_logout"
-        style="@style/ParagraphStyle.Text5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:onClick="showLogoutAlertDialog"
-        android:text="@string/logout"
-        android:textColor="@color/blue_grey_87"
-        app:layout_constraintBottom_toBottomOf="@+id/button_withdrawal_member"
-        app:layout_constraintEnd_toStartOf="@+id/button_withdrawal_member"
-        app:layout_constraintTop_toTopOf="@+id/button_withdrawal_member" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

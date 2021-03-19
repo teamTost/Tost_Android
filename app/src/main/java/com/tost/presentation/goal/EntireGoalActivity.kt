@@ -20,15 +20,19 @@ class EntireGoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickLi
     LevelPickBottomSheet.OnLevelPickListener {
 
     private val entireGoalViewModel: EntireGoalViewModel by viewModels()
+    private var isModifyRequested: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        isModifyRequested = getIsModifyRequested()
         val binding = ActivityEntireGoalBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView(binding)
         subscribeSaveSuccess()
     }
+
+    private fun getIsModifyRequested() = intent.getBooleanExtra(KEY_IS_MODIFY, false)
 
     private fun initView(binding: ActivityEntireGoalBinding) {
         window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
@@ -80,13 +84,18 @@ class EntireGoalActivity : AppCompatActivity(), DatePickBottomSheet.OnDatePickLi
     }
 
     private fun deployWeeklyGoalActivityAndFinish() {
+        if (isModifyRequested) {
+            finish()
+            return
+        }
         val intent = Intent(this, WeeklyGoalActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     companion object {
-        private const val TAG_DATE_BOTTOM_SHEET = "date_bottom_sheet"
-        private const val TAG_LEVEL_BOTTOM_SHEET = "level_bottom_sheet"
+        private const val TAG_DATE_BOTTOM_SHEET = "TAG_DATE_BOTTOM_SHEET"
+        private const val TAG_LEVEL_BOTTOM_SHEET = "TAG_LEVEL_BOTTOM_SHEET"
+        const val KEY_IS_MODIFY = "KEY_IS_MODIFY"
     }
 }

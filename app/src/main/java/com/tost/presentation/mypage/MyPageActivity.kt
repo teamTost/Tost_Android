@@ -3,6 +3,7 @@ package com.tost.presentation.mypage
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tost.R
@@ -13,18 +14,32 @@ import com.tost.presentation.mypage.dialog.MemberWithdrawalAlertDialog
 import com.tost.presentation.utils.showToast
 import com.tost.presentation.utils.showTostToast
 import com.tost.presentation.web.WebActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageActivity : AppCompatActivity() {
+
+    private val myPageViewModel: MyPageViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMyPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.viewModel = myPageViewModel
+        binding.lifecycleOwner = this
         window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        myPageViewModel.loadUserInfo()
     }
 
     fun launchModifyEntireGoalActivity(view: View) {
         val intent = Intent(this, EntireGoalActivity::class.java)
+        intent.putExtra(EntireGoalActivity.KEY_IS_MODIFY, true)
         startActivity(intent)
     }
 

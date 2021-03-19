@@ -142,4 +142,6 @@
     <string name="yes_i_am_fine">네, 괜찮아요.</string>
     <string name="modify_my_entire_goal">나의 목표 수정하기</string>
     <string name="nickname">닉네임</string>
+    <string name="change_nickname">별명 바꾸기</string>
+    <string name="which_nickname_want">어떤 별명으로 바꾸시겠어요?</string>
 </resources>
