@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
 import com.tost.data.dao.get
 import com.tost.data.service.TostService
+import com.tost.data.service.request.SaveNicknameParams
 import com.tost.data.service.request.TostLoginRequestParams
 import com.tost.presentation.utils.printLog
 import kotlinx.coroutines.flow.first
@@ -33,6 +34,12 @@ class UserRepository @Inject constructor(
         val params = TostLoginRequestParams(googleToken, fcmToken)
         val response = tostService.login(params)
         return response.token.also { printLog("remote Tost Token saved $it") }
+    }
+
+    suspend fun saveNickname(nickname: String) {
+        val tostToken = getTostToken() ?: error("Login Requested")
+        val params = SaveNicknameParams(nickname)
+        tostService.saveNickname(tostToken, params)
     }
 
     companion object {

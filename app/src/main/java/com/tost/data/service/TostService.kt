@@ -70,6 +70,12 @@ interface TostService {
         @Body bookmarkParams: BookmarkParams,
     )
 
+    @PUT("/users/nickname")
+    suspend fun saveNickname(
+        @Header("token") token: String,
+        @Body saveNicknameParams: SaveNicknameParams,
+    ): Response<Unit>
+
     companion object {
         const val BASE_URL = "https://teamtost.com"
     }

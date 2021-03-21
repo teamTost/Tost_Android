@@ -11,6 +11,7 @@ import com.tost.databinding.ActivityMyPageBinding
 import com.tost.presentation.goal.EntireGoalActivity
 import com.tost.presentation.mypage.dialog.LogoutAlertDialog
 import com.tost.presentation.mypage.dialog.MemberWithdrawalAlertDialog
+import com.tost.presentation.mypage.nickname.ModifyNicknameActivity
 import com.tost.presentation.utils.showToast
 import com.tost.presentation.utils.showTostToast
 import com.tost.presentation.web.WebActivity
@@ -40,6 +41,11 @@ class MyPageActivity : AppCompatActivity() {
     fun launchModifyEntireGoalActivity(view: View) {
         val intent = Intent(this, EntireGoalActivity::class.java)
         intent.putExtra(EntireGoalActivity.KEY_IS_MODIFY, true)
+        startActivity(intent)
+    }
+
+    fun launchModifyNicknameActivity(view: View) {
+        val intent = Intent(this, ModifyNicknameActivity::class.java)
         startActivity(intent)
     }
 

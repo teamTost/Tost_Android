@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tost"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presentation.web.WebActivity"/>
+        <activity android:name=".presentation.mypage.nickname.ModifyNicknameActivity" />
+        <activity android:name=".presentation.web.WebActivity" />
         <activity android:name=".presentation.mypage.MyPageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -144,4 +144,5 @@
     <string name="nickname">닉네임</string>
     <string name="change_nickname">별명 바꾸기</string>
     <string name="which_nickname_want">어떤 별명으로 바꾸시겠어요?</string>
+    <string name="not_blank">빈칸은 안돼요!</string>
 </resources>
