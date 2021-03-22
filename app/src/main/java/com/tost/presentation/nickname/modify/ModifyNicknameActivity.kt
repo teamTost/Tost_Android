@@ -1,9 +1,12 @@
-package com.tost.presentation.mypage.nickname
+package com.tost.presentation.nickname.modify
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.tost.R
 import com.tost.databinding.ActivityModifyNicknameBinding
+import com.tost.presentation.nickname.NicknameViewModel
 import com.tost.presentation.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ModifyNicknameActivity : AppCompatActivity() {
 
-    private val modifyNicknameViewModel: ModifyNicknameViewModel by viewModels()
+    private val nicknameViewModel: NicknameViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,12 +26,13 @@ class ModifyNicknameActivity : AppCompatActivity() {
         val binding = ActivityModifyNicknameBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.lifecycleOwner = this
-        binding.viewModel = modifyNicknameViewModel
+        binding.viewModel = nicknameViewModel
+        window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
 
-        modifyNicknameViewModel.isSuccess.observe(this) {
+        nicknameViewModel.isSuccess.observe(this) {
             if (it) finish()
         }
-        modifyNicknameViewModel.toastMessage.observe(this) {
+        nicknameViewModel.toastMessage.observe(this) {
             showToast(it)
         }
     }

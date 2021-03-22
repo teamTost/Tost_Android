@@ -1,4 +1,4 @@
-package com.tost.presentation.mypage.nickname
+package com.tost.presentation.nickname
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
  * on 3월 21, 2021
  */
 
-class ModifyNicknameViewModel @ViewModelInject constructor(
+class NicknameViewModel @ViewModelInject constructor(
     private val userRepository: UserRepository,
     private val googleAuthRepository: GoogleAuthRepository,
 ) : BaseViewModel() {

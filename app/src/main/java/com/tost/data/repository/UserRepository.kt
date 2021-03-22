@@ -40,9 +40,13 @@ class UserRepository @Inject constructor(
         val tostToken = getTostToken() ?: error("Login Requested")
         val params = SaveNicknameParams(nickname)
         tostService.saveNickname(tostToken, params)
+        dataStore.edit { it[KEY_NAME] = nickname }
     }
+
+    //TODO 닉네임 저장 조회를 여기로 역할 분리할 것. (지금은 google 어쩌구에 있음)
 
     companion object {
         private val KEY_TOST_TOKEN = preferencesKey<String>("KEY_TOST_TOKEN")
+        private val KEY_NAME = preferencesKey<String>("KEY_NAME")
     }
 }

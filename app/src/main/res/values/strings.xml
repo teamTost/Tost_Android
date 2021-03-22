@@ -44,6 +44,9 @@
     <string name="part6_directions">In this part of the test, you will give\nyour opinion about a specific topic.\n\nBe sure to say\nas much as you can in the time allowed.\n\nYou will have 30 seconds to prepare.\nThen you will have 60 seconds to speak.</string>
     <string name="part6_question_numbers">Q.11</string>
 
+    <string name="url_terms_and_conditions_of_service">https://www.notion.so/cbeaffd2ab3a4064b93876c00e98c025</string>
+    <string name="url_privacy_policy">https://www.notion.so/2cdcb359b69645bbbacc0816810529c1</string>
+
     <string name="my_note">My Note</string>
     <string name="part_n">Part.%d</string>
     <string name="part_n_no_dot">Part %d</string>

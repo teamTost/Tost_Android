@@ -11,9 +11,8 @@ import com.tost.databinding.ActivityMyPageBinding
 import com.tost.presentation.goal.EntireGoalActivity
 import com.tost.presentation.mypage.dialog.LogoutAlertDialog
 import com.tost.presentation.mypage.dialog.MemberWithdrawalAlertDialog
-import com.tost.presentation.mypage.nickname.ModifyNicknameActivity
+import com.tost.presentation.nickname.modify.ModifyNicknameActivity
 import com.tost.presentation.utils.showToast
-import com.tost.presentation.utils.showTostToast
 import com.tost.presentation.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,11 +49,13 @@ class MyPageActivity : AppCompatActivity() {
     }
 
     fun launchTermsAndConditionsOfServiceActivity(view: View) {
-        launchWebActivityWith(URL_TERMS_AND_CONDITIONS_OF_SERVICE)
+        val url = resources.getString(R.string.url_terms_and_conditions_of_service)
+        launchWebActivityWith(url)
     }
 
     fun launchPrivacyPolicyActivity(view: View) {
-        launchWebActivityWith(URL_PRIVACY_POLICY)
+        val url = resources.getString(R.string.url_privacy_policy)
+        launchWebActivityWith(url)
     }
 
     private fun launchWebActivityWith(url: String) {
@@ -73,12 +74,5 @@ class MyPageActivity : AppCompatActivity() {
         MemberWithdrawalAlertDialog(this).apply {
             setOnButtonClickListener { showToast("회원탈퇴햇넹 ㅠ") }
         }.show()
-    }
-
-    companion object {
-        private const val URL_TERMS_AND_CONDITIONS_OF_SERVICE =
-            "https://www.notion.so/cbeaffd2ab3a4064b93876c00e98c025"
-        private const val URL_PRIVACY_POLICY =
-            "https://www.notion.so/2cdcb359b69645bbbacc0816810529c1"
     }
 }
