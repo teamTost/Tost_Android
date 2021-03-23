@@ -45,6 +45,20 @@ class UserRepository @Inject constructor(
 
     //TODO 닉네임 저장 조회를 여기로 역할 분리할 것. (지금은 google 어쩌구에 있음)
 
+    suspend fun getNickname(): String? {
+        val localNickname = dataStore[KEY_NAME].first()
+        if (localNickname != null) return localNickname
+        val userInfo = tostService.getUserInfo(getTostToken() ?: return null)
+        if (userInfo.nickname.isEmpty()) return null
+        return userInfo.nickname
+            .also { dataStore.edit { it[KEY_NAME] = userInfo.nickname } }
+    }
+
+    suspend fun withdrawalMember() {
+        val tostToken = getTostToken() ?: error("Login Requested")
+        tostService.deleteUser(tostToken)
+    }
+
     companion object {
         private val KEY_TOST_TOKEN = preferencesKey<String>("KEY_TOST_TOKEN")
         private val KEY_NAME = preferencesKey<String>("KEY_NAME")

@@ -76,6 +76,16 @@ interface TostService {
         @Body saveNicknameParams: SaveNicknameParams,
     ): Response<Unit>
 
+    @GET("/users")
+    suspend fun getUserInfo(
+        @Header("token") token: String,
+    ): UserInfoResponse
+
+    @DELETE("/users/deleteUser")
+    suspend fun deleteUser(
+        @Header("token") token: String,
+    ): Response<Unit>
+
     companion object {
         const val BASE_URL = "https://teamtost.com"
     }
