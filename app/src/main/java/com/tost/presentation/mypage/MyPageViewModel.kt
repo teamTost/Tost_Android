@@ -30,11 +30,36 @@ class MyPageViewModel @ViewModelInject constructor(
     private val _selectedLevel = MutableLiveData<Int>()
     val selectedLevel: LiveData<Int> = _selectedLevel
 
+    private val _isDataCleared = MutableLiveData<Boolean>()
+    val isDataCleared: LiveData<Boolean> = _isDataCleared
+
+    var isUserQuit = false
+        private set
+
     fun loadUserInfo() = viewModelScope.launch {
         _userName.value = googleAuthRepository.getName()
         val token = userRepository.getTostToken() ?: throw IllegalStateException("로그인 이상")
         val entireGoal = goalRepository.getEntireGoal(token)
         _selectedDate.value = entireGoal?.endDate
         _selectedLevel.value = entireGoal?.level
+    }
+
+    fun logout() = viewModelScope.launch {
+        _isLoading.value = true
+        userRepository.deleteAll()
+        googleAuthRepository.deleteAll()
+        goalRepository.deleteAll()
+        _isLoading.value = false
+        _isDataCleared.value = true
+    }
+
+    fun quitMember() = viewModelScope.launch {
+        _isLoading.value = true
+        userRepository.quitMember()
+        googleAuthRepository.deleteAll()
+        goalRepository.deleteAll()
+        isUserQuit = true
+        _isLoading.value = false
+        _isDataCleared.value = true
     }
 }

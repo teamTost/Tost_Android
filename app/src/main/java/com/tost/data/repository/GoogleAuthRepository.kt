@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.core.remove
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.messaging.FirebaseMessaging
 import com.tost.data.dao.get
@@ -52,6 +53,13 @@ class GoogleAuthRepository @Inject constructor(
 
     private suspend fun saveFcmToken(fcmToken: String) {
         dataStore.edit { it[KEY_FCM_TOKEN] = fcmToken }
+    }
+
+    suspend fun deleteAll() {
+        dataStore.edit {
+            it.remove(KEY_GOOGLE_TOKEN)
+            it.remove(KEY_FCM_TOKEN)
+        }
     }
 
     companion object {

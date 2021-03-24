@@ -25,11 +25,7 @@
         <activity android:name=".presentation.web.WebActivity" />
         <activity android:name=".presentation.mypage.MyPageActivity"/>
         <activity android:name=".presentation.nickname.init.InitNicknameActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".presentation.problem.part3.Part3Activity" />
         <activity android:name=".presentation.problem.part5.Part5Activity" />
@@ -44,7 +40,13 @@
         <activity android:name=".presentation.SplashActivity">
 
         </activity>
-        <activity android:name=".presentation.auth.LoginActivity" />
+        <activity android:name=".presentation.auth.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".presentation.problem.part2.Part2Activity" />
         <activity android:name=".presentation.problem.ProblemGuideActivity" />
         <activity android:name=".presentation.problem.ProblemEntryActivity" />

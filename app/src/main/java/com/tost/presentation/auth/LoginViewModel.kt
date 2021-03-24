@@ -3,9 +3,6 @@ package com.tost.presentation.auth
 import android.app.Activity
 import android.content.Intent
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -28,8 +25,7 @@ class LoginViewModel @ViewModelInject constructor(
 ) : BaseViewModel() {
 
     fun handleActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        if (requestCode != REQUEST_CODE_GOOGLE_AUTH) return
-        if (resultCode != Activity.RESULT_OK) {
+        if (requestCode != REQUEST_CODE_GOOGLE_AUTH || resultCode != Activity.RESULT_OK) {
             changeLoadingTo(false)
             return
         }

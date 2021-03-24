@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.core.remove
 import com.tost.data.dao.get
 import com.tost.data.entity.EntireGoal
 import com.tost.data.entity.WeeklyGoal
@@ -93,6 +94,20 @@ class GoalRepository @Inject constructor(
             it[KEY_GOAL_PART4] = weeklyGoal.part4
             it[KEY_GOAL_PART5] = weeklyGoal.part5
             it[KEY_GOAL_PART6] = weeklyGoal.part6
+        }
+    }
+
+    suspend fun deleteAll() {
+        dataStore.edit {
+            it.remove(KEY_GOAL_START_DATE)
+            it.remove(KEY_GOAL_END_DATE)
+            it.remove(KEY_GOAL_LEVEL)
+            it.remove(KEY_GOAL_PART1)
+            it.remove(KEY_GOAL_PART2)
+            it.remove(KEY_GOAL_PART3)
+            it.remove(KEY_GOAL_PART4)
+            it.remove(KEY_GOAL_PART5)
+            it.remove(KEY_GOAL_PART6)
         }
     }
 

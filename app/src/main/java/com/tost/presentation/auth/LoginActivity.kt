@@ -2,7 +2,6 @@ package com.tost.presentation.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -32,16 +31,13 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         loginViewModel.handleActivityResult(requestCode, resultCode, data)
     }
 
     private fun initView(binding: ActivityLoginBinding) {
         binding.lifecycleOwner = this
-        binding.buttonLogin.setOnClickListener {
-            binding.windowLoading.root.visibility = View.VISIBLE
-            deployGoogleAuth(createGoogleSignInOptions())
-        }
+        binding.viewModel = loginViewModel
+        binding.buttonLogin.setOnClickListener { deployGoogleAuth(createGoogleSignInOptions()) }
         binding.buttonTry.setOnClickListener { deployHomeActivity(true) }
     }
 

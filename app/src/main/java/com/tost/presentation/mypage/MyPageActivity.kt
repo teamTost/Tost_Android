@@ -6,13 +6,16 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.tost.R
 import com.tost.databinding.ActivityMyPageBinding
+import com.tost.presentation.auth.LoginActivity
 import com.tost.presentation.goal.EntireGoalActivity
 import com.tost.presentation.mypage.dialog.LogoutAlertDialog
 import com.tost.presentation.mypage.dialog.MemberWithdrawalAlertDialog
 import com.tost.presentation.nickname.modify.ModifyNicknameActivity
-import com.tost.presentation.utils.showToast
 import com.tost.presentation.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MyPageActivity : AppCompatActivity() {
 
     private val myPageViewModel: MyPageViewModel by viewModels()
+    private var googleSignInClient: GoogleSignInClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +33,31 @@ class MyPageActivity : AppCompatActivity() {
         binding.viewModel = myPageViewModel
         binding.lifecycleOwner = this
         window.statusBarColor = ContextCompat.getColor(this, R.color.cloudy_orange)
+
+        googleSignInClient = getGoogleSignInClient()
+
+        myPageViewModel.isDataCleared.observe(this) {
+            if (it) goLoginActivity()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-
         myPageViewModel.loadUserInfo()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        googleSignInClient = null
+    }
+
+    private fun getGoogleSignInClient(): GoogleSignInClient {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestProfile()
+            .requestEmail()
+            .build()
+        return GoogleSignIn.getClient(this, gso)
     }
 
     fun launchModifyEntireGoalActivity(view: View) {
@@ -66,13 +89,21 @@ class MyPageActivity : AppCompatActivity() {
 
     fun showLogoutAlertDialog(view: View) {
         LogoutAlertDialog(this).apply {
-            setOnButtonClickListener { showToast("로그아웃햇넹") }
+            setOnButtonClickListener { myPageViewModel.logout() }
         }.show()
     }
 
     fun showMemberWithdrawalAlertDialog(view: View) {
         MemberWithdrawalAlertDialog(this).apply {
-            setOnButtonClickListener { showToast("회원탈퇴햇넹 ㅠ") }
+            setOnButtonClickListener { myPageViewModel.quitMember() }
         }.show()
+    }
+
+    private fun goLoginActivity() {
+        googleSignInClient?.signOut()
+        if (myPageViewModel.isUserQuit) googleSignInClient?.revokeAccess()
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

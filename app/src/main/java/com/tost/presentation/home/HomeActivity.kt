@@ -11,6 +11,7 @@ import com.tost.databinding.ActivityHomeBinding
 import com.tost.presentation.goal.EntireGoalActivity
 import com.tost.presentation.goal.weekly.WeeklyGoalActivity
 import com.tost.presentation.goal.weekly.change.ChangeWeeklyGoalActivity
+import com.tost.presentation.mypage.MyPageActivity
 import com.tost.presentation.problem.ProblemEntryActivity
 import com.tost.presentation.test.TestActivity
 import com.tost.presentation.utils.showToast
@@ -34,6 +35,10 @@ class HomeActivity : AppCompatActivity() {
 
         subscribeEntireGoals()
         subscribeWeeklyGoals()
+
+        binding.button2.setOnClickListener {
+            startActivity(Intent(this, MyPageActivity::class.java))
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
+import androidx.datastore.preferences.core.remove
 import com.tost.data.dao.get
 import com.tost.data.service.TostService
 import com.tost.data.service.request.SaveNicknameParams
@@ -54,9 +55,17 @@ class UserRepository @Inject constructor(
             .also { dataStore.edit { it[KEY_NAME] = userInfo.nickname } }
     }
 
-    suspend fun withdrawalMember() {
+    suspend fun quitMember() {
         val tostToken = getTostToken() ?: error("Login Requested")
         tostService.deleteUser(tostToken)
+        deleteAll()
+    }
+
+    suspend fun deleteAll() {
+        dataStore.edit {
+            it.remove(KEY_TOST_TOKEN)
+            it.remove(KEY_NAME)
+        }
     }
 
     companion object {
